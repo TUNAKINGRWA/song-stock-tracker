@@ -46,8 +46,10 @@ select{font-family:inherit;font-size:13.5px;padding:7px 12px;border:1px solid #c
 .art-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 20px;background:linear-gradient(0deg,#fafbfd,#fff);border-bottom:1px solid var(--line)}
 .art-title-wrap{display:flex;align-items:center;gap:10px;min-width:0}
 .theme-tag{font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid;white-space:nowrap}
-.mainline-badge{display:inline-flex;align-items:center;gap:3px;font-size:11.5px;font-weight:800;color:#fff;background:linear-gradient(135deg,#fb923c,#ea580c);padding:3px 12px;border-radius:20px;box-shadow:0 2px 6px rgba(234,88,12,.42);letter-spacing:1.5px;white-space:nowrap;flex-shrink:0}
-.mainline-badge::before{content:"\2605";font-size:10px;margin-top:-1px}
+.head-badge{display:inline-flex;align-items:center;gap:3px;font-size:11.5px;font-weight:800;color:#fff;padding:3px 12px;border-radius:20px;letter-spacing:1.5px;white-space:nowrap;flex-shrink:0}
+.badge-ml{background:linear-gradient(135deg,#fb923c,#ea580c);box-shadow:0 2px 6px rgba(234,88,12,.42)}
+.badge-ml::before{content:"\2605";font-size:10px;margin-top:-1px}
+.badge-dv{background:linear-gradient(135deg,#e11d48,#9f1239);box-shadow:0 2px 6px rgba(159,18,57,.4)}
 .art-title{font-size:15.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .art-meta{display:flex;align-items:center;gap:13px;font-size:12.5px;white-space:nowrap}
 .art-date{color:var(--dim)}.art-avg{font-weight:700}
@@ -233,7 +235,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#0d94881a;color:#0d9488;border-color:#0d948840">软件</span>
           <span class="art-title">AI政务叠加信创替代，软件龙头谁领跑</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-06-01</span>
@@ -281,7 +283,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#2c5aa01a;color:#2c5aa0;border-color:#2c5aa040">AI算力</span>
           <span class="art-title">AI算力组网爆发，交换机龙头谁领跑</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-06-01</span>
@@ -329,7 +331,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#c2410c1a;color:#c2410c;border-color:#c2410c40">半导体</span>
           <span class="art-title">Chiplet重塑芯片，封装与IP谁领跑</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-06-01</span>
@@ -386,7 +388,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#0e74901a;color:#0e7490;border-color:#0e749040">高端制造</span>
           <span class="art-title">大国重工崛起，谁卡位高端制造国产替代</span>
-          <span class="mainline-badge">主线</span>
+          <span class="head-badge badge-ml">主线</span>
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-06-01</span>
@@ -461,7 +463,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#a162071a;color:#a16207;border-color:#a1620740">周期</span>
           <span class="art-title">安监趋严叠加旺季，焦煤拐点谁领跑</span>
-          <span class="mainline-badge">主线</span>
+          <span class="head-badge badge-dv">红利</span>
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-06-01</span>
@@ -509,7 +511,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#4755691a;color:#475569;border-color:#47556940">军工</span>
           <span class="art-title">星链狂飙，中国商业航天谁卡位</span>
-          <span class="mainline-badge">主线</span>
+          <span class="head-badge badge-ml">主线</span>
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-06-01</span>
@@ -566,7 +568,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#2563eb1a;color:#2563eb;border-color:#2563eb40">电力设备</span>
           <span class="art-title">电网超级周期，谁卡位出海与AI缺电</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-06-01</span>
@@ -659,7 +661,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#2c5aa01a;color:#2c5aa0;border-color:#2c5aa040">AI算力</span>
           <span class="art-title">连接定义算力，芯片级互联谁领跑</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-06-01</span>
@@ -716,7 +718,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#7c3aed1a;color:#7c3aed;border-color:#7c3aed40">机器人</span>
           <span class="art-title">3D视觉+机器人之眼，谁卡位感知新时代</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-05-21</span>
@@ -755,7 +757,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#7c3aed1a;color:#7c3aed;border-color:#7c3aed40">机器人</span>
           <span class="art-title">AI+机器人产业图谱，感知整机量产谁领跑</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-05-21</span>
@@ -812,7 +814,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#7c3aed1a;color:#7c3aed;border-color:#7c3aed40">机器人</span>
           <span class="art-title">AI电感叠加机器人MIM，谁是粉末冶金赢家</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-05-21</span>
@@ -851,7 +853,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#2c5aa01a;color:#2c5aa0;border-color:#2c5aa040">AI算力</span>
           <span class="art-title">AI算力到应用全链共振，谁是人工智能新十年赢家</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-05-21</span>
@@ -926,7 +928,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#2c5aa01a;color:#2c5aa0;border-color:#2c5aa040">AI算力</span>
           <span class="art-title">AI算力推动PCB全面反转，谁卡位高端制造</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-05-21</span>
@@ -965,7 +967,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#7c3aed1a;color:#7c3aed;border-color:#7c3aed40">机器人</span>
           <span class="art-title">人形机器人量产元年，谁是港股整机赢家</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-05-21</span>
@@ -1004,7 +1006,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#4755691a;color:#475569;border-color:#47556940">军工</span>
           <span class="art-title">建军百年临近，航空主机厂谁领跑</span>
-          <span class="mainline-badge">主线</span>
+          <span class="head-badge badge-ml">主线</span>
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-05-21</span>
@@ -1061,7 +1063,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#7c3aed1a;color:#7c3aed;border-color:#7c3aed40">机器人</span>
           <span class="art-title">新能源车+智能化+机器人，谁卡位下一个十年</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-05-21</span>
@@ -1100,7 +1102,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#7c3aed1a;color:#7c3aed;border-color:#7c3aed40">机器人</span>
           <span class="art-title">机器人产业知识图谱，从核心零件到整机谁领跑</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-05-21</span>
@@ -1175,7 +1177,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#a162071a;color:#a16207;border-color:#a1620740">周期</span>
           <span class="art-title">科技与稀缺共振，谁卡位新质生产力金属</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-05-21</span>
@@ -1250,7 +1252,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#be123c1a;color:#be123c;border-color:#be123c40">医药</span>
           <span class="art-title">传统医药估值见底，价值发现窗口已至</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-04-28</span>
@@ -1334,7 +1336,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#7c3aed1a;color:#7c3aed;border-color:#7c3aed40">机器人</span>
           <span class="art-title">机器人与热管理共振，谁卡位黄金赛道</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-04-28</span>
@@ -1373,7 +1375,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#0891b21a;color:#0891b2;border-color:#0891b240">新能源</span>
           <span class="art-title">锂电材料反转，谁是细分赛道赢家</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-04-28</span>
@@ -1457,7 +1459,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#0891b21a;color:#0891b2;border-color:#0891b240">新能源</span>
           <span class="art-title">锂资源拐点叠加隔膜出海，谁卡位上游</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-04-28</span>
@@ -1514,7 +1516,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#c2410c1a;color:#c2410c;border-color:#c2410c40">半导体</span>
           <span class="art-title">功率半导体反转叠加SiC放量，谁领跑</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-04-22</span>
@@ -1553,7 +1555,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#a162071a;color:#a16207;border-color:#a1620740">周期</span>
           <span class="art-title">化工反转叠加新材料，谁是双线赢家</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-04-22</span>
@@ -1601,7 +1603,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#c2410c1a;color:#c2410c;border-color:#c2410c40">半导体</span>
           <span class="art-title">存储反转叠加车规放量，谁是双线赢家</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-04-20</span>
@@ -1640,7 +1642,7 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
         <div class="art-title-wrap">
           <span class="theme-tag" style="background:#0891b21a;color:#0891b2;border-color:#0891b240">新能源</span>
           <span class="art-title">锂电拐点已至，量价齐升谁先兑现</span>
-          <span class="mainline-badge">主线</span>
+          
         </div>
         <div class="art-meta">
           <span class="art-date">发布 2026-04-16</span>
