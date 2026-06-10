@@ -1829,7 +1829,7 @@ document.getElementById('rkE').onclick=function(){this.classList.add('on');docum
   function fcls(v){return v>0?'up':(v<0?'down':'flat');}
   function r2(v){return Math.round(v*100)/100;}
   function escH(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML;}
-  function loadScript(src,cs){return new Promise(function(res,rej){var s=document.createElement('script');if(cs)s.charset=cs;s.src=src;var t=setTimeout(function(){s.remove();rej('timeout');},15000);s.onload=function(){clearTimeout(t);s.remove();res();};s.onerror=function(){clearTimeout(t);s.remove();rej('err');};document.head.appendChild(s);});}
+  function loadScript(src,cs){return new Promise(function(res,rej){var s=document.createElement('script');if(cs)s.charset=cs;s.src=src;var t=setTimeout(function(){s.remove();rej('timeout');},9000);s.onload=function(){clearTimeout(t);s.remove();res();};s.onerror=function(){clearTimeout(t);s.remove();rej('err');};document.head.appendChild(s);});}
   function sparkJS(series,force){
     var vals=series.map(function(p){return p[1];});
     if(vals.length<2)return '<span class="nodata">—</span>';
