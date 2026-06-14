@@ -24,7 +24,7 @@ THEME_COLORS = {
     "机器人": "#7c3aed", "新能源": "#0891b2", "电力设备": "#2563eb",
     "军工": "#475569", "AI算力": "#2c5aa0", "半导体": "#c2410c",
     "软件": "#0d9488", "医药": "#be123c", "周期": "#a16207",
-    "高端制造": "#0e7490", "其他": "#64748b",
+    "高端制造": "#0e7490", "金融": "#0369a1", "其他": "#64748b",
 }
 
 def esc(s):
@@ -430,7 +430,12 @@ footer .disc{background:#fff;border:1px solid var(--line);border-radius:13px;pad
 footer b{color:#475569}
 @media print{header::after{display:none}.hnav,.detail-tools{display:none!important}.card,.art-card,.kpi,.ins-card,.theme-card{box-shadow:none;break-inside:avoid}section{margin-bottom:16px}#mainChart{height:380px}body{background:#fff}.kpi-grid{grid-template-columns:repeat(4,1fr)!important;gap:10px}.kpi-val{font-size:21px}.seg{display:none}}
 @media(max-width:920px){.kpi-grid,.ins-grid{grid-template-columns:repeat(2,1fr)}.rank-wrap{grid-template-columns:1fr}select{min-width:170px}}
-@media(max-width:640px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.ins-grid{grid-template-columns:1fr}.art-title{max-width:150px}.stock-tbl{min-width:700px}.bar-row{grid-template-columns:106px 1fr 116px}}
+@media(max-width:640px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.ins-grid{grid-template-columns:1fr}.art-title{max-width:150px}.bar-row{grid-template-columns:106px 1fr 116px}
+/* 明细表窄屏:隐藏推荐日/推荐价/现价三列,保留 标的·代码·累计涨跌·超额·走势,铺满不横滚 */
+.tbl-wrap{overflow-x:visible}.stock-tbl{min-width:0;width:100%}
+.stock-tbl th,.stock-tbl td{padding:9px 5px}
+.stock-tbl th:nth-child(3),.stock-tbl td:nth-child(3),.stock-tbl th:nth-child(4),.stock-tbl td:nth-child(4),.stock-tbl th:nth-child(5),.stock-tbl td:nth-child(5){display:none}
+.th-sub{display:none}.sp{width:88px}.spark{width:88px;height:30px}.cum,.exc{font-size:12.5px}.tname{font-size:13px}.mono{font-size:11px}}
 __ANNOCSS__
 </style></head>
 <body>
@@ -617,7 +622,14 @@ document.getElementById('rkE').onclick=function(){this.classList.add('on');docum
     var dt=new Date();dt.setDate(dt.getDate()+1);
     var endDay=dt.toISOString().slice(0,10);
     var klMap={},qtTime='';
-    var jobs=sids.map(function(sid){
+    // 并发池:限制同时在飞的请求数, 避免一次性 100+ 请求把同域连接打满 / 触发腾讯WAF限流
+    function runPool(items,limit,worker){return new Promise(function(resolve){
+      var idx=0,active=0,done=0,n=items.length;if(!n)return resolve();
+      function next(){while(active<limit&&idx<n){active++;
+        Promise.resolve(worker(items[idx++])).catch(function(){}).then(function(){
+          active--;done++;if(done===n)resolve();else next();});}}
+      next();});}
+    function fetchKline(sid){
       var vn='kl_'+sid.replace(/\\W/g,'');
       return loadScript('https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?_var='+vn+'&param='+sid+',day,2026-04-01,'+endDay+',320,qfq&r='+Math.random()).then(function(){
         try{var dd=window[vn]&&window[vn].data&&window[vn].data[sid];var k=dd&&(dd.qfqday||dd.day);
@@ -625,11 +637,12 @@ document.getElementById('rkE').onclick=function(){this.classList.add('on');docum
         }catch(e){}
         try{delete window[vn];}catch(e){window[vn]=undefined;}
       }).catch(function(){});
-    });
-    for(var i=0;i<sids.length;i+=50){
-      (function(ch){jobs.push(loadScript('https://qt.gtimg.cn/q='+ch.join(',')+'&r='+Math.random(),'GBK').catch(function(){}));})(sids.slice(i,i+50));
     }
-    Promise.all(jobs).then(function(){
+    var qtJobs=[];
+    for(var i=0;i<sids.length;i+=50){
+      (function(ch){qtJobs.push(loadScript('https://qt.gtimg.cn/q='+ch.join(',')+'&r='+Math.random(),'GBK').catch(function(){}));})(sids.slice(i,i+50));
+    }
+    Promise.all([runPool(sids,8,fetchKline)].concat(qtJobs)).then(function(){
       // 实时续点
       var qtToday='';
       sids.forEach(function(sid){
@@ -733,7 +746,7 @@ document.getElementById('rkE').onclick=function(){this.classList.add('on');docum
         if(blkE)blkE.innerHTML='<div class="rank-wrap"><div class="rank-col"><h3>🚀 超额榜 Top 8</h3>'+barRows(rkE.slice(0,8),'exc','cum',mabE)+'</div><div class="rank-col"><h3>🪨 落后榜 Top 8</h3>'+barRows(rkE.slice(-8).reverse(),'exc','cum',mabE)+'</div></div>';
       }
       // ---- 主题卡 ----
-      var TC={'机器人':'#7c3aed','新能源':'#0891b2','电力设备':'#2563eb','军工':'#475569','AI算力':'#2c5aa0','半导体':'#c2410c','软件':'#0d9488','医药':'#be123c','周期':'#a16207','高端制造':'#0e7490','其他':'#64748b'};
+      var TC={'机器人':'#7c3aed','新能源':'#0891b2','电力设备':'#2563eb','军工':'#475569','AI算力':'#2c5aa0','半导体':'#c2410c','软件':'#0d9488','医药':'#be123c','周期':'#a16207','高端制造':'#0e7490','金融':'#0369a1','其他':'#64748b'};
       var tmaxv=1;thList.forEach(function(t){if(t.exc!=null&&Math.abs(t.exc)>tmaxv)tmaxv=Math.abs(t.exc);});
       var tg=document.getElementById('themeGrid');
       if(tg)tg.innerHTML=thList.map(function(t){

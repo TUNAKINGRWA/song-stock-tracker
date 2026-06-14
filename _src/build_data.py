@@ -32,6 +32,7 @@ for d in sorted(os.listdir(BASE)):
 # ---------- 2. 文章 -> 行业ETF (有序规则, 先匹配先得) ----------
 ETF_RULES = [
     (["重工", "国产替代", "大国重工"],     "sz159638", "高端装备ETF"),
+    (["券商", "证券"],                    "sh512880", "证券ETF"),
     (["信创", "软件", "政务"],            "sh515230", "软件ETF"),
     (["交换机", "组网"],                  "sh515880", "通信ETF"),
     (["焦煤", "煤"],                      "sh515220", "煤炭ETF"),
@@ -59,6 +60,15 @@ for d, info in articles.items():
     info["etf_code"] = code[2:] if code else None
     info["etf_name"] = name
     print(f"{info['title'][:22]:24} -> {name}({info['etf_code']})")
+
+_unmapped = [i["title"] for i in articles.values() if not i["etf_secid"]]
+if _unmapped:
+    print("\n" + "!" * 50)
+    print(f"⚠️  {len(_unmapped)} 篇文章未匹配到对标ETF —— 超额(α)将缺失！")
+    print("   请在 ETF_RULES 加「关键词→行业ETF」规则(代码先用腾讯接口验名)：")
+    for t in _unmapped:
+        print("   -", t)
+    print("!" * 50 + "\n")
 
 # ---------- 3. 抓取 (标的 + ETF) ----------
 def stk_prefix(code, ex):
