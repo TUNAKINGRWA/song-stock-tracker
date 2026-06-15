@@ -233,8 +233,9 @@ for a in articles:
         avg_html = f'<span class="art-avg {cls(a["avg_cum"])}">篇均 {pct(a["avg_cum"])}</span>'
         avg_ex_html = (f'<span class="art-ex {cls(a["avg_excess"])}">篇均超额 {pct(a["avg_excess"])}</span>'
                        if a.get("avg_excess") is not None else "")
-    link_html = (f'<button class="art-link" data-url="{esc(a["url"])}" data-title="{esc(a["title"])}">📄 看原文</button>'
-                 if a.get("url") else "")
+    qr_html = (f'<div class="art-qr" data-url="{esc(a["url"])}" data-title="{esc(a["title"])}" title="点击放大扫码 / 看原文">'
+               f'<div class="art-qr-img"></div><div class="art-qr-cap">扫码看原文</div></div>'
+               if a.get("url") else "")
     search_blob = (a["title"] + " " + " ".join(r["name"] + r["code"] for r in a["rows"])).lower()
     trs = []
     for r in a["rows"]:
@@ -290,11 +291,13 @@ for a in articles:
           <span class="art-title">{esc(a['title'])}</span>
           {hb}
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 {a['date']}</span>
-          {avg_html}
-          {avg_ex_html}
-          {link_html}
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 {a['date']}</span>
+            {avg_html}
+            {avg_ex_html}
+          </div>
+          {qr_html}
         </div>
       </div>
       <div class="tbl-wrap"><table class="stock-tbl">
@@ -436,8 +439,12 @@ select{cursor:pointer;min-width:240px}
 .badge-ml::before{content:"\\2605";font-size:10px;margin-top:-1px}
 .badge-dv{background:linear-gradient(135deg,#e11d48,#9f1239);box-shadow:0 2px 6px rgba(159,18,57,.4)}
 .art-title{font-size:15.5px;font-weight:720;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.art-link{font-family:inherit;font-size:12px;font-weight:600;color:#2c5aa0;background:#eef4fc;border:1px solid #c9ddf5;border-radius:16px;padding:4px 12px;cursor:pointer;white-space:nowrap;transition:.15s}
-.art-link:hover{background:#2c5aa0;color:#fff;border-color:#2c5aa0}
+.art-right{display:flex;align-items:center;gap:14px}
+.art-qr{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex-shrink:0}
+.art-qr-img{width:64px;height:64px;border-radius:9px;overflow:hidden;box-shadow:0 1px 6px rgba(20,40,80,.14);background:#fff;transition:transform .15s,box-shadow .15s}
+.art-qr:hover .art-qr-img{transform:scale(1.07);box-shadow:0 4px 14px rgba(20,40,80,.24)}
+.art-qr-img svg{width:100%;height:100%;display:block}
+.art-qr-cap{font-size:10px;color:#2c5aa0;font-weight:600;white-space:nowrap;letter-spacing:.3px}
 .qr-mask{display:none;position:fixed;inset:0;background:rgba(15,30,60,.55);z-index:1100;align-items:center;justify-content:center;padding:20px}
 .qr-box{background:#fff;border-radius:16px;padding:22px 24px 18px;max-width:340px;width:100%;text-align:center;box-shadow:0 18px 50px rgba(10,30,70,.3)}
 .qr-title{font-size:14.5px;font-weight:700;color:#1e293b;line-height:1.45;margin-bottom:14px}
@@ -1116,9 +1123,20 @@ QR_BODY = """
     }
     mask.style.display='flex';
   }
+  // 在每张卡片上把品牌款小二维码缩略图渲染出来(直接可见)
+  function renderThumbs(){
+    if(typeof qrcode==='undefined')return false;
+    var els=document.querySelectorAll('.art-qr[data-url]'),done=true;
+    for(var i=0;i<els.length;i++){
+      var img=els[i].querySelector('.art-qr-img');
+      if(img&&!img.firstChild){try{img.innerHTML=styledQR(els[i].dataset.url);}catch(e){done=false;}}
+    }
+    return done;
+  }
+  if(!renderThumbs()){var tries=0,iv=setInterval(function(){if(renderThumbs()||++tries>20)clearInterval(iv);},250);}
   document.addEventListener('click',function(e){
-    var b=e.target.closest('.art-link');
-    if(b){e.preventDefault();openQR(b.dataset.url,b.dataset.title);return;}
+    var b=e.target.closest('.art-qr');
+    if(b&&b.dataset.url){e.preventDefault();openQR(b.dataset.url,b.dataset.title);return;}
     if(e.target===mask||e.target.id==='qrClose')mask.style.display='none';
   });
   var cp=document.getElementById('qrCopy');

@@ -97,8 +97,12 @@ select{cursor:pointer;min-width:240px}
 .badge-ml::before{content:"\2605";font-size:10px;margin-top:-1px}
 .badge-dv{background:linear-gradient(135deg,#e11d48,#9f1239);box-shadow:0 2px 6px rgba(159,18,57,.4)}
 .art-title{font-size:15.5px;font-weight:720;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.art-link{font-family:inherit;font-size:12px;font-weight:600;color:#2c5aa0;background:#eef4fc;border:1px solid #c9ddf5;border-radius:16px;padding:4px 12px;cursor:pointer;white-space:nowrap;transition:.15s}
-.art-link:hover{background:#2c5aa0;color:#fff;border-color:#2c5aa0}
+.art-right{display:flex;align-items:center;gap:14px}
+.art-qr{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex-shrink:0}
+.art-qr-img{width:64px;height:64px;border-radius:9px;overflow:hidden;box-shadow:0 1px 6px rgba(20,40,80,.14);background:#fff;transition:transform .15s,box-shadow .15s}
+.art-qr:hover .art-qr-img{transform:scale(1.07);box-shadow:0 4px 14px rgba(20,40,80,.24)}
+.art-qr-img svg{width:100%;height:100%;display:block}
+.art-qr-cap{font-size:10px;color:#2c5aa0;font-weight:600;white-space:nowrap;letter-spacing:.3px}
 .qr-mask{display:none;position:fixed;inset:0;background:rgba(15,30,60,.55);z-index:1100;align-items:center;justify-content:center;padding:20px}
 .qr-box{background:#fff;border-radius:16px;padding:22px 24px 18px;max-width:340px;width:100%;text-align:center;box-shadow:0 18px 50px rgba(10,30,70,.3)}
 .qr-title{font-size:14.5px;font-weight:700;color:#1e293b;line-height:1.45;margin-bottom:14px}
@@ -262,10 +266,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">MLCC史诗级涨价，全球尖端供货谁卡位</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-06-15</span>
-          <span class="art-avg dim">📅 今日新推 · 待首个交易日</span>
-          
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-06-15</span>
+            <span class="art-avg dim">📅 今日新推 · 待首个交易日</span>
+            
+          </div>
           
         </div>
       </div>
@@ -320,10 +326,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">电容电感全面涨价，被动元件谁领跑</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-06-15</span>
-          <span class="art-avg dim">📅 今日新推 · 待首个交易日</span>
-          
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-06-15</span>
+            <span class="art-avg dim">📅 今日新推 · 待首个交易日</span>
+            
+          </div>
           
         </div>
       </div>
@@ -387,10 +395,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">慢牛叠加AI赋能，券商科技谁领跑</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-06-08</span>
-          <span class="art-avg up">篇均 +2.18%</span>
-          <span class="art-ex down">篇均超额 -2.22%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-06-08</span>
+            <span class="art-avg up">篇均 +2.18%</span>
+            <span class="art-ex down">篇均超额 -2.22%</span>
+          </div>
           
         </div>
       </div>
@@ -481,10 +491,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">钼钨铀三箭齐发，战略金属谁领跑</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-06-08</span>
-          <span class="art-avg up">篇均 +11.40%</span>
-          <span class="art-ex up">篇均超额 +2.83%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-06-08</span>
+            <span class="art-avg up">篇均 +11.40%</span>
+            <span class="art-ex up">篇均超额 +2.83%</span>
+          </div>
           
         </div>
       </div>
@@ -575,10 +587,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">AI政务叠加信创替代，软件龙头谁领跑</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-06-01</span>
-          <span class="art-avg down">篇均 -3.76%</span>
-          <span class="art-ex up">篇均超额 +8.29%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-06-01</span>
+            <span class="art-avg down">篇均 -3.76%</span>
+            <span class="art-ex up">篇均超额 +8.29%</span>
+          </div>
           
         </div>
       </div>
@@ -624,10 +638,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">AI算力组网爆发，交换机龙头谁领跑</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-06-01</span>
-          <span class="art-avg down">篇均 -8.89%</span>
-          <span class="art-ex down">篇均超额 -12.28%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-06-01</span>
+            <span class="art-avg down">篇均 -8.89%</span>
+            <span class="art-ex down">篇均超额 -12.28%</span>
+          </div>
           
         </div>
       </div>
@@ -673,10 +689,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">Chiplet重塑芯片，封装与IP谁领跑</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-06-01</span>
-          <span class="art-avg down">篇均 -5.84%</span>
-          <span class="art-ex down">篇均超额 -8.77%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-06-01</span>
+            <span class="art-avg down">篇均 -5.84%</span>
+            <span class="art-ex down">篇均超额 -8.77%</span>
+          </div>
           
         </div>
       </div>
@@ -731,10 +749,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">大国重工崛起，谁卡位高端制造国产替代</span>
           <span class="head-badge badge-ml">主线</span>
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-06-01</span>
-          <span class="art-avg down">篇均 -3.63%</span>
-          <span class="art-ex down">篇均超额 -2.46%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-06-01</span>
+            <span class="art-avg down">篇均 -3.63%</span>
+            <span class="art-ex down">篇均超额 -2.46%</span>
+          </div>
           
         </div>
       </div>
@@ -807,10 +827,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">安监趋严叠加旺季，焦煤拐点谁领跑</span>
           <span class="head-badge badge-dv">红利</span>
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-06-01</span>
-          <span class="art-avg up">篇均 +2.40%</span>
-          <span class="art-ex up">篇均超额 +6.13%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-06-01</span>
+            <span class="art-avg up">篇均 +2.40%</span>
+            <span class="art-ex up">篇均超额 +6.13%</span>
+          </div>
           
         </div>
       </div>
@@ -856,10 +878,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">星链狂飙，中国商业航天谁卡位</span>
           <span class="head-badge badge-ml">主线</span>
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-06-01</span>
-          <span class="art-avg up">篇均 +6.70%</span>
-          <span class="art-ex up">篇均超额 +8.51%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-06-01</span>
+            <span class="art-avg up">篇均 +6.70%</span>
+            <span class="art-ex up">篇均超额 +8.51%</span>
+          </div>
           
         </div>
       </div>
@@ -914,10 +938,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">电网超级周期，谁卡位出海与AI缺电</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-06-01</span>
-          <span class="art-avg down">篇均 -1.85%</span>
-          <span class="art-ex up">篇均超额 +7.46%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-06-01</span>
+            <span class="art-avg down">篇均 -1.85%</span>
+            <span class="art-ex up">篇均超额 +7.46%</span>
+          </div>
           
         </div>
       </div>
@@ -1008,10 +1034,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">连接定义算力，芯片级互联谁领跑</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-06-01</span>
-          <span class="art-avg down">篇均 -1.58%</span>
-          <span class="art-ex down">篇均超额 -4.51%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-06-01</span>
+            <span class="art-avg down">篇均 -1.58%</span>
+            <span class="art-ex down">篇均超额 -4.51%</span>
+          </div>
           
         </div>
       </div>
@@ -1066,10 +1094,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">3D视觉+机器人之眼，谁卡位感知新时代</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-05-21</span>
-          <span class="art-avg up">篇均 +12.21%</span>
-          <span class="art-ex up">篇均超额 +20.63%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-05-21</span>
+            <span class="art-avg up">篇均 +12.21%</span>
+            <span class="art-ex up">篇均超额 +20.63%</span>
+          </div>
           
         </div>
       </div>
@@ -1106,10 +1136,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">AI+机器人产业图谱，感知整机量产谁领跑</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-05-21</span>
-          <span class="art-avg up">篇均 +1.70%</span>
-          <span class="art-ex up">篇均超额 +10.12%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-05-21</span>
+            <span class="art-avg up">篇均 +1.70%</span>
+            <span class="art-ex up">篇均超额 +10.12%</span>
+          </div>
           
         </div>
       </div>
@@ -1164,10 +1196,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">AI电感叠加机器人MIM，谁是粉末冶金赢家</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-05-21</span>
-          <span class="art-avg up">篇均 +11.28%</span>
-          <span class="art-ex up">篇均超额 +19.70%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-05-21</span>
+            <span class="art-avg up">篇均 +11.28%</span>
+            <span class="art-ex up">篇均超额 +19.70%</span>
+          </div>
           
         </div>
       </div>
@@ -1204,10 +1238,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">AI算力到应用全链共振，谁是人工智能新十年赢家</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-05-21</span>
-          <span class="art-avg down">篇均 -10.11%</span>
-          <span class="art-ex down">篇均超额 -6.02%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-05-21</span>
+            <span class="art-avg down">篇均 -10.11%</span>
+            <span class="art-ex down">篇均超额 -6.02%</span>
+          </div>
           
         </div>
       </div>
@@ -1280,10 +1316,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">AI算力推动PCB全面反转，谁卡位高端制造</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-05-21</span>
-          <span class="art-avg up">篇均 +10.83%</span>
-          <span class="art-ex up">篇均超额 +10.94%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-05-21</span>
+            <span class="art-avg up">篇均 +10.83%</span>
+            <span class="art-ex up">篇均超额 +10.94%</span>
+          </div>
           
         </div>
       </div>
@@ -1320,10 +1358,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">人形机器人量产元年，谁是港股整机赢家</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-05-21</span>
-          <span class="art-avg down">篇均 -5.07%</span>
-          <span class="art-ex up">篇均超额 +3.35%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-05-21</span>
+            <span class="art-avg down">篇均 -5.07%</span>
+            <span class="art-ex up">篇均超额 +3.35%</span>
+          </div>
           
         </div>
       </div>
@@ -1360,10 +1400,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">建军百年临近，航空主机厂谁领跑</span>
           <span class="head-badge badge-ml">主线</span>
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-05-21</span>
-          <span class="art-avg down">篇均 -0.59%</span>
-          <span class="art-ex up">篇均超额 +6.22%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-05-21</span>
+            <span class="art-avg down">篇均 -0.59%</span>
+            <span class="art-ex up">篇均超额 +6.22%</span>
+          </div>
           
         </div>
       </div>
@@ -1418,10 +1460,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">新能源车+智能化+机器人，谁卡位下一个十年</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-05-21</span>
-          <span class="art-avg down">篇均 -2.04%</span>
-          <span class="art-ex up">篇均超额 +5.76%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-05-21</span>
+            <span class="art-avg down">篇均 -2.04%</span>
+            <span class="art-ex up">篇均超额 +5.76%</span>
+          </div>
           
         </div>
       </div>
@@ -1458,10 +1502,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">机器人产业知识图谱，从核心零件到整机谁领跑</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-05-21</span>
-          <span class="art-avg down">篇均 -6.09%</span>
-          <span class="art-ex up">篇均超额 +2.33%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-05-21</span>
+            <span class="art-avg down">篇均 -6.09%</span>
+            <span class="art-ex up">篇均超额 +2.33%</span>
+          </div>
           
         </div>
       </div>
@@ -1534,10 +1580,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">科技与稀缺共振，谁卡位新质生产力金属</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-05-21</span>
-          <span class="art-avg up">篇均 +1.61%</span>
-          <span class="art-ex up">篇均超额 +0.12%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-05-21</span>
+            <span class="art-avg up">篇均 +1.61%</span>
+            <span class="art-ex up">篇均超额 +0.12%</span>
+          </div>
           
         </div>
       </div>
@@ -1610,10 +1658,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">传统医药估值见底，价值发现窗口已至</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-04-28</span>
-          <span class="art-avg down">篇均 -11.36%</span>
-          <span class="art-ex down">篇均超额 -0.61%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-04-28</span>
+            <span class="art-avg down">篇均 -11.36%</span>
+            <span class="art-ex down">篇均超额 -0.61%</span>
+          </div>
           
         </div>
       </div>
@@ -1695,10 +1745,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">机器人与热管理共振，谁卡位黄金赛道</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-04-28</span>
-          <span class="art-avg up">篇均 +1.47%</span>
-          <span class="art-ex down">篇均超额 -5.94%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-04-28</span>
+            <span class="art-avg up">篇均 +1.47%</span>
+            <span class="art-ex down">篇均超额 -5.94%</span>
+          </div>
           
         </div>
       </div>
@@ -1735,10 +1787,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">锂电材料反转，谁是细分赛道赢家</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-04-28</span>
-          <span class="art-avg down">篇均 -11.25%</span>
-          <span class="art-ex down">篇均超额 -2.47%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-04-28</span>
+            <span class="art-avg down">篇均 -11.25%</span>
+            <span class="art-ex down">篇均超额 -2.47%</span>
+          </div>
           
         </div>
       </div>
@@ -1820,10 +1874,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">锂资源拐点叠加隔膜出海，谁卡位上游</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-04-28</span>
-          <span class="art-avg down">篇均 -3.74%</span>
-          <span class="art-ex up">篇均超额 +5.04%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-04-28</span>
+            <span class="art-avg down">篇均 -3.74%</span>
+            <span class="art-ex up">篇均超额 +5.04%</span>
+          </div>
           
         </div>
       </div>
@@ -1878,10 +1934,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">功率半导体反转叠加SiC放量，谁领跑</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-04-22</span>
-          <span class="art-avg up">篇均 +17.19%</span>
-          <span class="art-ex down">篇均超额 -8.39%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-04-22</span>
+            <span class="art-avg up">篇均 +17.19%</span>
+            <span class="art-ex down">篇均超额 -8.39%</span>
+          </div>
           
         </div>
       </div>
@@ -1918,10 +1976,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">化工反转叠加新材料，谁是双线赢家</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-04-22</span>
-          <span class="art-avg down">篇均 -10.03%</span>
-          <span class="art-ex down">篇均超额 -3.08%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-04-22</span>
+            <span class="art-avg down">篇均 -10.03%</span>
+            <span class="art-ex down">篇均超额 -3.08%</span>
+          </div>
           
         </div>
       </div>
@@ -1967,10 +2027,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">存储反转叠加车规放量，谁是双线赢家</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-04-20</span>
-          <span class="art-avg up">篇均 +20.44%</span>
-          <span class="art-ex down">篇均超额 -6.96%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-04-20</span>
+            <span class="art-avg up">篇均 +20.44%</span>
+            <span class="art-ex down">篇均超额 -6.96%</span>
+          </div>
           
         </div>
       </div>
@@ -2007,10 +2069,12 @@ body.anno-on .anno-bar *,body.anno-on .anno-drawer *{cursor:default}
           <span class="art-title">锂电拐点已至，量价齐升谁先兑现</span>
           
         </div>
-        <div class="art-meta">
-          <span class="art-date">发布 2026-04-16</span>
-          <span class="art-avg down">篇均 -9.27%</span>
-          <span class="art-ex up">篇均超额 +0.20%</span>
+        <div class="art-right">
+          <div class="art-meta">
+            <span class="art-date">发布 2026-04-16</span>
+            <span class="art-avg down">篇均 -9.27%</span>
+            <span class="art-ex up">篇均超额 +0.20%</span>
+          </div>
           
         </div>
       </div>
@@ -2464,9 +2528,20 @@ document.getElementById('rkE').onclick=function(){this.classList.add('on');docum
     }
     mask.style.display='flex';
   }
+  // 在每张卡片上把品牌款小二维码缩略图渲染出来(直接可见)
+  function renderThumbs(){
+    if(typeof qrcode==='undefined')return false;
+    var els=document.querySelectorAll('.art-qr[data-url]'),done=true;
+    for(var i=0;i<els.length;i++){
+      var img=els[i].querySelector('.art-qr-img');
+      if(img&&!img.firstChild){try{img.innerHTML=styledQR(els[i].dataset.url);}catch(e){done=false;}}
+    }
+    return done;
+  }
+  if(!renderThumbs()){var tries=0,iv=setInterval(function(){if(renderThumbs()||++tries>20)clearInterval(iv);},250);}
   document.addEventListener('click',function(e){
-    var b=e.target.closest('.art-link');
-    if(b){e.preventDefault();openQR(b.dataset.url,b.dataset.title);return;}
+    var b=e.target.closest('.art-qr');
+    if(b&&b.dataset.url){e.preventDefault();openQR(b.dataset.url,b.dataset.title);return;}
     if(e.target===mask||e.target.id==='qrClose')mask.style.display='none';
   });
   var cp=document.getElementById('qrCopy');
