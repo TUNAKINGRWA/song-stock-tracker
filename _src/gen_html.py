@@ -441,7 +441,7 @@ select{cursor:pointer;min-width:240px}
 .qr-mask{display:none;position:fixed;inset:0;background:rgba(15,30,60,.55);z-index:1100;align-items:center;justify-content:center;padding:20px}
 .qr-box{background:#fff;border-radius:16px;padding:22px 24px 18px;max-width:340px;width:100%;text-align:center;box-shadow:0 18px 50px rgba(10,30,70,.3)}
 .qr-title{font-size:14.5px;font-weight:700;color:#1e293b;line-height:1.45;margin-bottom:14px}
-.qr-svg{width:216px;height:216px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;border:1px solid #eef1f5;border-radius:10px;padding:8px}
+.qr-svg{width:250px;height:250px;margin:2px auto 14px;display:flex;align-items:center;justify-content:center;border-radius:16px;box-shadow:0 4px 18px rgba(20,40,80,.12)}
 .qr-svg svg{width:100%;height:100%;display:block}
 .qr-tip{font-size:11.5px;color:#94a3b8;margin-bottom:12px}
 .qr-url{font-size:11px;color:#64748b;word-break:break-all;background:#f6f8fb;border-radius:7px;padding:7px 9px;margin-bottom:12px;font-family:ui-monospace,Menlo,monospace}
@@ -1076,6 +1076,33 @@ QR_BODY = """
 <script>
 (function(){
   var mask=document.getElementById('qrMask');
+  // 设计款二维码: 品牌蓝圆点 + 圆角定位框 + 中心盾牌logo(纠错H, 带logo可扫)
+  function styledQR(url){
+    var qr=qrcode(0,'H');qr.addData(url);qr.make();
+    var n=qr.getModuleCount(),q=3,cell=10,W=(n+q*2)*cell,col='#1f4f8f';
+    var p=['<rect width="'+W+'" height="'+W+'" rx="'+(cell*3.4)+'" fill="#ffffff"/>'];
+    var lm=Math.round(n*0.18);if(lm%2===0)lm++;var lo=(n-lm)/2,hi=lo+lm;
+    function isF(R,C){return (R<7&&C<7)||(R<7&&C>=n-7)||(R>=n-7&&C<7);}
+    var g=cell*0.9,off=(cell-g)/2;  // 圆角方块, 近乎填满, 可扫
+    for(var r=0;r<n;r++){for(var c=0;c<n;c++){
+      if(!qr.isDark(r,c))continue;
+      if(r>=lo&&r<hi&&c>=lo&&c<hi)continue;
+      if(isF(r,c))continue;
+      p.push('<rect x="'+((c+q)*cell+off)+'" y="'+((r+q)*cell+off)+'" width="'+g+'" height="'+g+'" rx="'+(cell*0.3)+'" fill="'+col+'"/>');
+    }}
+    function fp(R,C){var x=(C+q)*cell,y=(R+q)*cell;  // 标准实心定位框(轻微圆角),保证识别
+      p.push('<rect x="'+x+'" y="'+y+'" width="'+(7*cell)+'" height="'+(7*cell)+'" rx="'+(cell*1.6)+'" fill="'+col+'"/>');
+      p.push('<rect x="'+(x+cell)+'" y="'+(y+cell)+'" width="'+(5*cell)+'" height="'+(5*cell)+'" rx="'+(cell*1.05)+'" fill="#ffffff"/>');
+      p.push('<rect x="'+(x+cell*2)+'" y="'+(y+cell*2)+'" width="'+(cell*3)+'" height="'+(cell*3)+'" rx="'+(cell*0.65)+'" fill="'+col+'"/>');}
+    fp(0,0);fp(0,n-7);fp(n-7,0);
+    var ctr=W/2,bg=lm*cell*1.18;
+    p.push('<rect x="'+(ctr-bg/2)+'" y="'+(ctr-bg/2)+'" width="'+bg+'" height="'+bg+'" rx="'+(bg*0.3)+'" fill="#ffffff"/>');
+    var s=bg*0.72;
+    p.push('<g transform="translate('+(ctr-s/2)+','+(ctr-s/2)+') scale('+(s/100)+')">'
+      +'<path d="M50 5 L88 19 V47 C88 71 71 89 50 97 C29 89 12 71 12 47 V19 Z" fill="#14b8a6"/>'
+      +'<path d="M55 24 L33 57 H48 L45 78 L69 43 H53 Z" fill="#ffffff"/></g>');
+    return '<svg viewBox="0 0 '+W+' '+W+'" width="100%" height="100%" shape-rendering="geometricPrecision">'+p.join('')+'</svg>';
+  }
   function openQR(url,title){
     document.getElementById('qrTitle').textContent=title||'';
     document.getElementById('qrUrl').textContent=url;
@@ -1083,8 +1110,7 @@ QR_BODY = """
     var box=document.getElementById('qrSvg');box.innerHTML='';
     try{
       if(typeof qrcode==='undefined')throw 0;
-      var qr=qrcode(0,'M');qr.addData(url);qr.make();
-      box.innerHTML=qr.createSvgTag({cellSize:6,margin:1,scalable:true});
+      box.innerHTML=styledQR(url);
     }catch(e){
       box.innerHTML='<a href="'+url+'" target="_blank" style="font-size:12px;color:#2c5aa0">二维码加载失败，点此打开原文</a>';
     }
