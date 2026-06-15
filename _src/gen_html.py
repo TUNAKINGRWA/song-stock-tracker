@@ -24,7 +24,7 @@ THEME_COLORS = {
     "机器人": "#7c3aed", "新能源": "#0891b2", "电力设备": "#2563eb",
     "军工": "#475569", "AI算力": "#2c5aa0", "半导体": "#c2410c",
     "软件": "#0d9488", "医药": "#be123c", "周期": "#a16207",
-    "高端制造": "#0e7490", "金融": "#0369a1", "其他": "#64748b",
+    "高端制造": "#0e7490", "金融": "#0369a1", "电子": "#a21caf", "其他": "#64748b",
 }
 
 def esc(s):
@@ -746,7 +746,7 @@ document.getElementById('rkE').onclick=function(){this.classList.add('on');docum
         if(blkE)blkE.innerHTML='<div class="rank-wrap"><div class="rank-col"><h3>🚀 超额榜 Top 8</h3>'+barRows(rkE.slice(0,8),'exc','cum',mabE)+'</div><div class="rank-col"><h3>🪨 落后榜 Top 8</h3>'+barRows(rkE.slice(-8).reverse(),'exc','cum',mabE)+'</div></div>';
       }
       // ---- 主题卡 ----
-      var TC={'机器人':'#7c3aed','新能源':'#0891b2','电力设备':'#2563eb','军工':'#475569','AI算力':'#2c5aa0','半导体':'#c2410c','软件':'#0d9488','医药':'#be123c','周期':'#a16207','高端制造':'#0e7490','金融':'#0369a1','其他':'#64748b'};
+      var TC={'机器人':'#7c3aed','新能源':'#0891b2','电力设备':'#2563eb','军工':'#475569','AI算力':'#2c5aa0','半导体':'#c2410c','软件':'#0d9488','医药':'#be123c','周期':'#a16207','高端制造':'#0e7490','金融':'#0369a1','电子':'#a21caf','其他':'#64748b'};
       var tmaxv=1;thList.forEach(function(t){if(t.exc!=null&&Math.abs(t.exc)>tmaxv)tmaxv=Math.abs(t.exc);});
       var tg=document.getElementById('themeGrid');
       if(tg)tg.innerHTML=thList.map(function(t){
