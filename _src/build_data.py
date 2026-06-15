@@ -70,6 +70,29 @@ if _unmapped:
         print("   -", t)
     print("!" * 50 + "\n")
 
+# ---------- 2.5 文章原文直链(标题→URL), 用于卡片二维码/看原文 ----------
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_links = {}
+_lf = os.path.join(_HERE, "article_links.json")
+if os.path.exists(_lf):
+    try:
+        _links = json.load(open(_lf, encoding="utf-8"))
+    except Exception as e:
+        print("⚠️ article_links.json 解析失败:", e)
+_linked = 0
+for info in articles.values():
+    t = info["title"]
+    url = _links.get(t)
+    if not url:  # 容错: 键是标题子串也算(标题被微调时)
+        for k, v in _links.items():
+            if k and (k in t or t in k):
+                url = v
+                break
+    info["url"] = url
+    if url:
+        _linked += 1
+print(f"原文直链: {_linked}/{len(articles)} 篇已配 URL")
+
 # ---------- 3. 抓取 (标的 + ETF) ----------
 def stk_prefix(code, ex):
     # 信代码前缀, 不信文章后缀(可能笔误, 如 000400 被写成 .SH)

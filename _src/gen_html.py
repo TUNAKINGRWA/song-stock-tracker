@@ -233,6 +233,8 @@ for a in articles:
         avg_html = f'<span class="art-avg {cls(a["avg_cum"])}">篇均 {pct(a["avg_cum"])}</span>'
         avg_ex_html = (f'<span class="art-ex {cls(a["avg_excess"])}">篇均超额 {pct(a["avg_excess"])}</span>'
                        if a.get("avg_excess") is not None else "")
+    link_html = (f'<button class="art-link" data-url="{esc(a["url"])}" data-title="{esc(a["title"])}">📄 看原文</button>'
+                 if a.get("url") else "")
     search_blob = (a["title"] + " " + " ".join(r["name"] + r["code"] for r in a["rows"])).lower()
     trs = []
     for r in a["rows"]:
@@ -292,6 +294,7 @@ for a in articles:
           <span class="art-date">发布 {a['date']}</span>
           {avg_html}
           {avg_ex_html}
+          {link_html}
         </div>
       </div>
       <div class="tbl-wrap"><table class="stock-tbl">
@@ -338,6 +341,7 @@ TEMPLATE = """<!DOCTYPE html><html lang="zh-CN"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>热点先锋 · 标的跟踪看板</title>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 <style>
 :root{--blue:#2c5aa0;--blue-d:#1e3f73;--up:#d9342b;--down:#15883e;--bench:#1d4ed8;
 --bg:#f3f6fa;--card:#fff;--ink:#16243a;--dim:#5b6b81;--line:#e3e9f1;
@@ -432,6 +436,19 @@ select{cursor:pointer;min-width:240px}
 .badge-ml::before{content:"\\2605";font-size:10px;margin-top:-1px}
 .badge-dv{background:linear-gradient(135deg,#e11d48,#9f1239);box-shadow:0 2px 6px rgba(159,18,57,.4)}
 .art-title{font-size:15.5px;font-weight:720;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.art-link{font-family:inherit;font-size:12px;font-weight:600;color:#2c5aa0;background:#eef4fc;border:1px solid #c9ddf5;border-radius:16px;padding:4px 12px;cursor:pointer;white-space:nowrap;transition:.15s}
+.art-link:hover{background:#2c5aa0;color:#fff;border-color:#2c5aa0}
+.qr-mask{display:none;position:fixed;inset:0;background:rgba(15,30,60,.55);z-index:1100;align-items:center;justify-content:center;padding:20px}
+.qr-box{background:#fff;border-radius:16px;padding:22px 24px 18px;max-width:340px;width:100%;text-align:center;box-shadow:0 18px 50px rgba(10,30,70,.3)}
+.qr-title{font-size:14.5px;font-weight:700;color:#1e293b;line-height:1.45;margin-bottom:14px}
+.qr-svg{width:216px;height:216px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;border:1px solid #eef1f5;border-radius:10px;padding:8px}
+.qr-svg svg{width:100%;height:100%;display:block}
+.qr-tip{font-size:11.5px;color:#94a3b8;margin-bottom:12px}
+.qr-url{font-size:11px;color:#64748b;word-break:break-all;background:#f6f8fb;border-radius:7px;padding:7px 9px;margin-bottom:12px;font-family:ui-monospace,Menlo,monospace}
+.qr-btns{display:flex;gap:8px}
+.qr-btns button,.qr-btns a{flex:1;font-family:inherit;font-size:12.5px;font-weight:600;padding:9px 6px;border-radius:8px;border:1px solid #cbd5e1;background:#fff;color:#475569;cursor:pointer;text-decoration:none;text-align:center}
+.qr-btns .qr-open{background:#2c5aa0;color:#fff;border-color:#2c5aa0}
+.qr-btns .qr-copy:hover,.qr-btns button:hover{border-color:#94a3b8}
 .art-meta{display:flex;align-items:center;gap:13px;font-size:12.5px;white-space:nowrap}
 .art-date{color:var(--dim)}.art-avg{font-weight:700}
 .art-ex{font-weight:700;padding:2px 9px;border-radius:6px;background:#f1f5fb;font-size:12px}
@@ -836,6 +853,7 @@ document.getElementById('rkE').onclick=function(){this.classList.add('on');docum
   }catch(e){setStat('⚠ 实时模块异常，显示静态数据','warn');}
 })();
 </script>
+__QRBODY__
 __ANNOBODY__
 </body></html>"""
 
@@ -1041,6 +1059,52 @@ ANNO_BODY = """
 </script>
 """
 
+QR_BODY = """
+<div class="qr-mask" id="qrMask">
+  <div class="qr-box">
+    <div class="qr-title" id="qrTitle"></div>
+    <div class="qr-svg" id="qrSvg"></div>
+    <div class="qr-tip">📱 微信 / 相机扫码看原文</div>
+    <div class="qr-url" id="qrUrl"></div>
+    <div class="qr-btns">
+      <button class="qr-copy" id="qrCopy">📋 复制链接</button>
+      <a class="qr-open" id="qrOpen" target="_blank" rel="noopener">↗ 打开原文</a>
+      <button id="qrClose">关闭</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var mask=document.getElementById('qrMask');
+  function openQR(url,title){
+    document.getElementById('qrTitle').textContent=title||'';
+    document.getElementById('qrUrl').textContent=url;
+    document.getElementById('qrOpen').href=url;
+    var box=document.getElementById('qrSvg');box.innerHTML='';
+    try{
+      if(typeof qrcode==='undefined')throw 0;
+      var qr=qrcode(0,'M');qr.addData(url);qr.make();
+      box.innerHTML=qr.createSvgTag({cellSize:6,margin:1,scalable:true});
+    }catch(e){
+      box.innerHTML='<a href="'+url+'" target="_blank" style="font-size:12px;color:#2c5aa0">二维码加载失败，点此打开原文</a>';
+    }
+    mask.style.display='flex';
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.art-link');
+    if(b){e.preventDefault();openQR(b.dataset.url,b.dataset.title);return;}
+    if(e.target===mask||e.target.id==='qrClose')mask.style.display='none';
+  });
+  var cp=document.getElementById('qrCopy');
+  if(cp)cp.onclick=function(){
+    var u=document.getElementById('qrUrl').textContent,self=this;
+    if(navigator.clipboard)navigator.clipboard.writeText(u).then(function(){self.textContent='✓ 已复制';setTimeout(function(){self.textContent='📋 复制链接';},1500);});
+  };
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')mask.style.display='none';});
+})();
+</script>
+"""
+
 HTML = (TEMPLATE
         .replace("__ASHLAST__", st["ash_last"])
         .replace("__TODAY__", PAGE_UPDATE)
@@ -1054,6 +1118,7 @@ HTML = (TEMPLATE
         .replace("__ARTS__", "".join(arts_html))
         .replace("__CHART__", chart_json)
         .replace("__ANNOCSS__", ANNO_CSS)
+        .replace("__QRBODY__", QR_BODY)
         .replace("__ANNOBODY__", ANNO_BODY))
 
 open("/tmp/tracking.html", "w", encoding="utf-8").write(HTML)
