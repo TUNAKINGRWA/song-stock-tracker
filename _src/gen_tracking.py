@@ -83,16 +83,20 @@ for folder, info in stocks_meta.items():
                          "last_close": round(last, 3), "cum": sub[-1][1], "series": sub}
     etf_cum = etf_block["cum"] if etf_block else None
 
+    # 发布日晚于最后收盘 = 今日新推, 尚无交易日(待收盘), 而非真缺失
+    pending = pub > CUTOFF
     rows = []
     for s in info["stocks"]:
         code = s["code"]
         ex = "HK" if len(code) == 5 else ("SH" if code[0] == "6" else "SZ")
+        miss = {"name": s["name"], "code": code, "ex": ex, "ok": False,
+                "status": "pending" if pending else "missing"}
         if code not in stk_pts:
-            rows.append({"name": s["name"], "code": code, "ex": ex, "ok": False})
+            rows.append(miss)
             continue
         r = cum_from(stk_pts[code], pub)
         if not r:
-            rows.append({"name": s["name"], "code": code, "ex": ex, "ok": False})
+            rows.append(miss)
             continue
         sub, base, last, bd = r
         cum = sub[-1][1]

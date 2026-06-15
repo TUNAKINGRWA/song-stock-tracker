@@ -224,14 +224,35 @@ for a in articles:
     tc = THEME_COLORS.get(a["theme"], "#64748b")
     etf = a["etf"]
     hb = head_badge_for(a["title"])
-    avg_ex_html = (f'<span class="art-ex {cls(a["avg_excess"])}">篇均超额 {pct(a["avg_excess"])}</span>'
-                   if a.get("avg_excess") is not None else "")
+    art_pending = bool(a["rows"]) and all(not r["ok"] for r in a["rows"]) \
+        and any(r.get("status") == "pending" for r in a["rows"])
+    if art_pending:
+        avg_html = '<span class="art-avg dim">📅 今日新推 · 待首个交易日</span>'
+        avg_ex_html = ""
+    else:
+        avg_html = f'<span class="art-avg {cls(a["avg_cum"])}">篇均 {pct(a["avg_cum"])}</span>'
+        avg_ex_html = (f'<span class="art-ex {cls(a["avg_excess"])}">篇均超额 {pct(a["avg_excess"])}</span>'
+                       if a.get("avg_excess") is not None else "")
     search_blob = (a["title"] + " " + " ".join(r["name"] + r["code"] for r in a["rows"])).lower()
     trs = []
     for r in a["rows"]:
         if not r["ok"]:
-            trs.append(f'<tr class="miss"><td class="tname">{esc(r["name"])}</td>'
-                       f'<td class="mono">{r["code"]}</td><td colspan="6">数据缺失（停牌/未匹配）</td></tr>')
+            if r.get("status") == "pending":
+                # 今日新推, 尚无交易日; 给完整结构 + data-code, 收盘后实时引擎自动填
+                rsearch = esc((r["name"] + r["code"]).lower())
+                trs.append(f"""<tr class="pending" data-search="{rsearch}" data-code="{r['code']}">
+          <td class="tname">{esc(r['name'])}</td>
+          <td class="mono">{r['code']}.{r['ex']}</td>
+          <td class="mono dim">{a['date'][5:]}</td>
+          <td class="mono dim">—</td>
+          <td class="mono dim">—</td>
+          <td class="cum dim">待收盘</td>
+          <td class="dim">—</td>
+          <td class="sp dim">—</td>
+        </tr>""")
+            else:
+                trs.append(f'<tr class="miss"><td class="tname">{esc(r["name"])}</td>'
+                           f'<td class="mono">{r["code"]}</td><td colspan="6">数据缺失（停牌/未匹配）</td></tr>')
             continue
         rsearch = esc((r["name"] + r["code"]).lower())
         exc_td = (f'<td class="exc {cls(r["excess"])}">{pct(r["excess"])}</td>'
@@ -269,7 +290,7 @@ for a in articles:
         </div>
         <div class="art-meta">
           <span class="art-date">发布 {a['date']}</span>
-          <span class="art-avg {cls(a['avg_cum'])}">篇均 {pct(a['avg_cum'])}</span>
+          {avg_html}
           {avg_ex_html}
         </div>
       </div>
@@ -292,10 +313,16 @@ def secid_of(code):
 
 chart_articles = []
 for a in articles:
-    series = [{"name": r["name"], "code": r["code"], "secid": secid_of(r["code"]),
-               "scum": r["cum"], "sexc": r.get("excess"),
-               "data": [[d, v] for d, v in r["series"]]}
-              for r in a["rows"] if r["ok"]]
+    series = []
+    for r in a["rows"]:
+        if r["ok"]:
+            series.append({"name": r["name"], "code": r["code"], "secid": secid_of(r["code"]),
+                           "scum": r["cum"], "sexc": r.get("excess"),
+                           "data": [[d, v] for d, v in r["series"]]})
+        elif r.get("status") == "pending":
+            # 今日新推: 进 DATA 但无静态数据, 待收盘后实时引擎补算
+            series.append({"name": r["name"], "code": r["code"], "secid": secid_of(r["code"]),
+                           "scum": None, "sexc": None, "data": []})
     if not series:
         continue
     obj = {"title": a["title"], "date": a["date"], "theme": a["theme"], "series": series}
@@ -423,6 +450,7 @@ select{cursor:pointer;min-width:240px}
 .exc{font-weight:700;font-size:13px;font-variant-numeric:tabular-nums}
 .sp{width:130px;text-align:center!important}.spark{display:block;margin:0 auto}
 .nodata{color:#cbd5e1}.miss td{color:#94a3b8;font-style:italic;text-align:left}
+.pending td{color:#a3aec0}.pending .tname{color:#475569;font-weight:600}.pending .cum{font-weight:600;color:#b0892b}.pending:hover{background:#fffdf5}
 .bench-row{background:#eff5ff}.bench-row td{border-top:1.5px solid #cdddf5;border-bottom:none}
 .bench-row .tname{color:var(--bench)}
 footer{max-width:1180px;margin:0 auto;padding:0 24px 50px;color:var(--dim);font-size:12px;line-height:1.9}
