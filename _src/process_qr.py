@@ -30,13 +30,21 @@ def decode_qr(path):
         print("  解码失败:", e); return None
 
 def fetch_title(url):
-    """无头渲染取 <title>(SPA, 动态加载)。"""
+    """无头渲染取标题(SPA 动态加载)。综合 <title>/og:title/h1 取最长,防截断。"""
     try:
         out = subprocess.run([CHROME, "--headless=new", "--disable-gpu",
-                              "--virtual-time-budget=12000", f"--user-agent={UA}",
-                              "--dump-dom", url], capture_output=True, timeout=40).stdout.decode("utf-8", "ignore")
-        m = re.search(r"<title>([^<]+)</title>", out)
-        return m.group(1).strip() if m else None
+                              "--virtual-time-budget=16000", f"--user-agent={UA}",
+                              "--dump-dom", url], capture_output=True, timeout=45).stdout.decode("utf-8", "ignore")
+        cands = []
+        for pat in [r"<title>([^<]+)</title>",
+                    r'property="og:title"[^>]*content="([^"]+)"',
+                    r'content="([^"]+)"[^>]*property="og:title"',
+                    r'<h1[^>]*>([^<]{6,60})</h1>']:
+            for m in re.findall(pat, out):
+                s = m.strip()
+                if s and "内参" not in s:
+                    cands.append(s)
+        return max(cands, key=len) if cands else None
     except Exception as e:
         print("  取标题失败:", e); return None
 
