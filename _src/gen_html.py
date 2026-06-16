@@ -233,12 +233,11 @@ for a in articles:
         avg_html = f'<span class="art-avg {cls(a["avg_cum"])}">篇均 {pct(a["avg_cum"])}</span>'
         avg_ex_html = (f'<span class="art-ex {cls(a["avg_excess"])}">篇均超额 {pct(a["avg_excess"])}</span>'
                        if a.get("avg_excess") is not None else "")
-    if a.get("url") or a.get("img"):
-        _img = a.get("img") or ""
-        _thumb = f'<img src="{esc(_img)}" alt="二维码" loading="lazy">' if _img else ""
-        qr_html = (f'<div class="art-qr" data-url="{esc(a.get("url") or "")}" data-title="{esc(a["title"])}" '
-                   f'data-img="{esc(_img)}" title="点击放大扫码 / 看原文">'
-                   f'<div class="art-qr-img">{_thumb}</div><div class="art-qr-cap">扫码看原文</div></div>')
+    # 统一用蓝色设计款二维码(前端从真链接生成, 无黑边, 好看且可扫)
+    if a.get("url"):
+        qr_html = (f'<div class="art-qr" data-url="{esc(a["url"])}" data-title="{esc(a["title"])}" '
+                   f'title="点击放大扫码 / 看原文">'
+                   f'<div class="art-qr-img"></div><div class="art-qr-cap">扫码看原文</div></div>')
     else:
         qr_html = ""
     search_blob = (a["title"] + " " + " ".join(r["name"] + r["code"] for r in a["rows"])).lower()
