@@ -82,14 +82,17 @@ if os.path.exists(_lf):
 _linked = 0
 for info in articles.values():
     t = info["title"]
-    url = _links.get(t)
-    if not url:  # 容错: 键是标题子串也算(标题被微调时)
-        for k, v in _links.items():
+    v = _links.get(t)
+    if not v:  # 容错: 键是标题子串也算(标题被微调时)
+        for k, val in _links.items():
             if k and (k in t or t in k):
-                url = v
+                v = val
                 break
-    info["url"] = url
-    if url:
+    if isinstance(v, dict):
+        info["url"] = v.get("url"); info["img"] = v.get("img")
+    else:
+        info["url"] = v or None; info["img"] = None
+    if info["url"] or info["img"]:
         _linked += 1
 print(f"原文直链: {_linked}/{len(articles)} 篇已配 URL")
 

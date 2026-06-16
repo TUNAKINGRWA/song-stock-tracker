@@ -233,9 +233,14 @@ for a in articles:
         avg_html = f'<span class="art-avg {cls(a["avg_cum"])}">篇均 {pct(a["avg_cum"])}</span>'
         avg_ex_html = (f'<span class="art-ex {cls(a["avg_excess"])}">篇均超额 {pct(a["avg_excess"])}</span>'
                        if a.get("avg_excess") is not None else "")
-    qr_html = (f'<div class="art-qr" data-url="{esc(a["url"])}" data-title="{esc(a["title"])}" title="点击放大扫码 / 看原文">'
-               f'<div class="art-qr-img"></div><div class="art-qr-cap">扫码看原文</div></div>'
-               if a.get("url") else "")
+    if a.get("url") or a.get("img"):
+        _img = a.get("img") or ""
+        _thumb = f'<img src="{esc(_img)}" alt="二维码" loading="lazy">' if _img else ""
+        qr_html = (f'<div class="art-qr" data-url="{esc(a.get("url") or "")}" data-title="{esc(a["title"])}" '
+                   f'data-img="{esc(_img)}" title="点击放大扫码 / 看原文">'
+                   f'<div class="art-qr-img">{_thumb}</div><div class="art-qr-cap">扫码看原文</div></div>')
+    else:
+        qr_html = ""
     search_blob = (a["title"] + " " + " ".join(r["name"] + r["code"] for r in a["rows"])).lower()
     trs = []
     for r in a["rows"]:
@@ -443,7 +448,7 @@ select{cursor:pointer;min-width:240px}
 .art-qr{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex-shrink:0}
 .art-qr-img{width:64px;height:64px;border-radius:9px;overflow:hidden;box-shadow:0 1px 6px rgba(20,40,80,.14);background:#fff;transition:transform .15s,box-shadow .15s}
 .art-qr:hover .art-qr-img{transform:scale(1.07);box-shadow:0 4px 14px rgba(20,40,80,.24)}
-.art-qr-img svg{width:100%;height:100%;display:block}
+.art-qr-img svg,.art-qr-img img{width:100%;height:100%;display:block;object-fit:contain}
 .art-qr-cap{font-size:10px;color:#2c5aa0;font-weight:600;white-space:nowrap;letter-spacing:.3px}
 .qr-mask{display:none;position:fixed;inset:0;background:rgba(15,30,60,.55);z-index:1100;align-items:center;justify-content:center;padding:20px}
 .qr-box{background:#fff;border-radius:16px;padding:22px 24px 18px;max-width:340px;width:100%;text-align:center;box-shadow:0 18px 50px rgba(10,30,70,.3)}
@@ -1110,24 +1115,27 @@ QR_BODY = """
       +'<path d="M55 24 L33 57 H48 L45 78 L69 43 H53 Z" fill="#ffffff"/></g>');
     return '<svg viewBox="0 0 '+W+' '+W+'" width="100%" height="100%" shape-rendering="geometricPrecision">'+p.join('')+'</svg>';
   }
-  function openQR(url,title){
+  function openQR(url,title,img){
     document.getElementById('qrTitle').textContent=title||'';
-    document.getElementById('qrUrl').textContent=url;
-    document.getElementById('qrOpen').href=url;
+    document.getElementById('qrUrl').textContent=url||'';
+    var op=document.getElementById('qrOpen');op.href=url||'#';op.style.display=url?'':'none';
+    var cp=document.getElementById('qrCopy');cp.style.display=url?'':'none';
     var box=document.getElementById('qrSvg');box.innerHTML='';
-    try{
-      if(typeof qrcode==='undefined')throw 0;
-      box.innerHTML=styledQR(url);
-    }catch(e){
-      box.innerHTML='<a href="'+url+'" target="_blank" style="font-size:12px;color:#2c5aa0">二维码加载失败，点此打开原文</a>';
+    if(img){
+      box.innerHTML='<img src="'+img+'" alt="二维码" style="width:100%;height:100%;object-fit:contain;display:block">';
+    }else{
+      try{if(typeof qrcode==='undefined')throw 0;box.innerHTML=styledQR(url);}
+      catch(e){box.innerHTML='<a href="'+url+'" target="_blank" style="font-size:12px;color:#2c5aa0">点此打开原文</a>';}
     }
     mask.style.display='flex';
   }
   // 在每张卡片上把品牌款小二维码缩略图渲染出来(直接可见)
   function renderThumbs(){
     if(typeof qrcode==='undefined')return false;
-    var els=document.querySelectorAll('.art-qr[data-url]'),done=true;
+    var els=document.querySelectorAll('.art-qr'),done=true;
     for(var i=0;i<els.length;i++){
+      if(els[i].dataset.img)continue;               // 已用官方图片缩略图, 跳过
+      if(!els[i].dataset.url)continue;
       var img=els[i].querySelector('.art-qr-img');
       if(img&&!img.firstChild){try{img.innerHTML=styledQR(els[i].dataset.url);}catch(e){done=false;}}
     }
@@ -1136,7 +1144,7 @@ QR_BODY = """
   if(!renderThumbs()){var tries=0,iv=setInterval(function(){if(renderThumbs()||++tries>20)clearInterval(iv);},250);}
   document.addEventListener('click',function(e){
     var b=e.target.closest('.art-qr');
-    if(b&&b.dataset.url){e.preventDefault();openQR(b.dataset.url,b.dataset.title);return;}
+    if(b&&(b.dataset.url||b.dataset.img)){e.preventDefault();openQR(b.dataset.url,b.dataset.title,b.dataset.img);return;}
     if(e.target===mask||e.target.id==='qrClose')mask.style.display='none';
   });
   var cp=document.getElementById('qrCopy');

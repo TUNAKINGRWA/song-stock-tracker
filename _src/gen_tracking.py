@@ -114,7 +114,8 @@ for folder, info in stocks_meta.items():
     avg_ex = round(avg - etf_cum, 2) if (ok and etf_cum is not None) else None
     articles.append({
         "title": info["title"], "date": pub, "folder": folder,
-        "theme": theme_of(info["title"]), "etf": etf_block, "url": info.get("url"),
+        "theme": theme_of(info["title"]), "etf": etf_block,
+        "url": info.get("url"), "img": info.get("img"),
         "rows": rows, "avg_cum": avg, "avg_excess": avg_ex,
     })
 
