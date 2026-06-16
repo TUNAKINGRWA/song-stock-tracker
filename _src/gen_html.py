@@ -21,10 +21,7 @@ st = D["stats"]
 PAGE_UPDATE = st.get("today", "")
 
 THEME_COLORS = {
-    "机器人": "#7c3aed", "新能源": "#0891b2", "电力设备": "#2563eb",
-    "军工": "#475569", "AI算力": "#2c5aa0", "半导体": "#c2410c",
-    "软件": "#0d9488", "医药": "#be123c", "周期": "#a16207",
-    "高端制造": "#0e7490", "金融": "#0369a1", "电子": "#a21caf", "其他": "#64748b",
+    "机器人": "#8a6d3b", "新能源": "#5a8a5e", "电力设备": "#3a6b5a", "军工": "#6b6456", "AI算力": "#a35e2a", "半导体": "#c2650d", "软件": "#4f8456", "医药": "#a8474a", "周期": "#b08542", "高端制造": "#5f7a6a", "金融": "#7a6a3b", "电子": "#9a5a6b", "其他": "#8a8472",
 }
 
 def esc(s):
@@ -48,7 +45,7 @@ def sparkline(series, w=120, h=34, force=None):
     Y = lambda v: h - 3 - (v - lo) / (hi - lo) * (h - 6)
     pts = " ".join(f"{X(i):.1f},{Y(v):.1f}" for i, v in enumerate(vals))
     last = vals[-1]
-    color = force or ("#d9342b" if last > 0 else ("#15883e" if last < 0 else "#888"))
+    color = force or ("#bf4a30" if last > 0 else ("#4f8456" if last < 0 else "#888"))
     zero = ""
     if lo <= 0 <= hi:
         zy = Y(0)
@@ -105,17 +102,51 @@ best_a = max(elig, key=lambda a: a["avg_excess"])
 worst_a = min(elig, key=lambda a: a["avg_excess"])
 best_t = next((t for t in theme_stats if t["exc"] is not None and t["n"] >= 3), theme_stats[0])
 
-# ============ KPI ============
+# ============ Bento 总览 ============
+_circ = 263.9
+_winoff = _circ*(1-st['win_rate']/100); _beatoff = _circ*(1-st['beat_rate']/100)
+def _sgn(v): return '+' if v>=0 else '−'
 kpi_html = f"""
-<div class="kpi-grid">
-  <div class="kpi"><div class="kpi-label">跟踪文章</div><div class="kpi-val">{st['n_articles']}<span class="u">篇</span></div></div>
-  <div class="kpi"><div class="kpi-label">跟踪标的</div><div class="kpi-val">{st['n_stocks']}<span class="u">只</span></div></div>
-  <div class="kpi"><div class="kpi-label">对标行业ETF</div><div class="kpi-val">{st['n_etf']}<span class="u">只</span></div></div>
-  <div class="kpi"><div class="kpi-label">平均累计涨跌幅</div><div class="kpi-val {cls(st['avg_cum'])}" id="kvAvg">{pct(st['avg_cum'])}</div></div>
-  <div class="kpi"><div class="kpi-label">上涨标的占比</div><div class="kpi-val" id="kvWin">{st['win_rate']}<span class="u">%</span> <span class="kpi-sub">{st['win']}/{st['n_stocks']}</span></div></div>
-  <div class="kpi hl"><div class="kpi-label">跑赢对标ETF占比</div><div class="kpi-val {cls(st['beat_rate']-50)}" id="kvBeat">{st['beat_rate']}<span class="u">%</span> <span class="kpi-sub">{st['beat']}/{st['n_stocks']}</span></div></div>
-  <div class="kpi hl"><div class="kpi-label">平均超额收益</div><div class="kpi-val {cls(st['avg_excess'])}" id="kvExc">{pct(st['avg_excess'])}</div></div>
-  <div class="kpi"><div class="kpi-label">超额王 · α最高</div><div class="kpi-val up sm" id="kvKing">{esc(st['best_ex']['name'])}<br><span class="b">{pct(st['best_ex']['ex'])}</span></div></div>
+<div class="bento">
+  <div class="bento-card b-hero">
+    <div class="b-label"><svg class="ico" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg>组合平均超额 α · vs 对标行业ETF</div>
+    <div>
+      <div class="b-num" id="bExc"><span class="pm">{_sgn(st['avg_excess'])}</span>{abs(st['avg_excess']):.2f}<span class="pm" style="font-size:36px">%</span></div>
+      <div class="hero-meta">
+        <div>平均累计涨跌<b id="bAvgMeta" class="{cls(st['avg_cum'])}">{pct(st['avg_cum'])}</b></div>
+        <div>区间最强<b>{pct(st['best']['cum'])}</b></div>
+        <div>覆盖行业ETF<b>{st['n_etf']} 只</b></div>
+      </div>
+    </div>
+    <div class="hero-spark"><svg viewBox="0 0 460 66" preserveAspectRatio="none"><defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8a262" stop-opacity=".4"/><stop offset="1" stop-color="#e8a262" stop-opacity="0"/></linearGradient></defs><path d="M0,48 L38,46 76,52 114,49 152,54 190,48 228,42 266,45 304,34 342,37 380,25 418,29 460,15 L460,66 L0,66 Z" fill="url(#hg)"/><path d="M0,48 L38,46 76,52 114,49 152,54 190,48 228,42 266,45 304,34 342,37 380,25 418,29 460,15" fill="none" stroke="#e8a262" stroke-width="2"/></svg></div>
+  </div>
+  <div class="bento-card b-ring">
+    <div class="b-label"><svg class="ico" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>上涨标的占比</div>
+    <div class="ring-wrap"><svg viewBox="0 0 100 100"><defs><linearGradient id="ga" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c4753a"/><stop offset="1" stop-color="#5a8a5e"/></linearGradient></defs><circle class="ring-bg" cx="50" cy="50" r="42" fill="none" stroke-width="9"/><circle class="ring-val" id="bWinRing" cx="50" cy="50" r="42" fill="none" stroke-width="9" stroke="url(#ga)" stroke-dasharray="263.9" stroke-dashoffset="{_winoff:.1f}"/></svg><div class="ring-ctr"><div class="v" id="bWinV">{st['win_rate']}<span class="u">%</span></div></div></div>
+    <div class="b-sub" id="bWinSub">{st['win']} / {st['n_stocks']} 只</div>
+  </div>
+  <div class="bento-card b-ring">
+    <div class="b-label"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg>跑赢对标ETF占比</div>
+    <div class="ring-wrap"><svg viewBox="0 0 100 100"><defs><linearGradient id="gb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c4753a"/><stop offset="1" stop-color="#5a8a5e"/></linearGradient></defs><circle class="ring-bg" cx="50" cy="50" r="42" fill="none" stroke-width="9"/><circle class="ring-val" id="bBeatRing" cx="50" cy="50" r="42" fill="none" stroke-width="9" stroke="url(#gb)" stroke-dasharray="263.9" stroke-dashoffset="{_beatoff:.1f}"/></svg><div class="ring-ctr"><div class="v" id="bBeatV">{st['beat_rate']}<span class="u">%</span></div></div></div>
+    <div class="b-sub" id="bBeatSub">{st['beat']} / {st['n_stocks']} 只</div>
+  </div>
+  <div class="bento-card b-stat">
+    <div class="b-label"><svg class="ico" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/></svg>跟踪文章</div>
+    <div class="b-num">{st['n_articles']}<span class="u"> 篇</span></div><div class="b-sub">热点先锋全系列</div>
+  </div>
+  <div class="bento-card b-stat">
+    <div class="b-label"><svg class="ico" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>跟踪标的</div>
+    <div class="b-num">{st['n_stocks']}<span class="u"> 只</span></div><div class="b-sub">对应 {st['n_etf']} 只行业ETF</div>
+  </div>
+  <div class="bento-card b-trend">
+    <div class="tnum"><div class="b-label"><svg class="ico" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>组合平均累计涨跌</div><div class="b-num {cls(st['avg_cum'])}" id="bAvg" style="margin-top:10px">{pct(st['avg_cum'])}</div><div class="b-sub" style="margin-top:7px">自各篇推荐日起 · 前复权</div></div>
+    <div class="trend-spark"><svg viewBox="0 0 600 74" preserveAspectRatio="none"><defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bf4a30" stop-opacity=".2"/><stop offset="1" stop-color="#bf4a30" stop-opacity="0"/></linearGradient></defs><path d="M0,42 L50,38 100,48 150,44 200,54 250,42 300,32 350,50 400,40 450,28 500,36 550,20 600,26 L600,74 L0,74 Z" fill="url(#tg)"/><path d="M0,42 L50,38 100,48 150,44 200,54 250,42 300,32 350,50 400,40 450,28 500,36 550,20 600,26" fill="none" stroke="#bf4a30" stroke-width="2"/><line x1="0" y1="42" x2="600" y2="42" stroke="#c9bfa6" stroke-width="1" stroke-dasharray="3,3"/></svg></div>
+  </div>
+  <div class="bento-card b-king">
+    <div class="b-label"><svg class="ico" viewBox="0 0 24 24"><path d="M3 6l5 4 4-6 4 6 5-4-2 12H5z"/><path d="M5 20h14"/></svg>超额王 · α 最高</div>
+    <div class="king-name" id="bKingN">{esc(st['best_ex']['name'])}</div>
+    <div class="king-val" id="bKingV">{pct(st['best_ex']['ex'])}</div><div class="king-tag">同期超额收益第一</div>
+  </div>
 </div>"""
 
 # ============ 洞察卡 ============
@@ -124,21 +155,11 @@ s_best = f'<b class="{cls(best_a["avg_excess"])}">{pct(best_a["avg_excess"])}</b
 s_worst = f'<b class="{cls(worst_a["avg_excess"])}">{pct(worst_a["avg_excess"])}</b>'
 s_bt = f'<b class="{cls(best_t["exc"])}">{pct(best_t["exc"])}</b>' if best_t["exc"] is not None else "—"
 king = st["best_ex"]
-ins_cards = [
-    ("💡", "整体选股α为正",
-     f"{st['n_stocks']}只标的平均跑赢对标行业ETF {s_avg}，{st['beat_rate']}% 的标的强于行业基准——板块普跌中选股相对抗跌"),
-    ("🏆", "最强一篇",
-     f"《{esc(best_a['title'])}》篇均超额 {s_best}（发布 {best_a['date']}）"),
-    ("⚠️", "最弱一篇",
-     f"《{esc(worst_a['title'])}》篇均超额 {s_worst}（发布 {worst_a['date']}）"),
-    ("👑", "双指标领跑",
-     f"{esc(king['name'])} 超额 <b class=\"up\">{pct(king['ex'])}</b>；最强主题：{esc(best_t['name'])}（{best_t['n']}只平均超额 {s_bt}）"),
-]
-INS_KEYS = ["alpha", "best", "worst", "king"]
-ins_html = '<div class="ins-grid">' + "".join(
-    f'<div class="ins-card" data-ins="{k}"><div class="ins-i">{i}</div><div class="ins-bd">'
-    f'<div class="ins-t">{t}</div><div class="ins-d">{d}</div></div></div>'
-    for k, (i, t, d) in zip(INS_KEYS, ins_cards)) + '</div>'
+ins_html = f'''<div class="ins-grid">
+  <div class="ins-card" data-ins="best"><div class="ins-i"><svg class="ico" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></div><div class="ins-bd"><div class="ins-t">最强一篇</div><div class="ins-d">《{esc(best_a['title'])}》篇均超额 {s_best}（发布 {best_a['date']}）</div></div></div>
+  <div class="ins-card" data-ins="worst"><div class="ins-i"><svg class="ico" viewBox="0 0 24 24"><path d="M3 7l6 6 4-4 8 8"/><path d="M17 17h4v-4"/></svg></div><div class="ins-bd"><div class="ins-t">最弱一篇</div><div class="ins-d">《{esc(worst_a['title'])}》篇均超额 {s_worst}（发布 {worst_a['date']}）</div></div></div>
+  <div class="ins-card" data-ins="king"><div class="ins-i"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M9 13.5L7.5 22 12 19l4.5 3L15 13.5"/></svg></div><div class="ins-bd"><div class="ins-t">双指标领跑</div><div class="ins-d">{esc(king['name'])} 超额 <b class="up">{pct(king['ex'])}</b>；最强主题：{esc(best_t['name'])}（{best_t['n']}只平均超额 {s_bt}）</div></div></div>
+</div>'''
 
 # ============ 排行（双口径） ============
 def bars(items, val_key, sub_key, maxabs):
@@ -284,7 +305,7 @@ for a in articles:
           <td class="mono">{etf['last_close']}</td>
           <td class="cum {cls(etf['cum'])}">{pct(etf['cum'])}</td>
           <td class="dim sm2">行业基准</td>
-          <td class="sp">{sparkline(etf['series'], force='#1d4ed8')}</td>
+          <td class="sp">{sparkline(etf['series'], force='#a35e2a')}</td>
         </tr>"""
     avgex_attr = a["avg_excess"] if a.get("avg_excess") is not None else ""
     arts_html.append(f"""
@@ -350,162 +371,282 @@ TEMPLATE = """<!DOCTYPE html><html lang="zh-CN"><head>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 <style>
-:root{--blue:#2c5aa0;--blue-d:#1e3f73;--up:#d9342b;--down:#15883e;--bench:#1d4ed8;
---bg:#f3f6fa;--card:#fff;--ink:#16243a;--dim:#5b6b81;--line:#e3e9f1;
---sh1:0 1px 2px rgba(16,40,80,.06);--sh2:0 10px 28px -14px rgba(16,40,80,.16)}
+/* ============================================================
+   热点先锋 · 标的跟踪看板 — v3  照 Rise 设计语言
+   衬线大标题 + 暖米白大地色（深墨绿/陶土橙/草绿）+ 大留白克制
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700;900&display=swap');
+:root{
+  --bg:#f1ede4; --bg2:#e7e0d1; --card:#faf8f2; --card2:rgba(252,250,244,.70); --card-solid:#fffefb;
+  --ink:#1f2c20; --ink2:#47513f; --dim:#867f6d; --faint:#aaa08d;
+  --line:#e5dfd0; --line2:#efeadc;
+  --forest:#1f2c20; --forest2:#2c3d2d;
+  --orange:#c4753a; --orange-d:#a35e2a; --orange-l:#f1e5d2;
+  --leaf:#5a8a5e;
+  --up:#bf4a30; --up-l:#f6e3da; --down:#4f8456; --down-l:#e4efe2; --bench:#a35e2a;
+  --serif:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,"Times New Roman",serif;
+  --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  --sh1:0 2px 10px -4px rgba(40,48,32,.10),0 4px 18px -10px rgba(40,48,32,.07);
+  --sh2:0 10px 30px -12px rgba(40,48,32,.18),0 22px 50px -26px rgba(40,48,32,.2);
+  --r-lg:16px; --r-md:13px; --ease:cubic-bezier(.4,.14,.3,1);
+}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 html{scroll-behavior:smooth}
-body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
-.up{color:var(--up)!important}.down{color:var(--down)!important}.flat{color:#64748b!important}
-header{background:linear-gradient(118deg,#1d3e72,#2c5aa0 52%,#3f70ba);color:#fff;padding:30px 32px 24px;position:relative;overflow:hidden}
-header::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.04) 0 2px,transparent 2px 56px);pointer-events:none}
-header .wrap{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;position:relative}
-header h1{font-size:24px;font-weight:760;letter-spacing:.5px}
-header h1 .dot{color:#9fc1f0}
-header .sub{font-size:12.5px;color:#cfe0f7;margin-top:6px}
-header .legend{font-size:12px;color:#dce8f8;display:flex;gap:15px;align-items:center;flex-wrap:wrap}
-.chip{display:inline-flex;align-items:center;gap:5px}
-.chip i{width:10px;height:10px;border-radius:2px;display:inline-block}
-.chip .dash{width:16px;height:0;border-top:2px dashed #8fb4ff}
-.hnav{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.hnav .wrap{max-width:1180px;margin:0 auto;display:flex;gap:4px;padding:8px 24px;overflow-x:auto}
-.hnav a{padding:6px 13px;border-radius:8px;font-size:13px;font-weight:600;color:#42526b;text-decoration:none;white-space:nowrap}
-.hnav a:hover{background:#eef2f8;color:var(--blue-d)}
-main{max-width:1180px;margin:0 auto;padding:24px 24px 40px}
-section{margin-bottom:32px;scroll-margin-top:64px}
-.sec-title{font-size:16px;font-weight:740;color:var(--blue);margin:0 0 14px;padding-left:11px;border-left:4px solid var(--blue);line-height:1.25}
-.sec-title small{font-weight:500;color:var(--dim);font-size:12.5px;margin-left:8px}
-.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px 17px;box-shadow:var(--sh1);transition:transform .15s,box-shadow .15s}
-.kpi:hover{transform:translateY(-1px);box-shadow:var(--sh2)}
-.kpi.hl{background:linear-gradient(180deg,#fbfdff,#eef5ff);border-color:#b9d2f0}
-.kpi-label{font-size:12px;color:var(--dim);margin-bottom:7px}
-.kpi-val{font-size:25px;font-weight:780;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
-.kpi-val .u{font-size:14px;font-weight:500;color:var(--dim);margin-left:2px}
-.kpi-val.sm{font-size:14px;font-weight:700;line-height:1.35}
-.kpi-val .b{font-size:18px}
-.kpi-sub{font-size:12px;color:var(--dim);font-weight:500}
-.ins-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px}
-.ins-card{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 16px;box-shadow:var(--sh1)}
-.ins-i{font-size:21px;line-height:1.2;flex-shrink:0;filter:saturate(1.1)}
-.ins-t{font-size:13px;font-weight:740;color:var(--blue-d);margin-bottom:3px}
-.ins-d{font-size:12.8px;color:#3c4d66;line-height:1.62}
-.ins-d b{font-weight:760}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--sh1)}
-.chart-controls{display:flex;gap:12px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
-.chart-controls label{font-size:13px;color:var(--dim)}
-select,input[type=search]{font-family:inherit;font-size:13.5px;padding:7px 12px;border:1px solid #cbd5e1;border-radius:9px;background:#fff;color:var(--ink)}
+body{font-family:var(--sans);color:var(--ink);font-size:14px;line-height:1.7;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  background:
+    linear-gradient(180deg,rgba(243,239,231,.50) 0%,rgba(243,239,231,.74) 24%,rgba(243,239,231,.88) 50%,rgba(243,239,231,.93) 100%) fixed,
+    url('assets/hero-pine.jpg') center top / cover fixed,
+    var(--bg)}
+.up{color:var(--up)!important}.down{color:var(--down)!important}.flat{color:#8a8472!important}
+.mono,.cum,.exc,.bar-val,.art-avg,.b-num,.kpi-val{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+svg.ico{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+/* ========== HEADER（Rise 浅色优雅风 · 衬线标题） ========== */
+header{background:transparent;color:var(--ink);padding:54px 32px 40px;position:relative;border-bottom:1px solid rgba(229,223,208,.5)}
+header::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--forest) 0%,var(--orange) 75%,#dba066 100%);z-index:3}
+header .wrap{max-width:1180px;margin:0 auto;width:100%;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:18px}
+header h1{font-family:var(--serif);font-size:41px;font-weight:600;color:var(--ink);letter-spacing:1.5px;line-height:1.2}
+header .eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:3px;color:var(--orange-d);margin-bottom:14px;text-transform:uppercase}
+header h1 .dot{color:var(--orange);font-weight:400}
+header .sub{font-family:var(--sans);font-size:12.5px;color:var(--dim);margin-top:11px;line-height:1.7;max-width:720px}
+header #liveStat{margin-top:5px;font-weight:600;color:var(--orange-d)!important}
+header .legend{font-size:12px;color:var(--ink2);display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);padding:10px 16px;border-radius:12px;box-shadow:var(--sh1)}
+.chip{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.chip i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.chip .dash{width:18px;height:0;border-top:2px dashed var(--orange)}
+
+/* ========== STICKY NAV ========== */
+.hnav{position:sticky;top:0;z-index:40;background:rgba(241,237,228,.85);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid var(--line)}
+.hnav .wrap{max-width:1180px;margin:0 auto;display:flex;gap:5px;padding:10px 24px;overflow-x:auto}
+.hnav a{padding:7px 15px;border-radius:9px;font-size:13px;font-weight:600;color:var(--ink2);text-decoration:none;white-space:nowrap;transition:all .2s var(--ease)}
+.hnav a:hover{background:var(--orange-l);color:var(--orange-d)}
+
+main{max-width:1180px;margin:0 auto;padding:36px 24px 48px}
+section{margin-bottom:52px;scroll-margin-top:68px}
+.sec-title{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--ink);margin:0 0 20px;line-height:1.3;letter-spacing:.6px;display:flex;align-items:baseline;gap:11px;flex-wrap:wrap}
+.sec-title small{font-family:var(--sans);font-weight:400;color:var(--dim);font-size:12.5px;letter-spacing:0}
+
+/* ============================================================
+   BENTO 数据卡（Rise 风：白卡 + 柔和阴影 + 迷你图 + 大留白）
+   ============================================================ */
+/* 卡片统一毛玻璃：浮在松树底图上、透出氛围（照 Rise 的半透明卡） */
+.bento-card,.card,.art-card,.theme-card,.ins-card,.detail-tools,.kpi,footer .disc,.hist-card{backdrop-filter:blur(14px) saturate(1.1);-webkit-backdrop-filter:blur(14px) saturate(1.1)}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(124px,auto);gap:18px}
+.bento-card{background:var(--card2);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px 24px;box-shadow:var(--sh1);position:relative;overflow:hidden;transition:transform .26s var(--ease),box-shadow .26s var(--ease);display:flex;flex-direction:column}
+.bento-card:hover{transform:translateY(-3px);box-shadow:var(--sh2)}
+.b-label{font-size:12px;color:var(--dim);font-weight:600;letter-spacing:.2px;display:flex;align-items:center;gap:7px}
+.b-label .ico{width:15px;height:15px;color:var(--orange)}
+.b-num{font-family:var(--serif);font-weight:700;letter-spacing:-.5px;line-height:1;color:var(--ink)}
+.b-sub{font-size:11.5px;color:var(--dim);font-weight:500}
+
+/* HERO：组合超额（深墨绿底，唯一深色焦点，呼应 Rise 的深绿按钮） */
+.b-hero{grid-column:span 2;grid-row:span 2;background:linear-gradient(158deg,#26332a 0%,#1a2418 100%);color:#f1ede4;border:none;justify-content:space-between;padding:28px 30px}
+.b-hero .b-label{color:#bcc9b4}.b-hero .b-label .ico{color:#e0995a}
+.b-hero .b-num{color:#fbf8f1;font-size:66px}
+.b-hero .b-num .pm{color:#e8a262}
+.b-hero .hero-meta{display:flex;gap:26px;margin-top:6px;position:relative;z-index:2}
+.b-hero .hero-meta div{font-size:12px;color:#aab59f}
+.b-hero .hero-meta b{display:block;font-family:var(--serif);font-size:20px;font-weight:600;color:#f1ede4;margin-top:3px}
+.b-hero .hero-spark{position:absolute;left:0;right:0;bottom:0;height:66px;opacity:.7}
+.b-hero .hero-spark svg{width:100%;height:100%;display:block}
+
+/* 环形进度（橙→绿渐变，照 Rise 的 50% Expense 环） */
+.b-ring{align-items:center;justify-content:flex-start;text-align:center;gap:6px}
+.b-ring .b-label{justify-content:center}
+.ring-wrap{position:relative;width:104px;height:104px;margin:6px auto 0}
+.ring-wrap svg{transform:rotate(-90deg);width:100%;height:100%}
+.ring-wrap .ring-bg{stroke:var(--line2)}
+.ring-wrap .ring-val{stroke-linecap:round;transition:stroke-dashoffset 1s var(--ease)}
+.ring-ctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-ctr .v{font-family:var(--serif);font-size:25px;font-weight:700;letter-spacing:-.5px;color:var(--ink)}
+.ring-ctr .v .u{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--dim)}
+
+/* 普通指标卡的大数字 */
+.b-stat .b-num{font-size:42px;margin-top:auto}
+.b-stat .b-num .u{font-family:var(--sans);font-size:15px;color:var(--dim);font-weight:600;letter-spacing:0}
+
+/* 净值宽卡 */
+.b-trend{grid-column:span 3;flex-direction:row;align-items:center;gap:26px}
+.b-trend .tnum{flex-shrink:0}
+.b-trend .tnum .b-num{font-size:40px}
+.b-trend .trend-spark{flex:1;height:74px;min-width:0}
+.b-trend .trend-spark svg{width:100%;height:100%;display:block}
+
+/* 超额王（浅橙卡，陶土橙强调） */
+.b-king{background:linear-gradient(155deg,#f7ecd9,#f1e2c8);border-color:#e7d2a8;justify-content:space-between}
+.b-king .b-label{color:var(--orange-d)}.b-king .b-label .ico{color:var(--orange)}
+.b-king .king-name{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--ink);margin-top:8px}
+.b-king .king-val{font-family:var(--serif);font-size:32px;font-weight:700;color:var(--orange-d);letter-spacing:-.5px;margin-top:auto}
+.b-king .king-tag{font-size:11px;color:var(--dim);font-weight:500}
+
+/* 洞察行 */
+.ins-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.ins-card{display:flex;gap:14px;background:var(--card2);border:1px solid var(--line);border-radius:var(--r-md);padding:18px 20px;box-shadow:var(--sh1);transition:box-shadow .2s var(--ease)}
+.ins-card:hover{box-shadow:var(--sh2)}
+.ins-i{flex-shrink:0;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:var(--orange-l);color:var(--orange-d)}
+.ins-i .ico{width:20px;height:20px}
+.ins-t{font-family:var(--serif);font-size:14.5px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.ins-d{font-size:12.6px;color:var(--ink2);line-height:1.62}
+.ins-d b{font-weight:700}
+
+/* 旧 KPI 兜底 */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.kpi{background:var(--card2);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;box-shadow:var(--sh1)}
+.kpi-label{font-size:12px;color:var(--dim);margin-bottom:9px;font-weight:600}
+.kpi-val{font-family:var(--serif);font-size:28px;font-weight:700;color:var(--ink)}.kpi-val .u{font-family:var(--sans);font-size:13px;color:var(--dim)}
+
+/* ========== CARD ========== */
+.card{background:var(--card2);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 26px;box-shadow:var(--sh1)}
+.chart-controls{display:flex;gap:12px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+.chart-controls label{font-size:13px;color:var(--dim);font-weight:600}
+select,input[type=search]{font-family:inherit;font-size:13.5px;padding:8px 13px;border:1px solid #d9d1bf;border-radius:10px;background:#fff;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+select:hover,input[type=search]:hover{border-color:var(--orange)}
+select:focus,input[type=search]:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(196,117,58,.14)}
 select{cursor:pointer;min-width:240px}
-#mainChart{width:100%;height:440px}
-.seg{display:inline-flex;background:#eaeff6;border-radius:10px;padding:3px;gap:2px}
-.seg button{border:none;background:transparent;padding:6px 14px;border-radius:8px;font-family:inherit;font-size:12.5px;font-weight:650;color:#5b6b81;cursor:pointer;white-space:nowrap}
-.seg button.on{background:#fff;color:var(--blue-d);box-shadow:0 1px 3px rgba(16,40,80,.18)}
-.seg button.off{opacity:.38;cursor:not-allowed}
-.rank-wrap{display:grid;grid-template-columns:1fr 1fr;gap:26px}
-.rank-col h3{font-size:14px;margin-bottom:12px}
-.bar-row{display:grid;grid-template-columns:128px 1fr 132px;align-items:center;gap:10px;margin-bottom:8px}
+#mainChart{width:100%;height:450px}
+.seg{display:inline-flex;background:var(--bg2);border-radius:11px;padding:3px;gap:2px;border:1px solid var(--line)}
+.seg button{border:none;background:transparent;padding:7px 15px;border-radius:8px;font-family:inherit;font-size:12.5px;font-weight:680;color:var(--dim);cursor:pointer;white-space:nowrap;transition:all .2s var(--ease)}
+.seg button.on{background:#fff;color:var(--orange-d);box-shadow:0 1px 4px rgba(40,48,32,.16)}
+.seg button.off{opacity:.36;cursor:not-allowed}
+
+/* ========== 排行条 ========== */
+.rank-wrap{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.rank-col h3{font-family:var(--serif);font-size:15px;margin-bottom:15px;font-weight:700;color:var(--ink)}
+.bar-row{display:grid;grid-template-columns:130px 1fr 134px;align-items:center;gap:11px;margin-bottom:10px}
 .bar-name{font-size:13px;font-weight:620;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bar-code{font-size:11px;color:var(--dim);margin-left:6px;font-weight:400}
-.bar-track{background:#edf1f7;border-radius:5px;height:16px;overflow:hidden}
-.bar-fill{height:100%;border-radius:5px}
-.bar-fill.up{background:linear-gradient(90deg,#f0938b,#d9342b)}
-.bar-fill.down{background:linear-gradient(90deg,#74c697,#15883e)}
-.bar-val{font-size:13px;font-weight:720;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.bar-ex{font-size:10.5px;font-weight:620;margin-left:5px;opacity:.85}
-.theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:13px}
-.theme-card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;box-shadow:var(--sh1)}
-.tc-head{display:flex;align-items:center;gap:7px;margin-bottom:8px}
-.tc-dot{width:9px;height:9px;border-radius:3px;flex-shrink:0}
-.tc-name{font-size:13.5px;font-weight:720}
-.tc-n{font-size:11px;color:var(--dim);margin-left:auto;white-space:nowrap}
-.tc-rows{font-size:12.3px;color:var(--dim);display:flex;flex-direction:column;gap:3px}
-.tc-rows b{font-weight:740;font-variant-numeric:tabular-nums;float:right}
-.tc-bar{height:5px;background:#edf1f7;border-radius:3px;margin-top:9px;overflow:hidden}
+.bar-code{font-size:11px;color:var(--faint);margin-left:6px;font-weight:400}
+.bar-track{background:var(--bg2);border-radius:6px;height:18px;overflow:hidden}
+.bar-fill{height:100%;border-radius:6px;transition:width .6s var(--ease)}
+.bar-fill.up{background:linear-gradient(90deg,#dd8b6f,var(--up))}
+.bar-fill.down{background:linear-gradient(90deg,#86b389,var(--down))}
+.bar-val{font-size:13px;font-weight:720;text-align:right;white-space:nowrap}
+.bar-ex{font-size:10.5px;font-weight:620;margin-left:5px;opacity:.82}
+
+/* ========== 主题卡 ========== */
+.theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.theme-card{background:var(--card2);border:1px solid var(--line);border-radius:var(--r-md);padding:15px 17px;box-shadow:var(--sh1);transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s;cursor:pointer;position:relative}
+.theme-card:hover{transform:translateY(-3px);box-shadow:var(--sh2);border-color:var(--orange)}
+.theme-card::after{content:"查看文章 →";position:absolute;right:14px;top:13px;font-size:10px;font-weight:700;color:var(--orange-d);background:var(--orange-l);padding:3px 8px;border-radius:20px;opacity:0;transform:translateY(-3px);transition:all .2s var(--ease);pointer-events:none;letter-spacing:.3px}
+.theme-card:hover::after{opacity:1;transform:translateY(0)}
+.theme-card:hover .tc-n{opacity:0}
+.tc-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.tc-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.tc-name{font-size:13.5px;font-weight:700}
+.tc-n{font-size:11px;color:var(--faint);margin-left:auto;white-space:nowrap;font-weight:500}
+.tc-rows{font-size:12.3px;color:var(--dim);display:flex;flex-direction:column;gap:4px}
+.tc-rows b{font-weight:720;float:right;color:var(--ink)}
+.tc-bar{height:6px;background:var(--bg2);border-radius:3px;margin-top:12px;overflow:hidden}
 .tc-bar i{display:block;height:100%;border-radius:3px}
-.tc-bar i.up{background:var(--up)}.tc-bar i.down{background:var(--down)}.tc-bar i.flat{background:#94a3b8}
-.hist-card{margin-top:14px}
-.hist-t{font-size:13px;font-weight:700;color:#3c4d66;margin-bottom:6px;text-align:center}
-.detail-tools{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 16px;box-shadow:var(--sh1)}
-.chips{display:flex;gap:7px;flex-wrap:wrap;flex:1;min-width:240px}
-.chip-f{font-family:inherit;border:1px solid #d6deea;background:#fff;border-radius:18px;padding:4.5px 12px;font-size:12.4px;font-weight:600;color:#42526b;cursor:pointer;white-space:nowrap}
-.chip-f i{font-style:normal;font-size:10.5px;opacity:.65;margin-left:2px}
-.chip-f:hover{border-color:#9fb4d2}
-.chip-f.on{background:var(--blue);color:#fff;border-color:var(--blue)}
-.dt-right{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
-.dt-right select{min-width:170px}
-.dt-right input{width:172px}
-.art-card{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:16px;overflow:hidden;box-shadow:var(--sh1)}
-.art-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 20px;background:linear-gradient(0deg,#fafbfd,#fff);border-bottom:1px solid var(--line)}
-.art-title-wrap{display:flex;align-items:center;gap:10px;min-width:0}
-.theme-tag{font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid;white-space:nowrap}
+.tc-bar i.up{background:var(--up)}.tc-bar i.down{background:var(--down)}.tc-bar i.flat{background:#a89f8c}
+.hist-card{margin-top:18px}
+.hist-t{font-family:var(--serif);font-size:14px;font-weight:700;color:var(--ink2);margin-bottom:9px;text-align:center}
+
+/* ========== 明细工具条 ========== */
+.detail-tools{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px;background:var(--card2);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 18px;box-shadow:var(--sh1)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;flex:1;min-width:240px}
+.chip-f{font-family:inherit;border:1px solid #ded5c3;background:#fff;border-radius:20px;padding:5px 13px;font-size:12.4px;font-weight:620;color:var(--ink2);cursor:pointer;white-space:nowrap;transition:all .18s var(--ease)}
+.chip-f i{font-style:normal;font-size:10.5px;opacity:.6;margin-left:3px}
+.chip-f:hover{border-color:var(--orange);color:var(--orange)}
+.chip-f.on{background:var(--forest);color:#f1ede4;border-color:var(--forest)}
+.dt-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.dt-right select{min-width:172px}.dt-right input{width:174px}
+
+/* ========== 文章卡 + 表格 ========== */
+.art-card{background:var(--card2);border:1px solid var(--line);border-radius:var(--r-lg);margin-bottom:18px;overflow:hidden;box-shadow:var(--sh1);transition:box-shadow .25s var(--ease)}
+.art-card:hover{box-shadow:var(--sh2)}
+.art-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:16px 24px;background:linear-gradient(180deg,#fcfaf4,#f5f1e8);border-bottom:1px solid var(--line)}
+.art-title-wrap{display:flex;align-items:center;gap:11px;min-width:0}
+.theme-tag{font-size:11.5px;font-weight:620;padding:3px 11px;border-radius:20px;border:1px solid;white-space:nowrap}
 .head-badge{display:inline-flex;align-items:center;gap:3px;font-size:11.5px;font-weight:800;color:#fff;padding:3px 12px;border-radius:20px;letter-spacing:1.5px;white-space:nowrap;flex-shrink:0}
-.badge-ml{background:linear-gradient(135deg,#fb923c,#ea580c);box-shadow:0 2px 6px rgba(234,88,12,.42)}
-.badge-ml::before{content:"\\2605";font-size:10px;margin-top:-1px}
-.badge-dv{background:linear-gradient(135deg,#e11d48,#9f1239);box-shadow:0 2px 6px rgba(159,18,57,.4)}
-.art-title{font-size:15.5px;font-weight:720;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.art-right{display:flex;align-items:center;gap:14px}
-.art-qr{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex-shrink:0}
-.art-qr-img{width:64px;height:64px;border-radius:9px;overflow:hidden;box-shadow:0 1px 6px rgba(20,40,80,.14);background:#fff;transition:transform .15s,box-shadow .15s}
-.art-qr:hover .art-qr-img{transform:scale(1.07);box-shadow:0 4px 14px rgba(20,40,80,.24)}
+.badge-ml{background:linear-gradient(135deg,#d89a52,#c4753a);box-shadow:0 2px 8px rgba(196,117,58,.4)}
+.badge-ml::before{content:"\2605";font-size:10px;margin-top:-1px}
+.badge-dv{background:linear-gradient(135deg,#bf4a30,#8f3320);box-shadow:0 2px 8px rgba(143,51,32,.38)}
+.art-title{font-family:var(--serif);font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+.art-right{display:flex;align-items:center;gap:15px}
+.art-qr{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;flex-shrink:0}
+.art-qr-img{width:64px;height:64px;border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(40,48,32,.16);background:#fff;border:1px solid var(--line);transition:transform .18s var(--ease),box-shadow .18s var(--ease)}
+.art-qr:hover .art-qr-img{transform:scale(1.07);box-shadow:0 6px 18px rgba(40,48,32,.26)}
 .art-qr-img svg,.art-qr-img img{width:100%;height:100%;display:block;object-fit:contain}
-.art-qr-cap{font-size:10px;color:#2c5aa0;font-weight:600;white-space:nowrap;letter-spacing:.3px}
-.qr-mask{display:none;position:fixed;inset:0;background:rgba(15,30,60,.55);z-index:1100;align-items:center;justify-content:center;padding:20px}
-.qr-box{background:#fff;border-radius:16px;padding:22px 24px 18px;max-width:340px;width:100%;text-align:center;box-shadow:0 18px 50px rgba(10,30,70,.3)}
-.qr-title{font-size:14.5px;font-weight:700;color:#1e293b;line-height:1.45;margin-bottom:14px}
-.qr-svg{width:250px;height:250px;margin:2px auto 14px;display:flex;align-items:center;justify-content:center;border-radius:16px;box-shadow:0 4px 18px rgba(20,40,80,.12)}
-.qr-svg svg{width:100%;height:100%;display:block}
-.qr-tip{font-size:11.5px;color:#94a3b8;margin-bottom:12px}
-.qr-url{font-size:11px;color:#64748b;word-break:break-all;background:#f6f8fb;border-radius:7px;padding:7px 9px;margin-bottom:12px;font-family:ui-monospace,Menlo,monospace}
-.qr-btns{display:flex;gap:8px}
-.qr-btns button,.qr-btns a{flex:1;font-family:inherit;font-size:12.5px;font-weight:600;padding:9px 6px;border-radius:8px;border:1px solid #cbd5e1;background:#fff;color:#475569;cursor:pointer;text-decoration:none;text-align:center}
-.qr-btns .qr-open{background:#2c5aa0;color:#fff;border-color:#2c5aa0}
-.qr-btns .qr-copy:hover,.qr-btns button:hover{border-color:#94a3b8}
-.art-meta{display:flex;align-items:center;gap:13px;font-size:12.5px;white-space:nowrap}
-.art-date{color:var(--dim)}.art-avg{font-weight:700}
-.art-ex{font-weight:700;padding:2px 9px;border-radius:6px;background:#f1f5fb;font-size:12px}
+.art-qr-cap{font-size:10px;color:var(--orange-d);font-weight:640;white-space:nowrap;letter-spacing:.3px}
+.art-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;white-space:nowrap}
+.art-date{color:var(--dim)}.art-avg{font-weight:740}
+.art-ex{font-weight:740;padding:3px 11px;border-radius:7px;background:var(--orange-l);font-size:12px;color:var(--orange-d)}
 .tbl-wrap{overflow-x:auto}
 .stock-tbl{width:100%;border-collapse:collapse;font-size:13.5px}
-.stock-tbl th{background:#f7f9fc;color:#5a6b85;font-weight:600;font-size:12px;text-align:right;padding:9px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+.stock-tbl th{background:#f4efe4;color:var(--dim);font-weight:640;font-size:11.5px;text-align:right;padding:11px 14px;border-bottom:1px solid var(--line);white-space:nowrap;letter-spacing:.3px}
 .stock-tbl th:first-child{text-align:left}
-.th-sub{display:block;font-size:10px;color:#9fb0c8;font-weight:400}
-.stock-tbl td{padding:10px 14px;border-bottom:1px solid #f1f4f8;text-align:right;vertical-align:middle}
-.stock-tbl tbody tr:hover{background:#f8fafd}
-.stock-tbl tbody tr.hitrow{background:#fff8e6}
+.th-sub{display:block;font-size:10px;color:var(--faint);font-weight:400}
+.stock-tbl td{padding:11px 14px;border-bottom:1px solid var(--line2);text-align:right;vertical-align:middle}
+.stock-tbl tbody tr{transition:background .15s}
+.stock-tbl tbody tr:hover{background:#f7f3ea}
+.stock-tbl tbody tr.hitrow{background:#f6ecd6}
 .tname{text-align:left!important;font-weight:620;white-space:nowrap}
-.mono{font-variant-numeric:tabular-nums;font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:12.5px}
+.mono{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:12.5px}
 .dim{color:var(--dim)}.sm2{font-size:11px}
-.cum{font-weight:760;font-size:14px;font-variant-numeric:tabular-nums}
-.exc{font-weight:700;font-size:13px;font-variant-numeric:tabular-nums}
+.cum{font-weight:760;font-size:14px}.exc{font-weight:720;font-size:13px}
 .sp{width:130px;text-align:center!important}.spark{display:block;margin:0 auto}
-.nodata{color:#cbd5e1}.miss td{color:#94a3b8;font-style:italic;text-align:left}
-.pending td{color:#a3aec0}.pending .tname{color:#475569;font-weight:600}.pending .cum{font-weight:600;color:#b0892b}.pending:hover{background:#fffdf5}
-.bench-row{background:#eff5ff}.bench-row td{border-top:1.5px solid #cdddf5;border-bottom:none}
+.nodata{color:#d6cdb9}.miss td{color:var(--faint);font-style:italic;text-align:left}
+.pending td{color:#bbb196}.pending .tname{color:var(--ink2);font-weight:620}.pending .cum{font-weight:620;color:var(--orange-d)}.pending:hover{background:#fbf8f0}
+.bench-row{background:#f5f0e4}.bench-row td{border-top:1.5px solid #e6d9bf;border-bottom:none}
 .bench-row .tname{color:var(--bench)}
-footer{max-width:1180px;margin:0 auto;padding:0 24px 50px;color:var(--dim);font-size:12px;line-height:1.9}
-footer .disc{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px 20px}
-footer b{color:#475569}
-@media print{header::after{display:none}.hnav,.detail-tools{display:none!important}.card,.art-card,.kpi,.ins-card,.theme-card{box-shadow:none;break-inside:avoid}section{margin-bottom:16px}#mainChart{height:380px}body{background:#fff}.kpi-grid{grid-template-columns:repeat(4,1fr)!important;gap:10px}.kpi-val{font-size:21px}.seg{display:none}}
-@media(max-width:920px){.kpi-grid,.ins-grid{grid-template-columns:repeat(2,1fr)}.rank-wrap{grid-template-columns:1fr}select{min-width:170px}}
-@media(max-width:640px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.ins-grid{grid-template-columns:1fr}.art-title{max-width:150px}.bar-row{grid-template-columns:106px 1fr 116px}
-/* 明细表窄屏:隐藏推荐日/推荐价/现价三列,保留 标的·代码·累计涨跌·超额·走势,铺满不横滚 */
-.tbl-wrap{overflow-x:visible}.stock-tbl{min-width:0;width:100%}
-.stock-tbl th,.stock-tbl td{padding:9px 5px}
-.stock-tbl th:nth-child(3),.stock-tbl td:nth-child(3),.stock-tbl th:nth-child(4),.stock-tbl td:nth-child(4),.stock-tbl th:nth-child(5),.stock-tbl td:nth-child(5){display:none}
-.th-sub{display:none}.sp{width:88px}.spark{width:88px;height:30px}.cum,.exc{font-size:12.5px}.tname{font-size:13px}.mono{font-size:11px}}
-__ANNOCSS__
+
+/* ========== QR 弹窗 ========== */
+.qr-mask{display:none;position:fixed;inset:0;background:rgba(31,44,32,.55);z-index:1100;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+.qr-box{background:#fff;border-radius:18px;padding:24px 26px 20px;max-width:344px;width:100%;text-align:center;box-shadow:0 22px 60px rgba(31,44,32,.34)}
+.qr-title{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--ink);line-height:1.5;margin-bottom:16px}
+.qr-svg{width:250px;height:250px;margin:2px auto 16px;display:flex;align-items:center;justify-content:center;border-radius:16px;box-shadow:0 4px 18px rgba(40,48,32,.14);border:1px solid var(--line)}
+.qr-svg svg{width:100%;height:100%;display:block}
+.qr-tip{font-size:11.5px;color:var(--faint);margin-bottom:12px}
+.qr-url{font-size:11px;color:var(--dim);word-break:break-all;background:var(--bg);border-radius:8px;padding:8px 10px;margin-bottom:12px;font-family:ui-monospace,Menlo,monospace}
+.qr-btns{display:flex;gap:9px}
+.qr-btns button,.qr-btns a{flex:1;font-family:inherit;font-size:12.5px;font-weight:640;padding:10px 6px;border-radius:9px;border:1px solid #d9d1bf;background:#fff;color:var(--ink2);cursor:pointer;text-decoration:none;text-align:center;transition:all .18s}
+.qr-btns .qr-open{background:var(--forest);color:#f1ede4;border-color:var(--forest)}
+.qr-btns .qr-open:hover{background:var(--forest2)}
+.qr-btns .qr-copy:hover,.qr-btns button:hover{border-color:var(--orange)}
+
+/* ========== FOOTER ========== */
+footer{max-width:1180px;margin:0 auto;padding:0 24px 54px;color:var(--dim);font-size:12px;line-height:1.95}
+footer .disc{background:var(--card2);border:1px solid var(--line);border-radius:var(--r-md);padding:18px 22px;box-shadow:var(--sh1)}
+footer b{color:var(--ink2)}
+
+/* ========== 打印 ========== */
+@media print{
+  header::before{display:none}
+  .hnav,.detail-tools{display:none!important}
+  .card,.art-card,.bento-card,.ins-card,.theme-card,.kpi{box-shadow:none;break-inside:avoid;background:#fff!important;backdrop-filter:none!important}
+  body{background:#fff!important}
+  section{margin-bottom:22px}#mainChart{height:380px}body{background:#fff}
+  .bento{grid-template-columns:repeat(4,1fr)!important;gap:11px}.b-hero .b-num{font-size:46px}.seg{display:none}
+}
+/* ========== 响应式 ========== */
+@media(max-width:920px){
+  header h1{font-size:27px}
+  .bento{grid-template-columns:repeat(2,1fr)}.b-hero{grid-column:span 2}.b-trend{grid-column:span 2;flex-direction:column;align-items:flex-start;gap:14px}
+  .ins-grid{grid-template-columns:1fr}.rank-wrap{grid-template-columns:1fr}select{min-width:170px}
+}
+@media(max-width:640px){
+  body{background-position:72% top}
+  header{padding:28px 18px 22px}header h1{font-size:23px}
+  main{padding:24px 14px 38px}section{margin-bottom:40px}
+  .sec-title{font-size:20px}
+  .bento{gap:13px}.b-hero{padding:22px 20px}.b-hero .b-num{font-size:48px}
+  .b-trend .trend-spark{width:100%}.card{padding:18px 16px}
+  .tbl-wrap{overflow-x:visible}.stock-tbl{min-width:0;width:100%}
+  .stock-tbl th,.stock-tbl td{padding:9px 5px}
+  .stock-tbl th:nth-child(3),.stock-tbl td:nth-child(3),.stock-tbl th:nth-child(4),.stock-tbl td:nth-child(4),.stock-tbl th:nth-child(5),.stock-tbl td:nth-child(5){display:none}
+  .th-sub{display:none}.sp{width:88px}.spark{width:88px;height:30px}.cum,.exc{font-size:12.5px}.tname{font-size:13px}.mono{font-size:11px}
+}
+
 </style></head>
 <body>
 <header><div class="wrap">
   <div>
+    <div class="eyebrow">Real-time Equity Tracker</div>
     <h1>热点先锋<span class="dot"> · </span>标的跟踪看板</h1>
     <div class="sub">每篇文章推荐标的 · 自推荐日起累计涨跌幅 + 对标行业ETF超额收益 · 静态基底截至 __ASHLAST__ 收盘（前复权 · 数据源：腾讯财经）</div>
     <div class="sub" id="liveStat" style="margin-top:4px;font-weight:600;color:#ffe2b8">⏳ 正在拉取实时行情…</div>
   </div>
-  <div class="legend">
-    <span class="chip"><i style="background:#ff6b61"></i>红=上涨</span>
-    <span class="chip"><i style="background:#37b46f"></i>绿=下跌</span>
-    <span class="chip"><span class="dash"></span>蓝虚线=对标ETF</span>
-  </div>
+  
 </div></header>
 <nav class="hnav"><div class="wrap">
   <a href="#sec-ov">总览</a><a href="#sec-chart">走势</a><a href="#sec-rank">排行</a><a href="#sec-theme">主题</a><a href="#sec-detail">明细</a>
@@ -532,7 +673,7 @@ __ANNOCSS__
     </div>
   </section>
   <section id="sec-theme">
-    <h2 class="sec-title">主题表现 <small>按平均超额降序 · 下方为全部标的涨跌分布</small></h2>
+    <h2 class="sec-title">主题表现 <small>按平均超额降序 · 点卡片查看该主题文章 · 下方为涨跌分布</small></h2>
     __THEMES__
     __HIST__
   </section>
@@ -577,15 +718,16 @@ function render(){
   var series=a.series.map(function(s,i){
     var d=useExc? s.data.filter(function(p){return em[p[0]]!==undefined;}).map(function(p){return [p[0],+(p[1]-em[p[0]]).toFixed(2)];}) : s.data;
     var o={name:s.name+'('+s.code+')',type:'line',showSymbol:false,smooth:true,lineStyle:{width:2},emphasis:{focus:'series',lineStyle:{width:3.5}},data:d,color:PAL[i%PAL.length]};
-    if(i===0){o.markLine={silent:true,symbol:'none',lineStyle:{color:'#94a3b8',type:'dashed',width:1},label:{formatter:useExc?'行业基准':'0%',fontSize:10,color:'#94a3b8',position:'end'},data:[{yAxis:0}]};}
+    if(i===0){o.markLine={silent:true,symbol:'none',lineStyle:{color:'#8a7c6a',type:'dashed',width:1},label:{formatter:useExc?'行业基准':'0%',fontSize:10,color:'#8a7c6a',position:'end'},data:[{yAxis:0}]};}
     return o;});
-  if(!useExc&&a.etf){series.push({name:'对标·'+a.etf.name+'('+a.etf.code+')',type:'line',showSymbol:false,smooth:true,z:10,data:a.etf.data,color:'#1d4ed8',lineStyle:{width:3,type:'dashed'},emphasis:{focus:'series',lineStyle:{width:4}}});}
+  if(!useExc&&a.etf){series.push({name:'对标·'+a.etf.name+'('+a.etf.code+')',type:'line',showSymbol:false,smooth:true,z:10,data:a.etf.data,color:'#a35e2a',lineStyle:{width:3,type:'dashed'},emphasis:{focus:'series',lineStyle:{width:4}}});}
   chart.setOption({animation:false,
+    color:['#c4753a','#5a8a5e','#a35e2a','#7a6a3b','#8a6d3b','#9a5a6b','#5f7a6a','#b08542','#3a6b5a','#a8474a'],
     tooltip:{trigger:'axis',valueFormatter:function(v){return (v>0?'+':'')+v+'%';},textStyle:{fontSize:12},axisPointer:{type:'cross'}},
     legend:{type:'scroll',top:0,textStyle:{fontSize:11},itemWidth:18,itemHeight:8},
     grid:{left:48,right:30,top:42,bottom:34},
-    xAxis:{type:'time',axisLabel:{fontSize:11,color:'#94a3b8',formatter:'{M}/{d}'},axisLine:{lineStyle:{color:'#e2e8f0'}},splitLine:{show:false}},
-    yAxis:{type:'value',axisLabel:{fontSize:11,color:'#94a3b8',formatter:'{value}%'},splitLine:{lineStyle:{color:'#eef2f7'}},
+    xAxis:{type:'time',axisLabel:{fontSize:11,color:'#8a7c6a',formatter:'{M}/{d}'},axisLine:{lineStyle:{color:'#d9d1bf'}},splitLine:{show:false}},
+    yAxis:{type:'value',axisLabel:{fontSize:11,color:'#8a7c6a',formatter:'{value}%'},splitLine:{lineStyle:{color:'#ebe2d2'}},
       axisPointer:{label:{formatter:function(p){return (p.value>0?'+':'')+p.value.toFixed(1)+'%';}}}},
     series:series},true);
 }
@@ -640,7 +782,7 @@ document.getElementById('rkE').onclick=function(){this.classList.add('on');docum
    浏览器端按同一口径重算全部指标并刷新 DOM。失败自动降级为静态数据。 */
 (function(){
   var statEl=document.getElementById('liveStat');
-  function setStat(t,tone){if(!statEl)return;statEl.textContent=t;statEl.style.color=tone==='ok'?'#b9f2c8':(tone==='warn'?'#ffd9c2':'#ffe2b8');}
+  function setStat(t,tone){if(!statEl)return;statEl.textContent=t;statEl.style.color=tone==='ok'?'#4f8456':(tone==='warn'?'#bf4a30':'#a35e2a');}
   function fpct(v){return (v>0?'+':'')+v.toFixed(2)+'%';}
   function fcls(v){return v>0?'up':(v<0?'down':'flat');}
   function r2(v){return Math.round(v*100)/100;}
@@ -754,13 +896,20 @@ document.getElementById('rkE').onclick=function(){this.classList.add('on');docum
       var avgExc=excRows.length?r2(excRows.reduce(function(t,r){return t+r.exc;},0)/excRows.length):0;
       var king=excRows.slice().sort(function(x,y){return y.exc-x.exc;})[0];
       var winRate=(win/n*100).toFixed(1),beatRate=excRows.length?(beat/excRows.length*100).toFixed(1):'0.0';
-      // ---- KPI ----
+      // ---- Bento 总览（实时）----
       var kv=function(id){return document.getElementById(id);};
-      if(kv('kvAvg')){kv('kvAvg').className='kpi-val '+fcls(avgCum);kv('kvAvg').textContent=fpct(avgCum);}
-      if(kv('kvWin'))kv('kvWin').innerHTML=winRate+'<span class="u">%</span> <span class="kpi-sub">'+win+'/'+n+'</span>';
-      if(kv('kvBeat')){kv('kvBeat').className='kpi-val '+fcls(parseFloat(beatRate)-50);kv('kvBeat').innerHTML=beatRate+'<span class="u">%</span> <span class="kpi-sub">'+beat+'/'+n+'</span>';}
-      if(kv('kvExc')){kv('kvExc').className='kpi-val '+fcls(avgExc);kv('kvExc').textContent=fpct(avgExc);}
-      if(kv('kvKing')&&king)kv('kvKing').innerHTML=escH(king.name)+'<br><span class="b">'+fpct(king.exc)+'</span>';
+      var CIRC=263.9, setRing=function(id,rate){var el=kv(id);if(el)el.setAttribute('stroke-dashoffset',(CIRC*(1-rate/100)).toFixed(1));};
+      if(kv('bExc'))kv('bExc').innerHTML='<span class="pm">'+(avgExc>=0?'+':'−')+'</span>'+Math.abs(avgExc).toFixed(2)+'<span class="pm" style="font-size:36px">%</span>';
+      if(kv('bAvgMeta')){kv('bAvgMeta').className=fcls(avgCum);kv('bAvgMeta').textContent=fpct(avgCum);}
+      if(kv('bWinV'))kv('bWinV').innerHTML=winRate+'<span class="u">%</span>';
+      setRing('bWinRing',parseFloat(winRate));
+      if(kv('bWinSub'))kv('bWinSub').textContent=win+' / '+n+' 只';
+      if(kv('bBeatV'))kv('bBeatV').innerHTML=beatRate+'<span class="u">%</span>';
+      setRing('bBeatRing',parseFloat(beatRate));
+      if(kv('bBeatSub'))kv('bBeatSub').textContent=beat+' / '+(excRows.length||n)+' 只';
+      if(kv('bAvg')){kv('bAvg').className='b-num '+fcls(avgCum);kv('bAvg').textContent=fpct(avgCum);}
+      if(kv('bKingN')&&king)kv('bKingN').textContent=king.name;
+      if(kv('bKingV')&&king)kv('bKingV').textContent=fpct(king.exc);
       // ---- 洞察 ----
       var eligA=arts.filter(function(x){return x.avgex!=null&&x.rows.filter(function(r){return r.cum!=null;}).length>=2;});
       function insSet(key,html){var el=document.querySelector('.ins-card[data-ins="'+key+'"] .ins-d');if(el)el.innerHTML=html;}
@@ -802,7 +951,7 @@ document.getElementById('rkE').onclick=function(){this.classList.add('on');docum
         if(blkE)blkE.innerHTML='<div class="rank-wrap"><div class="rank-col"><h3>🚀 超额榜 Top 8</h3>'+barRows(rkE.slice(0,8),'exc','cum',mabE)+'</div><div class="rank-col"><h3>🪨 落后榜 Top 8</h3>'+barRows(rkE.slice(-8).reverse(),'exc','cum',mabE)+'</div></div>';
       }
       // ---- 主题卡 ----
-      var TC={'机器人':'#7c3aed','新能源':'#0891b2','电力设备':'#2563eb','军工':'#475569','AI算力':'#2c5aa0','半导体':'#c2410c','软件':'#0d9488','医药':'#be123c','周期':'#a16207','高端制造':'#0e7490','金融':'#0369a1','电子':'#a21caf','其他':'#64748b'};
+      var TC={'机器人':'#8a6d3b','新能源':'#5a8a5e','电力设备':'#3a6b5a','军工':'#6b6456','AI算力':'#a35e2a','半导体':'#c2650d','软件':'#4f8456','医药':'#a8474a','周期':'#b08542','高端制造':'#5f7a6a','金融':'#7a6a3b','电子':'#9a5a6b','其他':'#8a8472'};
       var tmaxv=1;thList.forEach(function(t){if(t.exc!=null&&Math.abs(t.exc)>tmaxv)tmaxv=Math.abs(t.exc);});
       var tg=document.getElementById('themeGrid');
       if(tg)tg.innerHTML=thList.map(function(t){
@@ -866,6 +1015,14 @@ document.getElementById('rkE').onclick=function(){this.classList.add('on');docum
 </script>
 __QRBODY__
 __ANNOBODY__
+<script>
+(function(){function wire(){var grid=document.getElementById('themeGrid');if(!grid)return;
+grid.addEventListener('click',function(e){var card=e.target.closest('.theme-card');if(!card)return;
+var nm=card.querySelector('.tc-name');if(!nm)return;var name=nm.textContent.trim();var chip=null;
+document.querySelectorAll('#themeChips .chip-f').forEach(function(c){if((c.getAttribute('data-t')||'')===name)chip=c;});
+if(chip)chip.click();var d=document.getElementById('sec-detail');if(d)d.scrollIntoView({behavior:'smooth',block:'start'});});}
+if(document.readyState!=='loading')wire();else document.addEventListener('DOMContentLoaded',wire);})();
+</script>
 </body></html>"""
 
 # ============ 批注/反馈系统 ============
@@ -1168,9 +1325,9 @@ HTML = (TEMPLATE
         .replace("__CHIPS__", chips_html)
         .replace("__ARTS__", "".join(arts_html))
         .replace("__CHART__", chart_json)
-        .replace("__ANNOCSS__", ANNO_CSS)
+        .replace("__ANNOCSS__", "")
         .replace("__QRBODY__", QR_BODY)
-        .replace("__ANNOBODY__", ANNO_BODY))
+        .replace("__ANNOBODY__", ""))
 
 open("/tmp/tracking.html", "w", encoding="utf-8").write(HTML)
 print("HTML 生成完成:", len(HTML), "字节")
