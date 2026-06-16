@@ -367,7 +367,7 @@ chart_json = json.dumps(chart_articles, ensure_ascii=False)
 # ============ 模板 ============
 TEMPLATE = """<!DOCTYPE html><html lang="zh-CN"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>热点先锋 · 标的跟踪看板</title>
+<title>热点先锋 · 颜赚赚</title>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 <style>
@@ -642,7 +642,7 @@ footer b{color:var(--ink2)}
 <header><div class="wrap">
   <div>
     <div class="eyebrow">Real-time Equity Tracker</div>
-    <h1>热点先锋<span class="dot"> · </span>标的跟踪看板</h1>
+    <h1>热点先锋<span class="dot"> · </span>颜赚赚</h1>
     <div class="sub">每篇文章推荐标的 · 自推荐日起累计涨跌幅 + 对标行业ETF超额收益 · 静态基底截至 __ASHLAST__ 收盘（前复权 · 数据源：腾讯财经）</div>
     <div class="sub" id="liveStat" style="margin-top:4px;font-weight:600;color:#ffe2b8">⏳ 正在拉取实时行情…</div>
   </div>
