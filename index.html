@@ -11,12 +11,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700;900&display=swap');
 :root{
   --bg:#f1ede4; --bg2:#e7e0d1; --card:#faf8f2; --card2:rgba(252,250,244,.70); --card-solid:#fffefb;
-  --ink:#2a2218; --ink2:#4a443a; --dim:#867f6d; --faint:#aaa08d;
+  --ink:#1f2c20; --ink2:#47513f; --dim:#867f6d; --faint:#aaa08d;
   --line:#e5dfd0; --line2:#efeadc;
-  --forest:#3d1d16; --forest2:#4d2419;
+  --forest:#1f2c20; --forest2:#2c3d2d;
   --orange:#c4753a; --orange-d:#a35e2a; --orange-l:#f1e5d2;
-  --leaf:#b8843a;
-  --up:#bf4a30; --up-l:#f6e3da; --down:#6f6857; --down-l:#ece6da; --bench:#a35e2a;
+  --leaf:#5a8a5e;
+  --up:#bf4a30; --up-l:#f6e3da; --down:#4f8456; --down-l:#e4efe2; --bench:#a35e2a;
   --serif:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,"Times New Roman",serif;
   --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
   --sh1:0 2px 10px -4px rgba(40,48,32,.10),0 4px 18px -10px rgba(40,48,32,.07);
@@ -151,7 +151,7 @@ select{cursor:pointer;min-width:240px}
 .bar-track{background:var(--bg2);border-radius:6px;height:18px;overflow:hidden}
 .bar-fill{height:100%;border-radius:6px;transition:width .6s var(--ease)}
 .bar-fill.up{background:linear-gradient(90deg,#dd8b6f,var(--up))}
-.bar-fill.down{background:linear-gradient(90deg,#a89a7a,var(--down))}
+.bar-fill.down{background:linear-gradient(90deg,#86b389,var(--down))}
 .bar-val{font-size:13px;font-weight:720;text-align:right;white-space:nowrap}
 .bar-ex{font-size:10.5px;font-weight:620;margin-left:5px;opacity:.82}
 
@@ -301,12 +301,12 @@ footer b{color:var(--ink2)}
   </div>
   <div class="bento-card b-ring">
     <div class="b-label"><svg class="ico" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>上涨标的占比</div>
-    <div class="ring-wrap"><svg viewBox="0 0 100 100"><defs><linearGradient id="ga" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c4753a"/><stop offset="1" stop-color="#d8a850"/></linearGradient></defs><circle class="ring-bg" cx="50" cy="50" r="42" fill="none" stroke-width="9"/><circle class="ring-val" id="bWinRing" cx="50" cy="50" r="42" fill="none" stroke-width="9" stroke="url(#ga)" stroke-dasharray="263.9" stroke-dashoffset="128.3"/></svg><div class="ring-ctr"><div class="v" id="bWinV">51.4<span class="u">%</span></div></div></div>
+    <div class="ring-wrap"><svg viewBox="0 0 100 100"><defs><linearGradient id="ga" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c4753a"/><stop offset="1" stop-color="#5a8a5e"/></linearGradient></defs><circle class="ring-bg" cx="50" cy="50" r="42" fill="none" stroke-width="9"/><circle class="ring-val" id="bWinRing" cx="50" cy="50" r="42" fill="none" stroke-width="9" stroke="url(#ga)" stroke-dasharray="263.9" stroke-dashoffset="128.3"/></svg><div class="ring-ctr"><div class="v" id="bWinV">51.4<span class="u">%</span></div></div></div>
     <div class="b-sub" id="bWinSub">54 / 105 只</div>
   </div>
   <div class="bento-card b-ring">
     <div class="b-label"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg>跑赢对标ETF占比</div>
-    <div class="ring-wrap"><svg viewBox="0 0 100 100"><defs><linearGradient id="gb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c4753a"/><stop offset="1" stop-color="#d8a850"/></linearGradient></defs><circle class="ring-bg" cx="50" cy="50" r="42" fill="none" stroke-width="9"/><circle class="ring-val" id="bBeatRing" cx="50" cy="50" r="42" fill="none" stroke-width="9" stroke="url(#gb)" stroke-dasharray="263.9" stroke-dashoffset="153.3"/></svg><div class="ring-ctr"><div class="v" id="bBeatV">41.9<span class="u">%</span></div></div></div>
+    <div class="ring-wrap"><svg viewBox="0 0 100 100"><defs><linearGradient id="gb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c4753a"/><stop offset="1" stop-color="#5a8a5e"/></linearGradient></defs><circle class="ring-bg" cx="50" cy="50" r="42" fill="none" stroke-width="9"/><circle class="ring-val" id="bBeatRing" cx="50" cy="50" r="42" fill="none" stroke-width="9" stroke="url(#gb)" stroke-dasharray="263.9" stroke-dashoffset="153.3"/></svg><div class="ring-ctr"><div class="v" id="bBeatV">41.9<span class="u">%</span></div></div></div>
     <div class="b-sub" id="bBeatSub">44 / 105 只</div>
   </div>
   <div class="bento-card b-stat">
@@ -352,7 +352,7 @@ footer b{color:var(--ink2)}
   </section>
   <section id="sec-theme">
     <h2 class="sec-title">主题表现 <small>按平均超额降序 · 点卡片查看该主题文章 · 下方为涨跌分布</small></h2>
-    <div class="theme-grid" id="themeGrid"><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#9c3f2e"></span><span class="tc-name">电力设备</span><span class="tc-n">1篇·7只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+5.49%</b></div><div>平均超额 <b class="up">+14.73%</b></div></div><div class="tc-bar"><i class="up" style="width:100%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#877a4a"></span><span class="tc-name">软件</span><span class="tc-n">1篇·2只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+0.53%</b></div><div>平均超额 <b class="up">+10.32%</b></div></div><div class="tc-bar"><i class="up" style="width:70%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#9a5a6b"></span><span class="tc-name">电子</span><span class="tc-n">2篇·9只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+7.01%</b></div><div>平均超额 <b class="up">+6.17%</b></div></div><div class="tc-bar"><i class="up" style="width:42%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#8a6d3b"></span><span class="tc-name">机器人</span><span class="tc-n">8篇·15只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+3.82%</b></div><div>平均超额 <b class="up">+5.74%</b></div></div><div class="tc-bar"><i class="up" style="width:39%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#c4a04a"></span><span class="tc-name">周期</span><span class="tc-n">4篇·16只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+9.63%</b></div><div>平均超额 <b class="up">+4.50%</b></div></div><div class="tc-bar"><i class="up" style="width:31%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#6b6456"></span><span class="tc-name">军工</span><span class="tc-n">2篇·6只</span></div><div class="tc-rows"><div>平均涨跌 <b class="down">-1.09%</b></div><div>平均超额 <b class="up">+1.60%</b></div></div><div class="tc-bar"><i class="up" style="width:11%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#c27a4a"></span><span class="tc-name">新能源</span><span class="tc-n">3篇·16只</span></div><div class="tc-rows"><div>平均涨跌 <b class="down">-4.16%</b></div><div>平均超额 <b class="up">+0.38%</b></div></div><div class="tc-bar"><i class="up" style="width:3%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#8a5a44"></span><span class="tc-name">高端制造</span><span class="tc-n">1篇·5只</span></div><div class="tc-rows"><div>平均涨跌 <b class="down">-0.29%</b></div><div>平均超额 <b class="up">+0.14%</b></div></div><div class="tc-bar"><i class="up" style="width:1%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#a8474a"></span><span class="tc-name">医药</span><span class="tc-n">1篇·6只</span></div><div class="tc-rows"><div>平均涨跌 <b class="down">-13.16%</b></div><div>平均超额 <b class="up">+0.01%</b></div></div><div class="tc-bar"><i class="up" style="width:0%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#6e5a3a"></span><span class="tc-name">金融</span><span class="tc-n">1篇·7只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+7.53%</b></div><div>平均超额 <b class="down">-0.56%</b></div></div><div class="tc-bar"><i class="down" style="width:4%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#c2650d"></span><span class="tc-name">半导体</span><span class="tc-n">3篇·5只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+15.94%</b></div><div>平均超额 <b class="down">-4.32%</b></div></div><div class="tc-bar"><i class="down" style="width:29%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#a35e2a"></span><span class="tc-name">AI算力</span><span class="tc-n">4篇·11只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+0.99%</b></div><div>平均超额 <b class="down">-5.53%</b></div></div><div class="tc-bar"><i class="down" style="width:38%"></i></div></div></div>
+    <div class="theme-grid" id="themeGrid"><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#3a6b5a"></span><span class="tc-name">电力设备</span><span class="tc-n">1篇·7只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+5.49%</b></div><div>平均超额 <b class="up">+14.73%</b></div></div><div class="tc-bar"><i class="up" style="width:100%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#4f8456"></span><span class="tc-name">软件</span><span class="tc-n">1篇·2只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+0.53%</b></div><div>平均超额 <b class="up">+10.32%</b></div></div><div class="tc-bar"><i class="up" style="width:70%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#9a5a6b"></span><span class="tc-name">电子</span><span class="tc-n">2篇·9只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+7.01%</b></div><div>平均超额 <b class="up">+6.17%</b></div></div><div class="tc-bar"><i class="up" style="width:42%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#8a6d3b"></span><span class="tc-name">机器人</span><span class="tc-n">8篇·15只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+3.82%</b></div><div>平均超额 <b class="up">+5.74%</b></div></div><div class="tc-bar"><i class="up" style="width:39%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#b08542"></span><span class="tc-name">周期</span><span class="tc-n">4篇·16只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+9.63%</b></div><div>平均超额 <b class="up">+4.50%</b></div></div><div class="tc-bar"><i class="up" style="width:31%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#6b6456"></span><span class="tc-name">军工</span><span class="tc-n">2篇·6只</span></div><div class="tc-rows"><div>平均涨跌 <b class="down">-1.09%</b></div><div>平均超额 <b class="up">+1.60%</b></div></div><div class="tc-bar"><i class="up" style="width:11%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#5a8a5e"></span><span class="tc-name">新能源</span><span class="tc-n">3篇·16只</span></div><div class="tc-rows"><div>平均涨跌 <b class="down">-4.16%</b></div><div>平均超额 <b class="up">+0.38%</b></div></div><div class="tc-bar"><i class="up" style="width:3%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#5f7a6a"></span><span class="tc-name">高端制造</span><span class="tc-n">1篇·5只</span></div><div class="tc-rows"><div>平均涨跌 <b class="down">-0.29%</b></div><div>平均超额 <b class="up">+0.14%</b></div></div><div class="tc-bar"><i class="up" style="width:1%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#a8474a"></span><span class="tc-name">医药</span><span class="tc-n">1篇·6只</span></div><div class="tc-rows"><div>平均涨跌 <b class="down">-13.16%</b></div><div>平均超额 <b class="up">+0.01%</b></div></div><div class="tc-bar"><i class="up" style="width:0%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#7a6a3b"></span><span class="tc-name">金融</span><span class="tc-n">1篇·7只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+7.53%</b></div><div>平均超额 <b class="down">-0.56%</b></div></div><div class="tc-bar"><i class="down" style="width:4%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#c2650d"></span><span class="tc-name">半导体</span><span class="tc-n">3篇·5只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+15.94%</b></div><div>平均超额 <b class="down">-4.32%</b></div></div><div class="tc-bar"><i class="down" style="width:29%"></i></div></div><div class="theme-card"><div class="tc-head"><span class="tc-dot" style="background:#a35e2a"></span><span class="tc-name">AI算力</span><span class="tc-n">4篇·11只</span></div><div class="tc-rows"><div>平均涨跌 <b class="up">+0.99%</b></div><div>平均超额 <b class="down">-5.53%</b></div></div><div class="tc-bar"><i class="down" style="width:38%"></i></div></div></div>
     <div class="hist-card card"><div class="hist-t">全部 105 只标的累计涨跌幅分布（%）</div><svg viewBox="0 0 640 176" width="100%" style="max-width:680px;display:block;margin:0 auto"><rect x="27.4" y="124.7" width="46.2" height="17.3" rx="4" fill="#15883e" opacity="0.82"/><text x="50.5" y="118.7" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">3</text><text x="50.5" y="160.0" text-anchor="middle" font-size="10" fill="#8a97a8">≤-20</text><rect x="104.4" y="55.3" width="46.2" height="86.7" rx="4" fill="#15883e" opacity="0.82"/><text x="127.5" y="49.3" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">15</text><text x="127.5" y="160.0" text-anchor="middle" font-size="10" fill="#8a97a8">-20~-10</text><rect x="181.4" y="55.3" width="46.2" height="86.7" rx="4" fill="#15883e" opacity="0.82"/><text x="204.5" y="49.3" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">15</text><text x="204.5" y="160.0" text-anchor="middle" font-size="10" fill="#8a97a8">-10~-5</text><rect x="258.4" y="38.0" width="46.2" height="104.0" rx="4" fill="#15883e" opacity="0.82"/><text x="281.5" y="32.0" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">18</text><text x="281.5" y="160.0" text-anchor="middle" font-size="10" fill="#8a97a8">-5~0</text><rect x="335.4" y="61.1" width="46.2" height="80.9" rx="4" fill="#d9342b" opacity="0.82"/><text x="358.5" y="55.1" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">14</text><text x="358.5" y="160.0" text-anchor="middle" font-size="10" fill="#8a97a8">0~5</text><rect x="412.4" y="49.6" width="46.2" height="92.4" rx="4" fill="#d9342b" opacity="0.82"/><text x="435.5" y="43.6" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">16</text><text x="435.5" y="160.0" text-anchor="middle" font-size="10" fill="#8a97a8">5~10</text><rect x="489.4" y="84.2" width="46.2" height="57.8" rx="4" fill="#d9342b" opacity="0.82"/><text x="512.5" y="78.2" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">10</text><text x="512.5" y="160.0" text-anchor="middle" font-size="10" fill="#8a97a8">10~20</text><rect x="566.4" y="61.1" width="46.2" height="80.9" rx="4" fill="#d9342b" opacity="0.82"/><text x="589.5" y="55.1" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">14</text><text x="589.5" y="160.0" text-anchor="middle" font-size="10" fill="#8a97a8">>20</text><line x1="8" y1="144" x2="632" y2="144" stroke="#dde4ee"/></svg></div>
   </section>
   <section id="sec-detail">
@@ -468,7 +468,7 @@ footer b{color:var(--ink2)}
           <td class="mono">150.22</td>
           <td class="cum down">-0.02%</td>
           <td class="exc down">-0.86%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 118.0,31.0" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 118.0,31.0" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="风华高科000636" data-code="000636">
           <td class="tname">风华高科</td>
           <td class="mono">000636.SZ</td>
@@ -537,7 +537,7 @@ footer b{color:var(--ink2)}
           <td class="mono">61.29</td>
           <td class="cum down">-0.02%</td>
           <td class="exc down">-0.86%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 118.0,31.0" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 118.0,31.0" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="江海股份002484" data-code="002484">
           <td class="tname">江海股份</td>
           <td class="mono">002484.SZ</td>
@@ -571,7 +571,7 @@ footer b{color:var(--ink2)}
     <div class="art-card" data-theme="金融" data-date="2026-06-08" data-avgcum="7.53" data-avgex="-0.56" data-search="慢牛叠加ai赋能，券商科技谁领跑 中信证券600030 中信建投601066 东方财富300059 同花顺300033 财富趋势688318 恒生电子600570 赢时胜300377">
       <div class="art-head">
         <div class="art-title-wrap">
-          <span class="theme-tag" style="background:#6e5a3a1a;color:#6e5a3a;border-color:#6e5a3a40">金融</span>
+          <span class="theme-tag" style="background:#7a6a3b1a;color:#7a6a3b;border-color:#7a6a3b40">金融</span>
           <span class="art-title">慢牛叠加AI赋能，券商科技谁领跑</span>
           
         </div>
@@ -633,7 +633,7 @@ footer b{color:var(--ink2)}
           <td class="mono">74.73</td>
           <td class="cum down">-6.46%</td>
           <td class="exc down">-14.55%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 21.3,3.4 40.7,21.7 60.0,31.0 79.3,18.4 98.7,14.0 118.0,12.3" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="12.3" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 21.3,3.4 40.7,21.7 60.0,31.0 79.3,18.4 98.7,14.0 118.0,12.3" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="12.3" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="恒生电子600570" data-code="600570">
           <td class="tname">恒生电子</td>
           <td class="mono">600570.SH</td>
@@ -667,7 +667,7 @@ footer b{color:var(--ink2)}
     <div class="art-card" data-theme="周期" data-date="2026-06-08" data-avgcum="19.76" data-avgex="7.18" data-search="钼钨铀三箭齐发，战略金属谁领跑 金钼股份601958 洛阳钼业603993 章源钨业002378 中钨高新000657 中国铀业001280 中广核矿业01164 中国核电601985">
       <div class="art-head">
         <div class="art-title-wrap">
-          <span class="theme-tag" style="background:#c4a04a1a;color:#c4a04a;border-color:#c4a04a40">周期</span>
+          <span class="theme-tag" style="background:#b085421a;color:#b08542;border-color:#b0854240">周期</span>
           <span class="art-title">钼钨铀三箭齐发，战略金属谁领跑</span>
           
         </div>
@@ -763,7 +763,7 @@ footer b{color:var(--ink2)}
     <div class="art-card" data-theme="软件" data-date="2026-06-01" data-avgcum="0.53" data-avgex="10.32" data-search="ai政务叠加信创替代，软件龙头谁领跑 华宇软件300271 太极股份002368">
       <div class="art-head">
         <div class="art-title-wrap">
-          <span class="theme-tag" style="background:#877a4a1a;color:#877a4a;border-color:#877a4a40">软件</span>
+          <span class="theme-tag" style="background:#4f84561a;color:#4f8456;border-color:#4f845640">软件</span>
           <span class="art-title">AI政务叠加信创替代，软件龙头谁领跑</span>
           
         </div>
@@ -789,7 +789,7 @@ footer b{color:var(--ink2)}
           <td class="mono">5.39</td>
           <td class="cum down">-6.59%</td>
           <td class="exc up">+3.20%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 12.5,7.8 23.1,11.2 33.6,16.0 44.2,15.1 54.7,19.9 65.3,16.5 75.8,21.8 86.4,31.0 96.9,25.7 107.5,23.8 118.0,21.4" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="21.4" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 12.5,7.8 23.1,11.2 33.6,16.0 44.2,15.1 54.7,19.9 65.3,16.5 75.8,21.8 86.4,31.0 96.9,25.7 107.5,23.8 118.0,21.4" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="21.4" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="太极股份002368" data-code="002368">
           <td class="tname">太极股份</td>
           <td class="mono">002368.SZ</td>
@@ -925,7 +925,7 @@ footer b{color:var(--ink2)}
     <div class="art-card" data-theme="高端制造" data-date="2026-06-01" data-avgcum="-0.29" data-avgex="0.14" data-search="大国重工崛起，谁卡位高端制造国产替代 紫光国微002049 司南导航688592 中航重机600765 北方股份600262 睿能科技603933">
       <div class="art-head">
         <div class="art-title-wrap">
-          <span class="theme-tag" style="background:#8a5a441a;color:#8a5a44;border-color:#8a5a4440">高端制造</span>
+          <span class="theme-tag" style="background:#5f7a6a1a;color:#5f7a6a;border-color:#5f7a6a40">高端制造</span>
           <span class="art-title">大国重工崛起，谁卡位高端制造国产替代</span>
           <span class="head-badge badge-ml">主线</span>
         </div>
@@ -969,7 +969,7 @@ footer b{color:var(--ink2)}
           <td class="mono">13.93</td>
           <td class="cum down">-2.72%</td>
           <td class="exc down">-2.29%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 12.5,8.6 23.1,11.8 33.6,15.6 44.2,16.1 54.7,26.4 65.3,27.0 75.8,31.0 86.4,29.5 96.9,10.6 107.5,9.3 118.0,12.8" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="12.8" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 12.5,8.6 23.1,11.8 33.6,15.6 44.2,16.1 54.7,26.4 65.3,27.0 75.8,31.0 86.4,29.5 96.9,10.6 107.5,9.3 118.0,12.8" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="12.8" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="北方股份600262" data-code="600262">
           <td class="tname">北方股份</td>
           <td class="mono">600262.SH</td>
@@ -978,7 +978,7 @@ footer b{color:var(--ink2)}
           <td class="mono">22.05</td>
           <td class="cum down">-2.86%</td>
           <td class="exc down">-2.43%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 12.5,6.5 23.1,11.2 33.6,14.9 44.2,11.8 54.7,21.2 65.3,19.8 75.8,26.8 86.4,31.0 96.9,20.9 107.5,12.1 118.0,12.2" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="12.2" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 12.5,6.5 23.1,11.2 33.6,14.9 44.2,11.8 54.7,21.2 65.3,19.8 75.8,26.8 86.4,31.0 96.9,20.9 107.5,12.1 118.0,12.2" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="12.2" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="睿能科技603933" data-code="603933">
           <td class="tname">睿能科技</td>
           <td class="mono">603933.SH</td>
@@ -987,7 +987,7 @@ footer b{color:var(--ink2)}
           <td class="mono">23.53</td>
           <td class="cum down">-1.09%</td>
           <td class="exc down">-0.66%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.7" x2="118" y2="3.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.7 12.5,7.8 23.1,7.0 33.6,12.7 44.2,3.0 54.7,17.2 65.3,15.0 75.8,25.8 86.4,31.0 96.9,25.6 107.5,13.8 118.0,7.1" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="7.1" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.7" x2="118" y2="3.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.7 12.5,7.8 23.1,7.0 33.6,12.7 44.2,3.0 54.7,17.2 65.3,15.0 75.8,25.8 86.4,31.0 96.9,25.6 107.5,13.8 118.0,7.1" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="7.1" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr class="bench-row" data-search="高端装备etf159638" data-code="159638">
           <td class="tname">📊 对标 · 高端装备ETF</td>
           <td class="mono">159638</td>
@@ -1003,7 +1003,7 @@ footer b{color:var(--ink2)}
     <div class="art-card" data-theme="周期" data-date="2026-06-01" data-avgcum="-2.96" data-avgex="7.56" data-search="安监趋严叠加旺季，焦煤拐点谁领跑 山西焦煤000983 潞安环能601699">
       <div class="art-head">
         <div class="art-title-wrap">
-          <span class="theme-tag" style="background:#c4a04a1a;color:#c4a04a;border-color:#c4a04a40">周期</span>
+          <span class="theme-tag" style="background:#b085421a;color:#b08542;border-color:#b0854240">周期</span>
           <span class="art-title">安监趋严叠加旺季，焦煤拐点谁领跑</span>
           <span class="head-badge badge-dv">红利</span>
         </div>
@@ -1029,7 +1029,7 @@ footer b{color:var(--ink2)}
           <td class="mono">6.91</td>
           <td class="cum down">-5.34%</td>
           <td class="exc up">+5.18%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="18.6" x2="118" y2="18.6" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,18.6 12.5,16.7 23.1,10.6 33.6,3.3 44.2,3.0 54.7,11.3 65.3,13.5 75.8,22.7 86.4,22.7 96.9,13.5 107.5,26.5 118.0,31.0" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="18.6" x2="118" y2="18.6" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,18.6 12.5,16.7 23.1,10.6 33.6,3.3 44.2,3.0 54.7,11.3 65.3,13.5 75.8,22.7 86.4,22.7 96.9,13.5 107.5,26.5 118.0,31.0" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="潞安环能601699" data-code="601699">
           <td class="tname">潞安环能</td>
           <td class="mono">601699.SH</td>
@@ -1038,7 +1038,7 @@ footer b{color:var(--ink2)}
           <td class="mono">17.5</td>
           <td class="cum down">-0.57%</td>
           <td class="exc up">+9.95%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="29.4" x2="118" y2="29.4" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,29.4 12.5,26.3 23.1,7.7 33.6,3.0 44.2,10.8 54.7,14.2 65.3,13.9 75.8,24.0 86.4,25.9 96.9,22.3 107.5,29.4 118.0,31.0" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="29.4" x2="118" y2="29.4" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,29.4 12.5,26.3 23.1,7.7 33.6,3.0 44.2,10.8 54.7,14.2 65.3,13.9 75.8,24.0 86.4,25.9 96.9,22.3 107.5,29.4 118.0,31.0" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr class="bench-row" data-search="煤炭etf515220" data-code="515220">
           <td class="tname">📊 对标 · 煤炭ETF</td>
           <td class="mono">515220</td>
@@ -1080,7 +1080,7 @@ footer b{color:var(--ink2)}
           <td class="mono">75.26</td>
           <td class="cum down">-1.75%</td>
           <td class="exc down">-1.59%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="27.1" x2="118" y2="27.1" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,27.1 12.5,27.7 23.1,12.7 33.6,16.5 44.2,3.0 54.7,10.9 65.3,17.7 75.8,24.2 86.4,23.0 96.9,23.1 107.5,29.3 118.0,31.0" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="27.1" x2="118" y2="27.1" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,27.1 12.5,27.7 23.1,12.7 33.6,16.5 44.2,3.0 54.7,10.9 65.3,17.7 75.8,24.2 86.4,23.0 96.9,23.1 107.5,29.3 118.0,31.0" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="中国卫通601698" data-code="601698">
           <td class="tname">中国卫通</td>
           <td class="mono">601698.SH</td>
@@ -1114,7 +1114,7 @@ footer b{color:var(--ink2)}
     <div class="art-card" data-theme="电力设备" data-date="2026-06-01" data-avgcum="5.49" data-avgex="14.73" data-search="电网超级周期，谁卡位出海与ai缺电 思源电气002028 许继电气000400 特变电工600089 特锐德300001 时代电气688187 亨通光电600487 中天科技600522">
       <div class="art-head">
         <div class="art-title-wrap">
-          <span class="theme-tag" style="background:#9c3f2e1a;color:#9c3f2e;border-color:#9c3f2e40">电力设备</span>
+          <span class="theme-tag" style="background:#3a6b5a1a;color:#3a6b5a;border-color:#3a6b5a40">电力设备</span>
           <span class="art-title">电网超级周期，谁卡位出海与AI缺电</span>
           
         </div>
@@ -1140,7 +1140,7 @@ footer b{color:var(--ink2)}
           <td class="mono">174.48</td>
           <td class="cum down">-19.22%</td>
           <td class="exc down">-9.98%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 12.5,9.2 23.1,16.9 33.6,17.8 44.2,27.5 54.7,27.4 65.3,23.8 75.8,29.1 86.4,31.0 96.9,30.2 107.5,27.2 118.0,29.4" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="29.4" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 12.5,9.2 23.1,16.9 33.6,17.8 44.2,27.5 54.7,27.4 65.3,23.8 75.8,29.1 86.4,31.0 96.9,30.2 107.5,27.2 118.0,29.4" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="29.4" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="许继电气000400" data-code="000400">
           <td class="tname">许继电气</td>
           <td class="mono">000400.SZ</td>
@@ -1149,7 +1149,7 @@ footer b{color:var(--ink2)}
           <td class="mono">23.06</td>
           <td class="cum down">-15.28%</td>
           <td class="exc down">-6.04%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 12.5,6.4 23.1,9.5 33.6,18.5 44.2,23.1 54.7,28.7 65.3,27.3 75.8,30.6 86.4,31.0 96.9,28.1 107.5,24.6 118.0,23.8" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="23.8" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 12.5,6.4 23.1,9.5 33.6,18.5 44.2,23.1 54.7,28.7 65.3,27.3 75.8,30.6 86.4,31.0 96.9,28.1 107.5,24.6 118.0,23.8" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="23.8" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="特变电工600089" data-code="600089">
           <td class="tname">特变电工</td>
           <td class="mono">600089.SH</td>
@@ -1158,7 +1158,7 @@ footer b{color:var(--ink2)}
           <td class="mono">24.11</td>
           <td class="cum down">-8.88%</td>
           <td class="exc up">+0.36%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 12.5,5.5 23.1,4.7 33.6,9.0 44.2,8.5 54.7,21.6 65.3,24.7 75.8,31.0 86.4,30.3 96.9,28.3 107.5,22.5 118.0,20.3" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="20.3" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 12.5,5.5 23.1,4.7 33.6,9.0 44.2,8.5 54.7,21.6 65.3,24.7 75.8,31.0 86.4,30.3 96.9,28.3 107.5,22.5 118.0,20.3" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="20.3" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="特锐德300001" data-code="300001">
           <td class="tname">特锐德</td>
           <td class="mono">300001.SZ</td>
@@ -1176,7 +1176,7 @@ footer b{color:var(--ink2)}
           <td class="mono">57.11</td>
           <td class="cum down">-1.02%</td>
           <td class="exc up">+8.22%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="5.5" x2="118" y2="5.5" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,5.5 12.5,10.0 23.1,8.6 33.6,3.0 44.2,18.2 54.7,30.4 65.3,4.4 75.8,22.9 86.4,21.6 96.9,31.0 107.5,18.6 118.0,8.7" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="8.7" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="5.5" x2="118" y2="5.5" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,5.5 12.5,10.0 23.1,8.6 33.6,3.0 44.2,18.2 54.7,30.4 65.3,4.4 75.8,22.9 86.4,21.6 96.9,31.0 107.5,18.6 118.0,8.7" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="8.7" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="亨通光电600487" data-code="600487">
           <td class="tname">亨通光电</td>
           <td class="mono">600487.SH</td>
@@ -1338,7 +1338,7 @@ footer b{color:var(--ink2)}
           <td class="mono">89.64</td>
           <td class="cum down">-4.14%</td>
           <td class="exc down">-0.35%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="15.8" x2="118" y2="15.8" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,15.8 8.4,14.8 14.9,6.2 21.3,3.8 27.8,9.1 34.2,6.5 40.7,5.3 47.1,15.2 53.6,3.0 60.0,10.6 66.4,16.0 72.9,17.7 79.3,24.9 85.8,22.1 92.2,28.4 98.7,30.4 105.1,23.3 111.6,26.4 118.0,31.0" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="15.8" x2="118" y2="15.8" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,15.8 8.4,14.8 14.9,6.2 21.3,3.8 27.8,9.1 34.2,6.5 40.7,5.3 47.1,15.2 53.6,3.0 60.0,10.6 66.4,16.0 72.9,17.7 79.3,24.9 85.8,22.1 92.2,28.4 98.7,30.4 105.1,23.3 111.6,26.4 118.0,31.0" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="奥比中光688322" data-code="688322">
           <td class="tname">奥比中光</td>
           <td class="mono">688322.SH</td>
@@ -1356,7 +1356,7 @@ footer b{color:var(--ink2)}
           <td class="mono">107.4</td>
           <td class="cum down">-4.53%</td>
           <td class="exc down">-0.74%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="17.7" x2="118" y2="17.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,17.7 8.8,3.0 15.6,6.9 22.5,10.9 29.3,21.2 36.1,31.0 42.9,24.9 49.8,15.4 56.6,19.1 63.4,20.4 70.2,20.5 77.1,11.0 83.9,12.3 90.7,17.8 97.5,27.8 104.4,25.1 111.2,16.4 118.0,24.3" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="24.3" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="17.7" x2="118" y2="17.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,17.7 8.8,3.0 15.6,6.9 22.5,10.9 29.3,21.2 36.1,31.0 42.9,24.9 49.8,15.4 56.6,19.1 63.4,20.4 70.2,20.5 77.1,11.0 83.9,12.3 90.7,17.8 97.5,27.8 104.4,25.1 111.2,16.4 118.0,24.3" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="24.3" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr class="bench-row" data-search="机器人etf562500" data-code="562500">
           <td class="tname">📊 对标 · 机器人ETF</td>
           <td class="mono">562500</td>
@@ -1440,7 +1440,7 @@ footer b{color:var(--ink2)}
           <td class="mono">294.31</td>
           <td class="cum down">-4.13%</td>
           <td class="exc down">-5.63%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="14.7" x2="118" y2="14.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,14.7 8.4,12.9 14.9,6.9 21.3,3.0 27.8,11.4 34.2,12.2 40.7,19.2 47.1,25.6 53.6,22.8 60.0,22.0 66.4,22.0 72.9,26.1 79.3,31.0 85.8,28.1 92.2,22.4 98.7,20.6 105.1,24.0 111.6,17.4 118.0,19.1" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="19.1" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="14.7" x2="118" y2="14.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,14.7 8.4,12.9 14.9,6.9 21.3,3.0 27.8,11.4 34.2,12.2 40.7,19.2 47.1,25.6 53.6,22.8 60.0,22.0 66.4,22.0 72.9,26.1 79.3,31.0 85.8,28.1 92.2,22.4 98.7,20.6 105.1,24.0 111.6,17.4 118.0,19.1" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="19.1" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="寒武纪688256" data-code="688256">
           <td class="tname">寒武纪</td>
           <td class="mono">688256.SH</td>
@@ -1458,7 +1458,7 @@ footer b{color:var(--ink2)}
           <td class="mono">84.47</td>
           <td class="cum down">-9.04%</td>
           <td class="exc down">-10.54%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="8.1" x2="118" y2="8.1" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,8.1 8.4,5.6 14.9,3.0 21.3,6.4 27.8,11.7 34.2,11.3 40.7,16.1 47.1,20.0 53.6,19.0 60.0,18.5 66.4,21.6 72.9,24.9 79.3,31.0 85.8,28.0 92.2,24.3 98.7,26.4 105.1,25.2 111.6,19.9 118.0,21.5" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="21.5" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="8.1" x2="118" y2="8.1" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,8.1 8.4,5.6 14.9,3.0 21.3,6.4 27.8,11.7 34.2,11.3 40.7,16.1 47.1,20.0 53.6,19.0 60.0,18.5 66.4,21.6 72.9,24.9 79.3,31.0 85.8,28.0 92.2,24.3 98.7,26.4 105.1,25.2 111.6,19.9 118.0,21.5" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="21.5" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="科大讯飞002230" data-code="002230">
           <td class="tname">科大讯飞</td>
           <td class="mono">002230.SZ</td>
@@ -1467,7 +1467,7 @@ footer b{color:var(--ink2)}
           <td class="mono">41.28</td>
           <td class="cum down">-12.54%</td>
           <td class="exc down">-14.04%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="11.7" x2="118" y2="11.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,11.7 8.4,11.2 14.9,7.4 21.3,5.8 27.8,3.0 34.2,6.2 40.7,9.7 47.1,6.1 53.6,8.6 60.0,10.8 66.4,15.5 72.9,15.0 79.3,20.4 85.8,19.3 92.2,25.6 98.7,29.9 105.1,31.0 111.6,27.9 118.0,28.5" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="28.5" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="11.7" x2="118" y2="11.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,11.7 8.4,11.2 14.9,7.4 21.3,5.8 27.8,3.0 34.2,6.2 40.7,9.7 47.1,6.1 53.6,8.6 60.0,10.8 66.4,15.5 72.9,15.0 79.3,20.4 85.8,19.3 92.2,25.6 98.7,29.9 105.1,31.0 111.6,27.9 118.0,28.5" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="28.5" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="金山办公688111" data-code="688111">
           <td class="tname">金山办公</td>
           <td class="mono">688111.SH</td>
@@ -1476,7 +1476,7 @@ footer b{color:var(--ink2)}
           <td class="mono">214.3</td>
           <td class="cum down">-12.14%</td>
           <td class="exc down">-13.64%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="12.7" x2="118" y2="12.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,12.7 8.4,13.7 14.9,12.0 21.3,13.4 27.8,16.7 34.2,16.7 40.7,15.6 47.1,6.3 53.6,3.0 60.0,9.2 66.4,16.1 72.9,17.9 79.3,23.4 85.8,22.4 92.2,28.5 98.7,31.0 105.1,28.1 111.6,26.5 118.0,28.5" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="28.5" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="12.7" x2="118" y2="12.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,12.7 8.4,13.7 14.9,12.0 21.3,13.4 27.8,16.7 34.2,16.7 40.7,15.6 47.1,6.3 53.6,3.0 60.0,9.2 66.4,16.1 72.9,17.9 79.3,23.4 85.8,22.4 92.2,28.5 98.7,31.0 105.1,28.1 111.6,26.5 118.0,28.5" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="28.5" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr class="bench-row" data-search="人工智能etf159819" data-code="159819">
           <td class="tname">📊 对标 · 人工智能ETF</td>
           <td class="mono">159819</td>
@@ -1560,7 +1560,7 @@ footer b{color:var(--ink2)}
           <td class="mono">107.4</td>
           <td class="cum down">-4.53%</td>
           <td class="exc down">-0.74%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="17.7" x2="118" y2="17.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,17.7 8.8,3.0 15.6,6.9 22.5,10.9 29.3,21.2 36.1,31.0 42.9,24.9 49.8,15.4 56.6,19.1 63.4,20.4 70.2,20.5 77.1,11.0 83.9,12.3 90.7,17.8 97.5,27.8 104.4,25.1 111.2,16.4 118.0,24.3" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="24.3" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="17.7" x2="118" y2="17.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,17.7 8.8,3.0 15.6,6.9 22.5,10.9 29.3,21.2 36.1,31.0 42.9,24.9 49.8,15.4 56.6,19.1 63.4,20.4 70.2,20.5 77.1,11.0 83.9,12.3 90.7,17.8 97.5,27.8 104.4,25.1 111.2,16.4 118.0,24.3" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="24.3" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr class="bench-row" data-search="机器人etf562500" data-code="562500">
           <td class="tname">📊 对标 · 机器人ETF</td>
           <td class="mono">562500</td>
@@ -1602,7 +1602,7 @@ footer b{color:var(--ink2)}
           <td class="mono">21.13</td>
           <td class="cum down">-5.33%</td>
           <td class="exc down">-0.09%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="8.3" x2="118" y2="8.3" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,8.3 8.4,13.9 14.9,13.5 21.3,8.3 27.8,14.1 34.2,14.5 40.7,13.9 47.1,11.1 53.6,10.1 60.0,12.6 66.4,20.4 72.9,21.1 79.3,28.7 85.8,29.7 92.2,31.0 98.7,23.5 105.1,3.0 111.6,15.1 118.0,20.1" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="20.1" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="8.3" x2="118" y2="8.3" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,8.3 8.4,13.9 14.9,13.5 21.3,8.3 27.8,14.1 34.2,14.5 40.7,13.9 47.1,11.1 53.6,10.1 60.0,12.6 66.4,20.4 72.9,21.1 79.3,28.7 85.8,29.7 92.2,31.0 98.7,23.5 105.1,3.0 111.6,15.1 118.0,20.1" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="20.1" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="中航成飞302132" data-code="302132">
           <td class="tname">中航成飞</td>
           <td class="mono">302132.SZ</td>
@@ -1611,7 +1611,7 @@ footer b{color:var(--ink2)}
           <td class="mono">60.9</td>
           <td class="cum down">-5.75%</td>
           <td class="exc down">-0.51%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 8.4,3.0 14.9,6.3 21.3,9.1 27.8,14.1 34.2,12.5 40.7,12.1 47.1,11.3 53.6,16.9 60.0,17.2 66.4,24.0 72.9,25.5 79.3,29.8 85.8,30.2 92.2,31.0 98.7,27.9 105.1,7.0 111.6,15.3 118.0,15.5" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="15.5" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 8.4,3.0 14.9,6.3 21.3,9.1 27.8,14.1 34.2,12.5 40.7,12.1 47.1,11.3 53.6,16.9 60.0,17.2 66.4,24.0 72.9,25.5 79.3,29.8 85.8,30.2 92.2,31.0 98.7,27.9 105.1,7.0 111.6,15.3 118.0,15.5" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="15.5" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="中航沈飞600760" data-code="600760">
           <td class="tname">中航沈飞</td>
           <td class="mono">600760.SH</td>
@@ -1620,7 +1620,7 @@ footer b{color:var(--ink2)}
           <td class="mono">42.48</td>
           <td class="cum down">-7.04%</td>
           <td class="exc down">-1.80%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 8.4,5.8 14.9,12.4 21.3,15.5 27.8,19.3 34.2,18.4 40.7,17.6 47.1,13.2 53.6,16.1 60.0,20.7 66.4,27.0 72.9,31.0 79.3,30.5 85.8,27.6 92.2,28.0 98.7,25.0 105.1,8.8 111.6,16.0 118.0,20.3" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="20.3" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 8.4,5.8 14.9,12.4 21.3,15.5 27.8,19.3 34.2,18.4 40.7,17.6 47.1,13.2 53.6,16.1 60.0,20.7 66.4,27.0 72.9,31.0 79.3,30.5 85.8,27.6 92.2,28.0 98.7,25.0 105.1,8.8 111.6,16.0 118.0,20.3" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="20.3" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr class="bench-row" data-search="军工etf512660" data-code="512660">
           <td class="tname">📊 对标 · 军工ETF</td>
           <td class="mono">512660</td>
@@ -1662,7 +1662,7 @@ footer b{color:var(--ink2)}
           <td class="mono">89.64</td>
           <td class="cum down">-4.14%</td>
           <td class="exc down">-0.49%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="15.8" x2="118" y2="15.8" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,15.8 8.4,14.8 14.9,6.2 21.3,3.8 27.8,9.1 34.2,6.5 40.7,5.3 47.1,15.2 53.6,3.0 60.0,10.6 66.4,16.0 72.9,17.7 79.3,24.9 85.8,22.1 92.2,28.4 98.7,30.4 105.1,23.3 111.6,26.4 118.0,31.0" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="15.8" x2="118" y2="15.8" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,15.8 8.4,14.8 14.9,6.2 21.3,3.8 27.8,9.1 34.2,6.5 40.7,5.3 47.1,15.2 53.6,3.0 60.0,10.6 66.4,16.0 72.9,17.7 79.3,24.9 85.8,22.1 92.2,28.4 98.7,30.4 105.1,23.3 111.6,26.4 118.0,31.0" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr class="bench-row" data-search="新能源车etf515030" data-code="515030">
           <td class="tname">📊 对标 · 新能源车ETF</td>
           <td class="mono">515030</td>
@@ -1713,7 +1713,7 @@ footer b{color:var(--ink2)}
           <td class="mono">70.24</td>
           <td class="cum down">-9.10%</td>
           <td class="exc down">-5.31%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="9.6" x2="118" y2="9.6" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,9.6 8.4,7.0 14.9,7.3 21.3,3.0 27.8,8.9 34.2,11.3 40.7,17.7 47.1,16.5 53.6,12.3 60.0,13.6 66.4,16.2 72.9,14.2 79.3,15.4 85.8,15.2 92.2,24.8 98.7,26.7 105.1,31.0 111.6,26.5 118.0,24.5" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="24.5" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="9.6" x2="118" y2="9.6" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,9.6 8.4,7.0 14.9,7.3 21.3,3.0 27.8,8.9 34.2,11.3 40.7,17.7 47.1,16.5 53.6,12.3 60.0,13.6 66.4,16.2 72.9,14.2 79.3,15.4 85.8,15.2 92.2,24.8 98.7,26.7 105.1,31.0 111.6,26.5 118.0,24.5" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="24.5" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="鸣志电器603728" data-code="603728">
           <td class="tname">鸣志电器</td>
           <td class="mono">603728.SH</td>
@@ -1722,7 +1722,7 @@ footer b{color:var(--ink2)}
           <td class="mono">62.2</td>
           <td class="cum down">-7.72%</td>
           <td class="exc down">-3.93%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="10.1" x2="118" y2="10.1" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,10.1 8.4,8.0 14.9,5.8 21.3,3.0 27.8,12.4 34.2,17.4 40.7,26.8 47.1,31.0 53.6,23.5 60.0,24.1 66.4,20.7 72.9,14.4 79.3,10.0 85.8,13.6 92.2,23.0 98.7,27.0 105.1,28.5 111.6,24.2 118.0,24.4" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="24.4" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="10.1" x2="118" y2="10.1" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,10.1 8.4,8.0 14.9,5.8 21.3,3.0 27.8,12.4 34.2,17.4 40.7,26.8 47.1,31.0 53.6,23.5 60.0,24.1 66.4,20.7 72.9,14.4 79.3,10.0 85.8,13.6 92.2,23.0 98.7,27.0 105.1,28.5 111.6,24.2 118.0,24.4" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="24.4" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="埃斯顿002747" data-code="002747">
           <td class="tname">埃斯顿</td>
           <td class="mono">002747.SZ</td>
@@ -1740,7 +1740,7 @@ footer b{color:var(--ink2)}
           <td class="mono">66.38</td>
           <td class="cum down">-21.56%</td>
           <td class="exc down">-17.77%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="7.0" x2="118" y2="7.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,7.0 8.4,3.0 14.9,4.3 21.3,4.7 27.8,14.8 34.2,18.6 40.7,22.0 47.1,26.0 53.6,25.2 60.0,23.8 66.4,22.0 72.9,19.1 79.3,18.8 85.8,20.5 92.2,27.5 98.7,29.9 105.1,31.0 111.6,27.4 118.0,28.2" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="28.2" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="7.0" x2="118" y2="7.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,7.0 8.4,3.0 14.9,4.3 21.3,4.7 27.8,14.8 34.2,18.6 40.7,22.0 47.1,26.0 53.6,25.2 60.0,23.8 66.4,22.0 72.9,19.1 79.3,18.8 85.8,20.5 92.2,27.5 98.7,29.9 105.1,31.0 111.6,27.4 118.0,28.2" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="28.2" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr class="bench-row" data-search="机器人etf562500" data-code="562500">
           <td class="tname">📊 对标 · 机器人ETF</td>
           <td class="mono">562500</td>
@@ -1756,7 +1756,7 @@ footer b{color:var(--ink2)}
     <div class="art-card" data-theme="周期" data-date="2026-05-21" data-avgcum="10.03" data-avgex="4.79" data-search="科技与稀缺共振，谁卡位新质生产力金属 锡业股份000960 抚顺特钢600399 钢研高纳300034 中钨高新000657 华友钴业603799">
       <div class="art-head">
         <div class="art-title-wrap">
-          <span class="theme-tag" style="background:#c4a04a1a;color:#c4a04a;border-color:#c4a04a40">周期</span>
+          <span class="theme-tag" style="background:#b085421a;color:#b08542;border-color:#b0854240">周期</span>
           <span class="art-title">科技与稀缺共振，谁卡位新质生产力金属</span>
           
         </div>
@@ -1791,7 +1791,7 @@ footer b{color:var(--ink2)}
           <td class="mono">4.37</td>
           <td class="cum down">-13.47%</td>
           <td class="exc down">-18.71%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="4.8" x2="118" y2="4.8" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,4.8 8.4,3.0 14.9,4.5 21.3,5.4 27.8,7.4 34.2,7.4 40.7,12.1 47.1,11.8 53.6,16.6 60.0,19.2 66.4,20.1 72.9,18.3 79.3,24.8 85.8,26.9 92.2,28.9 98.7,31.0 105.1,26.3 111.6,22.5 118.0,24.8" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="24.8" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="4.8" x2="118" y2="4.8" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,4.8 8.4,3.0 14.9,4.5 21.3,5.4 27.8,7.4 34.2,7.4 40.7,12.1 47.1,11.8 53.6,16.6 60.0,19.2 66.4,20.1 72.9,18.3 79.3,24.8 85.8,26.9 92.2,28.9 98.7,31.0 105.1,26.3 111.6,22.5 118.0,24.8" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="24.8" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="钢研高纳300034" data-code="300034">
           <td class="tname">钢研高纳</td>
           <td class="mono">300034.SZ</td>
@@ -1800,7 +1800,7 @@ footer b{color:var(--ink2)}
           <td class="mono">17.87</td>
           <td class="cum down">-8.10%</td>
           <td class="exc down">-13.34%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="8.3" x2="118" y2="8.3" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,8.3 8.4,4.1 14.9,3.0 21.3,9.0 27.8,13.4 34.2,6.4 40.7,15.9 47.1,16.7 53.6,19.1 60.0,19.6 66.4,21.2 72.9,20.4 79.3,27.5 85.8,27.3 92.2,31.0 98.7,30.5 105.1,22.4 111.6,21.8 118.0,20.4" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="20.4" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="8.3" x2="118" y2="8.3" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,8.3 8.4,4.1 14.9,3.0 21.3,9.0 27.8,13.4 34.2,6.4 40.7,15.9 47.1,16.7 53.6,19.1 60.0,19.6 66.4,21.2 72.9,20.4 79.3,27.5 85.8,27.3 92.2,31.0 98.7,30.5 105.1,22.4 111.6,21.8 118.0,20.4" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="20.4" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="中钨高新000657" data-code="000657">
           <td class="tname">中钨高新</td>
           <td class="mono">000657.SZ</td>
@@ -1818,7 +1818,7 @@ footer b{color:var(--ink2)}
           <td class="mono">53.0</td>
           <td class="cum down">-6.13%</td>
           <td class="exc down">-11.37%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="8.6" x2="118" y2="8.6" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,8.6 8.4,3.0 14.9,7.1 21.3,4.8 27.8,9.4 34.2,9.9 40.7,12.4 47.1,15.4 53.6,15.2 60.0,16.0 66.4,20.5 72.9,23.5 79.3,31.0 85.8,28.4 92.2,30.0 98.7,29.1 105.1,22.9 111.6,17.8 118.0,16.5" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="16.5" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="8.6" x2="118" y2="8.6" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,8.6 8.4,3.0 14.9,7.1 21.3,4.8 27.8,9.4 34.2,9.9 40.7,12.4 47.1,15.4 53.6,15.2 60.0,16.0 66.4,20.5 72.9,23.5 79.3,31.0 85.8,28.4 92.2,30.0 98.7,29.1 105.1,22.9 111.6,17.8 118.0,16.5" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="16.5" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr class="bench-row" data-search="有色金属etf512400" data-code="512400">
           <td class="tname">📊 对标 · 有色金属ETF</td>
           <td class="mono">512400</td>
@@ -1860,7 +1860,7 @@ footer b{color:var(--ink2)}
           <td class="mono">49.41</td>
           <td class="cum down">-7.22%</td>
           <td class="exc up">+5.95%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 5.6,4.2 9.2,4.2 12.9,6.7 16.5,6.9 20.1,6.8 23.8,6.8 27.4,11.7 31.0,12.7 34.6,13.6 38.2,17.2 41.9,17.4 45.5,17.3 49.1,17.9 52.8,21.8 56.4,23.8 60.0,25.8 63.6,29.5 67.2,24.2 70.9,29.7 74.5,23.0 78.1,23.7 81.8,25.8 85.4,27.7 89.0,31.0 92.6,29.8 96.2,25.6 99.9,26.1 103.5,21.7 107.1,19.3 110.8,19.0 114.4,21.7 118.0,26.1" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="26.1" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 5.6,4.2 9.2,4.2 12.9,6.7 16.5,6.9 20.1,6.8 23.8,6.8 27.4,11.7 31.0,12.7 34.6,13.6 38.2,17.2 41.9,17.4 45.5,17.3 49.1,17.9 52.8,21.8 56.4,23.8 60.0,25.8 63.6,29.5 67.2,24.2 70.9,29.7 74.5,23.0 78.1,23.7 81.8,25.8 85.4,27.7 89.0,31.0 92.6,29.8 96.2,25.6 99.9,26.1 103.5,21.7 107.1,19.3 110.8,19.0 114.4,21.7 118.0,26.1" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="26.1" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="片仔癀600436" data-code="600436">
           <td class="tname">片仔癀</td>
           <td class="mono">600436.SH</td>
@@ -1869,7 +1869,7 @@ footer b{color:var(--ink2)}
           <td class="mono">116.12</td>
           <td class="cum down">-16.61%</td>
           <td class="exc down">-3.44%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="7.4" x2="118" y2="7.4" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,7.4 5.6,7.3 9.2,3.0 12.9,5.3 16.5,5.4 20.1,5.4 23.8,5.7 27.4,7.1 31.0,8.8 34.6,8.7 38.2,11.4 41.9,16.4 45.5,18.4 49.1,19.4 52.8,20.8 56.4,22.9 60.0,23.0 63.6,24.0 67.2,22.9 70.9,26.0 74.5,18.4 78.1,18.0 81.8,22.4 85.4,22.7 89.0,25.7 92.6,25.5 96.2,27.9 99.9,30.1 103.5,29.6 107.1,28.7 110.8,27.5 114.4,28.5 118.0,31.0" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="7.4" x2="118" y2="7.4" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,7.4 5.6,7.3 9.2,3.0 12.9,5.3 16.5,5.4 20.1,5.4 23.8,5.7 27.4,7.1 31.0,8.8 34.6,8.7 38.2,11.4 41.9,16.4 45.5,18.4 49.1,19.4 52.8,20.8 56.4,22.9 60.0,23.0 63.6,24.0 67.2,22.9 70.9,26.0 74.5,18.4 78.1,18.0 81.8,22.4 85.4,22.7 89.0,25.7 92.6,25.5 96.2,27.9 99.9,30.1 103.5,29.6 107.1,28.7 110.8,27.5 114.4,28.5 118.0,31.0" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="华润三九000999" data-code="000999">
           <td class="tname">华润三九</td>
           <td class="mono">000999.SZ</td>
@@ -1878,7 +1878,7 @@ footer b{color:var(--ink2)}
           <td class="mono">24.25</td>
           <td class="cum down">-4.94%</td>
           <td class="exc up">+8.23%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 5.6,3.6 9.2,5.8 12.9,8.0 16.5,8.6 20.1,9.5 23.8,8.0 27.4,10.4 31.0,12.5 34.6,14.7 38.2,20.3 41.9,25.4 45.5,20.2 49.1,23.9 52.8,24.5 56.4,27.6 60.0,28.2 63.6,31.0 67.2,26.2 70.9,31.0 74.5,18.7 78.1,17.7 81.8,16.8 85.4,21.7 89.0,26.4 92.6,22.3 96.2,24.3 99.9,21.7 103.5,18.3 107.1,15.0 110.8,12.8 114.4,17.2 118.0,21.7" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="21.7" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 5.6,3.6 9.2,5.8 12.9,8.0 16.5,8.6 20.1,9.5 23.8,8.0 27.4,10.4 31.0,12.5 34.6,14.7 38.2,20.3 41.9,25.4 45.5,20.2 49.1,23.9 52.8,24.5 56.4,27.6 60.0,28.2 63.6,31.0 67.2,26.2 70.9,31.0 74.5,18.7 78.1,17.7 81.8,16.8 85.4,21.7 89.0,26.4 92.6,22.3 96.2,24.3 99.9,21.7 103.5,18.3 107.1,15.0 110.8,12.8 114.4,17.2 118.0,21.7" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="21.7" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="上海医药601607" data-code="601607">
           <td class="tname">上海医药</td>
           <td class="mono">601607.SH</td>
@@ -1887,7 +1887,7 @@ footer b{color:var(--ink2)}
           <td class="mono">16.15</td>
           <td class="cum down">-4.61%</td>
           <td class="exc up">+8.56%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="8.7" x2="118" y2="8.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,8.7 5.6,8.7 9.2,4.7 12.9,3.0 16.5,3.8 20.1,5.2 23.8,3.3 27.4,3.3 31.0,5.7 34.6,9.7 38.2,13.6 41.9,19.3 45.5,13.6 49.1,16.4 52.8,19.3 56.4,20.8 60.0,22.3 63.6,23.3 67.2,22.1 70.9,27.3 74.5,19.9 78.1,20.8 81.8,19.3 85.4,24.3 89.0,29.2 92.6,25.3 96.2,31.0 99.9,28.7 103.5,25.6 107.1,25.8 110.8,23.3 114.4,24.8 118.0,28.0" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="28.0" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="8.7" x2="118" y2="8.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,8.7 5.6,8.7 9.2,4.7 12.9,3.0 16.5,3.8 20.1,5.2 23.8,3.3 27.4,3.3 31.0,5.7 34.6,9.7 38.2,13.6 41.9,19.3 45.5,13.6 49.1,16.4 52.8,19.3 56.4,20.8 60.0,22.3 63.6,23.3 67.2,22.1 70.9,27.3 74.5,19.9 78.1,20.8 81.8,19.3 85.4,24.3 89.0,29.2 92.6,25.3 96.2,31.0 99.9,28.7 103.5,25.6 107.1,25.8 110.8,23.3 114.4,24.8 118.0,28.0" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="28.0" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="长春高新000661" data-code="000661">
           <td class="tname">长春高新</td>
           <td class="mono">000661.SZ</td>
@@ -1896,7 +1896,7 @@ footer b{color:var(--ink2)}
           <td class="mono">64.86</td>
           <td class="cum down">-24.09%</td>
           <td class="exc down">-10.92%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="7.8" x2="118" y2="7.8" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,7.8 5.6,8.0 9.2,8.6 12.9,8.1 16.5,5.8 20.1,6.7 23.8,3.0 27.4,4.3 31.0,6.1 34.6,8.2 38.2,9.4 41.9,11.1 45.5,10.3 49.1,12.8 52.8,13.3 56.4,15.1 60.0,14.1 63.6,16.3 67.2,18.4 70.9,21.5 74.5,20.8 78.1,21.3 81.8,22.9 85.4,25.2 89.0,26.9 92.6,26.5 96.2,29.0 99.9,28.9 103.5,29.0 107.1,31.0 110.8,28.6 114.4,29.7 118.0,30.4" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="30.4" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="7.8" x2="118" y2="7.8" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,7.8 5.6,8.0 9.2,8.6 12.9,8.1 16.5,5.8 20.1,6.7 23.8,3.0 27.4,4.3 31.0,6.1 34.6,8.2 38.2,9.4 41.9,11.1 45.5,10.3 49.1,12.8 52.8,13.3 56.4,15.1 60.0,14.1 63.6,16.3 67.2,18.4 70.9,21.5 74.5,20.8 78.1,21.3 81.8,22.9 85.4,25.2 89.0,26.9 92.6,26.5 96.2,29.0 99.9,28.9 103.5,29.0 107.1,31.0 110.8,28.6 114.4,29.7 118.0,30.4" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="30.4" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="通化东宝600867" data-code="600867">
           <td class="tname">通化东宝</td>
           <td class="mono">600867.SH</td>
@@ -1905,7 +1905,7 @@ footer b{color:var(--ink2)}
           <td class="mono">7.48</td>
           <td class="cum down">-21.51%</td>
           <td class="exc down">-8.34%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 5.6,6.5 9.2,10.8 12.9,9.8 16.5,11.2 20.1,12.6 23.8,11.2 27.4,13.0 31.0,13.3 34.6,16.2 38.2,17.3 41.9,18.4 45.5,16.9 49.1,19.3 52.8,21.8 56.4,21.4 60.0,22.8 63.6,23.4 67.2,23.2 70.9,25.0 74.5,21.5 78.1,19.0 81.8,20.3 85.4,22.3 89.0,23.2 92.6,24.2 96.2,27.4 99.9,29.2 103.5,28.4 107.1,31.0 110.8,28.8 114.4,27.9 118.0,29.7" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="29.7" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="3.0" x2="118" y2="3.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,3.0 5.6,6.5 9.2,10.8 12.9,9.8 16.5,11.2 20.1,12.6 23.8,11.2 27.4,13.0 31.0,13.3 34.6,16.2 38.2,17.3 41.9,18.4 45.5,16.9 49.1,19.3 52.8,21.8 56.4,21.4 60.0,22.8 63.6,23.4 67.2,23.2 70.9,25.0 74.5,21.5 78.1,19.0 81.8,20.3 85.4,22.3 89.0,23.2 92.6,24.2 96.2,27.4 99.9,29.2 103.5,28.4 107.1,31.0 110.8,28.8 114.4,27.9 118.0,29.7" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="29.7" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr class="bench-row" data-search="医药etf512010" data-code="512010">
           <td class="tname">📊 对标 · 医药ETF</td>
           <td class="mono">512010</td>
@@ -1963,7 +1963,7 @@ footer b{color:var(--ink2)}
     <div class="art-card" data-theme="新能源" data-date="2026-04-28" data-avgcum="-7.83" data-avgex="-3.61" data-search="锂电材料反转，谁是细分赛道赢家 湖南裕能301358 当升科技300073 石大胜华603026 多氟多002407 容百科技688005 杉杉股份600884">
       <div class="art-head">
         <div class="art-title-wrap">
-          <span class="theme-tag" style="background:#c27a4a1a;color:#c27a4a;border-color:#c27a4a40">新能源</span>
+          <span class="theme-tag" style="background:#5a8a5e1a;color:#5a8a5e;border-color:#5a8a5e40">新能源</span>
           <span class="art-title">锂电材料反转，谁是细分赛道赢家</span>
           
         </div>
@@ -1989,7 +1989,7 @@ footer b{color:var(--ink2)}
           <td class="mono">75.1</td>
           <td class="cum down">-18.64%</td>
           <td class="exc down">-14.42%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="14.6" x2="118" y2="14.6" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,14.6 5.6,5.0 9.2,8.2 12.9,3.0 16.5,5.6 20.1,11.5 23.8,10.8 27.4,9.2 31.0,10.9 34.6,13.5 38.2,12.7 41.9,14.3 45.5,15.9 49.1,13.2 52.8,15.5 56.4,15.6 60.0,17.9 63.6,18.1 67.2,17.9 70.9,18.2 74.5,17.3 78.1,19.5 81.8,20.3 85.4,21.1 89.0,26.7 92.6,28.1 96.2,30.6 99.9,29.9 103.5,31.0 107.1,30.4 110.8,27.9 114.4,27.9 118.0,26.2" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="26.2" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="14.6" x2="118" y2="14.6" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,14.6 5.6,5.0 9.2,8.2 12.9,3.0 16.5,5.6 20.1,11.5 23.8,10.8 27.4,9.2 31.0,10.9 34.6,13.5 38.2,12.7 41.9,14.3 45.5,15.9 49.1,13.2 52.8,15.5 56.4,15.6 60.0,17.9 63.6,18.1 67.2,17.9 70.9,18.2 74.5,17.3 78.1,19.5 81.8,20.3 85.4,21.1 89.0,26.7 92.6,28.1 96.2,30.6 99.9,29.9 103.5,31.0 107.1,30.4 110.8,27.9 114.4,27.9 118.0,26.2" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="26.2" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="当升科技300073" data-code="300073">
           <td class="tname">当升科技</td>
           <td class="mono">300073.SZ</td>
@@ -1998,7 +1998,7 @@ footer b{color:var(--ink2)}
           <td class="mono">52.98</td>
           <td class="cum down">-13.88%</td>
           <td class="exc down">-9.66%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="8.6" x2="118" y2="8.6" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,8.6 5.6,3.3 9.2,5.8 12.9,3.0 16.5,5.6 20.1,7.3 23.8,7.3 27.4,8.8 31.0,9.4 34.6,13.6 38.2,14.4 41.9,14.2 45.5,15.4 49.1,11.3 52.8,14.1 56.4,11.5 60.0,15.6 63.6,14.7 67.2,15.2 70.9,14.9 74.5,18.5 78.1,18.6 81.8,20.7 85.4,21.4 89.0,23.4 92.6,25.4 96.2,31.0 99.9,28.3 103.5,30.4 107.1,30.9 110.8,27.9 114.4,26.2 118.0,22.8" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="22.8" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="8.6" x2="118" y2="8.6" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,8.6 5.6,3.3 9.2,5.8 12.9,3.0 16.5,5.6 20.1,7.3 23.8,7.3 27.4,8.8 31.0,9.4 34.6,13.6 38.2,14.4 41.9,14.2 45.5,15.4 49.1,11.3 52.8,14.1 56.4,11.5 60.0,15.6 63.6,14.7 67.2,15.2 70.9,14.9 74.5,18.5 78.1,18.6 81.8,20.7 85.4,21.4 89.0,23.4 92.6,25.4 96.2,31.0 99.9,28.3 103.5,30.4 107.1,30.9 110.8,27.9 114.4,26.2 118.0,22.8" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="22.8" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="石大胜华603026" data-code="603026">
           <td class="tname">石大胜华</td>
           <td class="mono">603026.SH</td>
@@ -2007,7 +2007,7 @@ footer b{color:var(--ink2)}
           <td class="mono">91.05</td>
           <td class="cum down">-15.98%</td>
           <td class="exc down">-11.76%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="11.2" x2="118" y2="11.2" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,11.2 5.6,3.8 9.2,6.7 12.9,3.0 16.5,11.1 20.1,14.2 23.8,13.7 27.4,14.3 31.0,15.5 34.6,18.7 38.2,16.5 41.9,17.0 45.5,18.9 49.1,16.2 52.8,18.3 56.4,18.8 60.0,21.2 63.6,22.5 67.2,23.1 70.9,23.7 74.5,25.3 78.1,24.0 81.8,25.4 85.4,25.9 89.0,27.8 92.6,27.9 96.2,31.0 99.9,29.8 103.5,29.5 107.1,29.2 110.8,26.2 114.4,26.7 118.0,23.0" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="23.0" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="11.2" x2="118" y2="11.2" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,11.2 5.6,3.8 9.2,6.7 12.9,3.0 16.5,11.1 20.1,14.2 23.8,13.7 27.4,14.3 31.0,15.5 34.6,18.7 38.2,16.5 41.9,17.0 45.5,18.9 49.1,16.2 52.8,18.3 56.4,18.8 60.0,21.2 63.6,22.5 67.2,23.1 70.9,23.7 74.5,25.3 78.1,24.0 81.8,25.4 85.4,25.9 89.0,27.8 92.6,27.9 96.2,31.0 99.9,29.8 103.5,29.5 107.1,29.2 110.8,26.2 114.4,26.7 118.0,23.0" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="23.0" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="多氟多002407" data-code="002407">
           <td class="tname">多氟多</td>
           <td class="mono">002407.SZ</td>
@@ -2025,7 +2025,7 @@ footer b{color:var(--ink2)}
           <td class="mono">33.76</td>
           <td class="cum down">-4.93%</td>
           <td class="exc down">-0.71%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="15.4" x2="118" y2="15.4" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,15.4 5.6,5.1 9.2,17.8 12.9,6.2 16.5,5.5 20.1,3.0 23.8,6.0 27.4,8.3 31.0,10.2 34.6,15.4 38.2,17.5 41.9,19.4 45.5,19.7 49.1,16.1 52.8,19.4 56.4,17.5 60.0,23.4 63.6,24.7 67.2,25.1 70.9,26.4 74.5,31.0 78.1,24.5 81.8,28.4 85.4,29.9 89.0,26.3 92.6,26.0 96.2,26.4 99.9,24.7 103.5,28.2 107.1,30.0 110.8,29.6 114.4,28.0 118.0,21.5" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="21.5" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="15.4" x2="118" y2="15.4" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,15.4 5.6,5.1 9.2,17.8 12.9,6.2 16.5,5.5 20.1,3.0 23.8,6.0 27.4,8.3 31.0,10.2 34.6,15.4 38.2,17.5 41.9,19.4 45.5,19.7 49.1,16.1 52.8,19.4 56.4,17.5 60.0,23.4 63.6,24.7 67.2,25.1 70.9,26.4 74.5,31.0 78.1,24.5 81.8,28.4 85.4,29.9 89.0,26.3 92.6,26.0 96.2,26.4 99.9,24.7 103.5,28.2 107.1,30.0 110.8,29.6 114.4,28.0 118.0,21.5" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="21.5" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="杉杉股份600884" data-code="600884">
           <td class="tname">杉杉股份</td>
           <td class="mono">600884.SH</td>
@@ -2034,7 +2034,7 @@ footer b{color:var(--ink2)}
           <td class="mono">14.07</td>
           <td class="cum down">-10.72%</td>
           <td class="exc down">-6.50%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="14.7" x2="118" y2="14.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,14.7 5.6,7.8 9.2,9.3 12.9,3.0 16.5,7.3 20.1,9.1 23.8,10.1 27.4,12.5 31.0,12.3 34.6,16.9 38.2,17.6 41.9,18.2 45.5,19.5 49.1,17.7 52.8,22.6 56.4,20.1 60.0,22.4 63.6,21.2 67.2,20.1 70.9,17.8 74.5,21.5 78.1,24.0 81.8,24.9 85.4,26.1 89.0,28.0 92.6,27.3 96.2,31.0 99.9,29.0 103.5,31.0 107.1,30.9 110.8,27.7 114.4,27.2 118.0,25.0" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="25.0" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="14.7" x2="118" y2="14.7" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,14.7 5.6,7.8 9.2,9.3 12.9,3.0 16.5,7.3 20.1,9.1 23.8,10.1 27.4,12.5 31.0,12.3 34.6,16.9 38.2,17.6 41.9,18.2 45.5,19.5 49.1,17.7 52.8,22.6 56.4,20.1 60.0,22.4 63.6,21.2 67.2,20.1 70.9,17.8 74.5,21.5 78.1,24.0 81.8,24.9 85.4,26.1 89.0,28.0 92.6,27.3 96.2,31.0 99.9,29.0 103.5,31.0 107.1,30.9 110.8,27.7 114.4,27.2 118.0,25.0" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="25.0" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr class="bench-row" data-search="电池etf159755" data-code="159755">
           <td class="tname">📊 对标 · 电池ETF</td>
           <td class="mono">159755</td>
@@ -2050,7 +2050,7 @@ footer b{color:var(--ink2)}
     <div class="art-card" data-theme="新能源" data-date="2026-04-28" data-avgcum="-4.34" data-avgex="-0.12" data-search="锂资源拐点叠加隔膜出海，谁卡位上游 恩捷股份002812 融捷股份002192 天华新能300390">
       <div class="art-head">
         <div class="art-title-wrap">
-          <span class="theme-tag" style="background:#c27a4a1a;color:#c27a4a;border-color:#c27a4a40">新能源</span>
+          <span class="theme-tag" style="background:#5a8a5e1a;color:#5a8a5e;border-color:#5a8a5e40">新能源</span>
           <span class="art-title">锂资源拐点叠加隔膜出海，谁卡位上游</span>
           
         </div>
@@ -2076,7 +2076,7 @@ footer b{color:var(--ink2)}
           <td class="mono">69.77</td>
           <td class="cum down">-11.13%</td>
           <td class="exc down">-6.91%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="12.5" x2="118" y2="12.5" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,12.5 5.6,6.2 9.2,7.8 12.9,3.0 16.5,5.4 20.1,9.6 23.8,9.1 27.4,7.4 31.0,9.5 34.6,15.4 38.2,14.7 41.9,15.8 45.5,12.6 49.1,10.4 52.8,14.9 56.4,18.1 60.0,22.2 63.6,21.2 67.2,19.4 70.9,19.6 74.5,21.0 78.1,22.5 81.8,24.0 85.4,25.4 89.0,27.5 92.6,28.6 96.2,30.9 99.9,29.0 103.5,31.0 107.1,30.6 110.8,24.1 114.4,23.7 118.0,21.8" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="21.8" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="12.5" x2="118" y2="12.5" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,12.5 5.6,6.2 9.2,7.8 12.9,3.0 16.5,5.4 20.1,9.6 23.8,9.1 27.4,7.4 31.0,9.5 34.6,15.4 38.2,14.7 41.9,15.8 45.5,12.6 49.1,10.4 52.8,14.9 56.4,18.1 60.0,22.2 63.6,21.2 67.2,19.4 70.9,19.6 74.5,21.0 78.1,22.5 81.8,24.0 85.4,25.4 89.0,27.5 92.6,28.6 96.2,30.9 99.9,29.0 103.5,31.0 107.1,30.6 110.8,24.1 114.4,23.7 118.0,21.8" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="21.8" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="融捷股份002192" data-code="002192">
           <td class="tname">融捷股份</td>
           <td class="mono">002192.SZ</td>
@@ -2085,7 +2085,7 @@ footer b{color:var(--ink2)}
           <td class="mono">88.13</td>
           <td class="cum down">-2.36%</td>
           <td class="exc up">+1.86%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="18.8" x2="118" y2="18.8" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,18.8 5.6,12.0 9.2,4.5 12.9,3.0 16.5,7.6 20.1,12.1 23.8,9.9 27.4,11.0 31.0,13.3 34.6,16.7 38.2,17.7 41.9,18.2 45.5,20.6 49.1,18.7 52.8,22.2 56.4,22.4 60.0,23.3 63.6,24.2 67.2,24.4 70.9,25.2 74.5,25.7 78.1,25.4 81.8,26.3 85.4,27.3 89.0,29.5 92.6,29.0 96.2,31.0 99.9,27.4 103.5,27.2 107.1,23.9 110.8,19.2 114.4,18.3 118.0,20.4" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="20.4" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="18.8" x2="118" y2="18.8" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,18.8 5.6,12.0 9.2,4.5 12.9,3.0 16.5,7.6 20.1,12.1 23.8,9.9 27.4,11.0 31.0,13.3 34.6,16.7 38.2,17.7 41.9,18.2 45.5,20.6 49.1,18.7 52.8,22.2 56.4,22.4 60.0,23.3 63.6,24.2 67.2,24.4 70.9,25.2 74.5,25.7 78.1,25.4 81.8,26.3 85.4,27.3 89.0,29.5 92.6,29.0 96.2,31.0 99.9,27.4 103.5,27.2 107.1,23.9 110.8,19.2 114.4,18.3 118.0,20.4" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="20.4" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="天华新能300390" data-code="300390">
           <td class="tname">天华新能</td>
           <td class="mono">300390.SZ</td>
@@ -2152,7 +2152,7 @@ footer b{color:var(--ink2)}
     <div class="art-card" data-theme="周期" data-date="2026-04-22" data-avgcum="-14.24" data-avgex="-8.62" data-search="化工反转叠加新材料，谁是双线赢家 卫星化学002648 恒逸石化000703">
       <div class="art-head">
         <div class="art-title-wrap">
-          <span class="theme-tag" style="background:#c4a04a1a;color:#c4a04a;border-color:#c4a04a40">周期</span>
+          <span class="theme-tag" style="background:#b085421a;color:#b08542;border-color:#b0854240">周期</span>
           <span class="art-title">化工反转叠加新材料，谁是双线赢家</span>
           
         </div>
@@ -2178,7 +2178,7 @@ footer b{color:var(--ink2)}
           <td class="mono">22.33</td>
           <td class="cum down">-13.99%</td>
           <td class="exc down">-8.37%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="16.0" x2="118" y2="16.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,16.0 5.2,12.2 8.4,10.7 11.7,9.8 14.9,5.5 18.1,4.5 21.3,3.0 24.6,3.5 27.8,13.2 31.0,15.2 34.2,14.3 37.4,11.1 40.7,10.4 43.9,13.4 47.1,9.3 50.3,10.6 53.6,16.2 56.8,19.7 60.0,22.6 63.2,23.3 66.4,25.9 69.7,26.5 72.9,27.2 76.1,26.7 79.3,29.2 82.6,26.9 85.8,27.6 89.0,25.7 92.2,28.2 95.4,26.3 98.7,25.3 101.9,25.7 105.1,27.2 108.3,28.0 111.6,23.4 114.8,27.1 118.0,31.0" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="16.0" x2="118" y2="16.0" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,16.0 5.2,12.2 8.4,10.7 11.7,9.8 14.9,5.5 18.1,4.5 21.3,3.0 24.6,3.5 27.8,13.2 31.0,15.2 34.2,14.3 37.4,11.1 40.7,10.4 43.9,13.4 47.1,9.3 50.3,10.6 53.6,16.2 56.8,19.7 60.0,22.6 63.2,23.3 66.4,25.9 69.7,26.5 72.9,27.2 76.1,26.7 79.3,29.2 82.6,26.9 85.8,27.6 89.0,25.7 92.2,28.2 95.4,26.3 98.7,25.3 101.9,25.7 105.1,27.2 108.3,28.0 111.6,23.4 114.8,27.1 118.0,31.0" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="31.0" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="恒逸石化000703" data-code="000703">
           <td class="tname">恒逸石化</td>
           <td class="mono">000703.SZ</td>
@@ -2187,7 +2187,7 @@ footer b{color:var(--ink2)}
           <td class="mono">12.78</td>
           <td class="cum down">-14.49%</td>
           <td class="exc down">-8.87%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="18.6" x2="118" y2="18.6" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,18.6 5.2,18.7 8.4,18.7 11.7,16.9 14.9,14.6 18.1,8.0 21.3,5.8 24.6,3.0 27.8,11.8 31.0,15.6 34.2,15.8 37.4,15.6 40.7,17.1 43.9,19.4 47.1,19.4 50.3,20.0 53.6,19.8 56.8,20.2 60.0,23.3 63.2,24.2 66.4,26.3 69.7,25.1 72.9,27.6 76.1,28.0 79.3,29.0 82.6,28.8 85.8,27.5 89.0,25.8 92.2,27.7 95.4,26.6 98.7,28.3 101.9,29.7 105.1,29.9 108.3,31.0 111.6,28.1 114.8,28.5 118.0,29.1" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="29.1" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="18.6" x2="118" y2="18.6" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,18.6 5.2,18.7 8.4,18.7 11.7,16.9 14.9,14.6 18.1,8.0 21.3,5.8 24.6,3.0 27.8,11.8 31.0,15.6 34.2,15.8 37.4,15.6 40.7,17.1 43.9,19.4 47.1,19.4 50.3,20.0 53.6,19.8 56.8,20.2 60.0,23.3 63.2,24.2 66.4,26.3 69.7,25.1 72.9,27.6 76.1,28.0 79.3,29.0 82.6,28.8 85.8,27.5 89.0,25.8 92.2,27.7 95.4,26.6 98.7,28.3 101.9,29.7 105.1,29.9 108.3,31.0 111.6,28.1 114.8,28.5 118.0,29.1" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="29.1" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr class="bench-row" data-search="化工etf159870" data-code="159870">
           <td class="tname">📊 对标 · 化工ETF</td>
           <td class="mono">159870</td>
@@ -2245,7 +2245,7 @@ footer b{color:var(--ink2)}
     <div class="art-card" data-theme="新能源" data-date="2026-04-16" data-avgcum="-0.93" data-avgex="4.02" data-search="锂电拐点已至，量价齐升谁先兑现 亿纬锂能300014 璞泰来603659 天赐材料002709 新宙邦300037 中伟股份300919 先导智能300450 科达利002850">
       <div class="art-head">
         <div class="art-title-wrap">
-          <span class="theme-tag" style="background:#c27a4a1a;color:#c27a4a;border-color:#c27a4a40">新能源</span>
+          <span class="theme-tag" style="background:#5a8a5e1a;color:#5a8a5e;border-color:#5a8a5e40">新能源</span>
           <span class="art-title">锂电拐点已至，量价齐升谁先兑现</span>
           
         </div>
@@ -2271,7 +2271,7 @@ footer b{color:var(--ink2)}
           <td class="mono">66.88</td>
           <td class="cum down">-5.46%</td>
           <td class="exc down">-0.51%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="9.1" x2="118" y2="9.1" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,9.1 4.9,10.6 7.8,11.8 10.7,7.8 13.6,8.0 16.5,7.9 19.4,6.6 22.3,8.5 25.2,9.8 28.1,4.9 31.0,6.9 33.9,3.0 36.8,8.0 39.7,10.5 42.6,10.3 45.5,13.0 48.4,12.4 51.3,16.4 54.2,15.7 57.1,16.6 60.0,16.1 62.9,14.7 65.8,18.2 68.7,17.6 71.6,19.1 74.5,19.0 77.4,17.1 80.3,15.6 83.2,18.5 86.1,16.8 89.0,16.1 91.9,19.5 94.8,23.9 97.7,25.8 100.6,31.0 103.5,27.6 106.4,29.6 109.3,30.0 112.2,26.5 115.1,25.1 118.0,14.2" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="14.2" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="9.1" x2="118" y2="9.1" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,9.1 4.9,10.6 7.8,11.8 10.7,7.8 13.6,8.0 16.5,7.9 19.4,6.6 22.3,8.5 25.2,9.8 28.1,4.9 31.0,6.9 33.9,3.0 36.8,8.0 39.7,10.5 42.6,10.3 45.5,13.0 48.4,12.4 51.3,16.4 54.2,15.7 57.1,16.6 60.0,16.1 62.9,14.7 65.8,18.2 68.7,17.6 71.6,19.1 74.5,19.0 77.4,17.1 80.3,15.6 83.2,18.5 86.1,16.8 89.0,16.1 91.9,19.5 94.8,23.9 97.7,25.8 100.6,31.0 103.5,27.6 106.4,29.6 109.3,30.0 112.2,26.5 115.1,25.1 118.0,14.2" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="14.2" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="璞泰来603659" data-code="603659">
           <td class="tname">璞泰来</td>
           <td class="mono">603659.SH</td>
@@ -2280,7 +2280,7 @@ footer b{color:var(--ink2)}
           <td class="mono">29.68</td>
           <td class="cum down">-16.65%</td>
           <td class="exc down">-11.70%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="8.3" x2="118" y2="8.3" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,8.3 4.9,7.5 7.8,8.9 10.7,6.7 13.6,6.8 16.5,11.5 19.4,5.4 22.3,4.7 25.2,8.6 28.1,3.0 31.0,6.5 33.9,4.2 36.8,7.9 39.7,12.5 42.6,13.3 45.5,14.5 48.4,14.4 51.3,17.3 54.2,17.2 57.1,18.7 60.0,19.3 62.9,16.6 65.8,18.5 68.7,16.8 71.6,20.9 74.5,20.5 77.4,19.6 80.3,21.2 83.2,21.3 86.1,21.2 89.0,20.8 91.9,23.1 94.8,27.2 97.7,29.3 100.6,31.0 103.5,28.5 106.4,29.5 109.3,30.3 112.2,27.4 115.1,25.2 118.0,23.8" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="23.8" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="8.3" x2="118" y2="8.3" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,8.3 4.9,7.5 7.8,8.9 10.7,6.7 13.6,6.8 16.5,11.5 19.4,5.4 22.3,4.7 25.2,8.6 28.1,3.0 31.0,6.5 33.9,4.2 36.8,7.9 39.7,12.5 42.6,13.3 45.5,14.5 48.4,14.4 51.3,17.3 54.2,17.2 57.1,18.7 60.0,19.3 62.9,16.6 65.8,18.5 68.7,16.8 71.6,20.9 74.5,20.5 77.4,19.6 80.3,21.2 83.2,21.3 86.1,21.2 89.0,20.8 91.9,23.1 94.8,27.2 97.7,29.3 100.6,31.0 103.5,28.5 106.4,29.5 109.3,30.3 112.2,27.4 115.1,25.2 118.0,23.8" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="23.8" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="天赐材料002709" data-code="002709">
           <td class="tname">天赐材料</td>
           <td class="mono">002709.SZ</td>
@@ -2307,7 +2307,7 @@ footer b{color:var(--ink2)}
           <td class="mono">49.92</td>
           <td class="cum down">-11.05%</td>
           <td class="exc down">-6.10%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="15.6" x2="118" y2="15.6" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,15.6 4.9,13.5 7.8,15.4 10.7,13.9 13.6,13.1 16.5,14.7 19.4,8.6 22.3,8.0 25.2,9.3 28.1,3.0 31.0,5.3 33.9,3.3 36.8,5.5 39.7,9.3 42.6,8.0 45.5,10.0 48.4,9.2 51.3,12.7 54.2,15.7 57.1,16.0 60.0,17.1 62.9,15.0 65.8,18.4 68.7,17.7 71.6,19.3 74.5,18.5 77.4,17.8 80.3,18.4 83.2,21.4 86.1,22.1 89.0,22.9 91.9,23.7 94.8,25.7 97.7,26.8 100.6,31.0 103.5,28.9 106.4,30.1 109.3,30.4 112.2,27.7 115.1,26.0 118.0,24.4" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="24.4" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="15.6" x2="118" y2="15.6" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,15.6 4.9,13.5 7.8,15.4 10.7,13.9 13.6,13.1 16.5,14.7 19.4,8.6 22.3,8.0 25.2,9.3 28.1,3.0 31.0,5.3 33.9,3.3 36.8,5.5 39.7,9.3 42.6,8.0 45.5,10.0 48.4,9.2 51.3,12.7 54.2,15.7 57.1,16.0 60.0,17.1 62.9,15.0 65.8,18.4 68.7,17.7 71.6,19.3 74.5,18.5 77.4,17.8 80.3,18.4 83.2,21.4 86.1,22.1 89.0,22.9 91.9,23.7 94.8,25.7 97.7,26.8 100.6,31.0 103.5,28.9 106.4,30.1 109.3,30.4 112.2,27.7 115.1,26.0 118.0,24.4" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="24.4" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="先导智能300450" data-code="300450">
           <td class="tname">先导智能</td>
           <td class="mono">300450.SZ</td>
@@ -2316,7 +2316,7 @@ footer b{color:var(--ink2)}
           <td class="mono">49.4</td>
           <td class="cum down">-7.94%</td>
           <td class="exc down">-2.99%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="11.2" x2="118" y2="11.2" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,11.2 4.9,7.5 7.8,6.3 10.7,3.3 13.6,3.0 16.5,5.7 19.4,5.9 22.3,5.2 25.2,8.5 28.1,7.8 31.0,8.7 33.9,5.8 36.8,7.0 39.7,9.4 42.6,6.6 45.5,10.5 48.4,9.4 51.3,13.2 54.2,13.5 57.1,12.4 60.0,15.5 62.9,14.4 65.8,16.8 68.7,15.0 71.6,17.2 74.5,18.0 77.4,17.9 80.3,14.7 83.2,15.7 86.1,18.3 89.0,19.9 91.9,20.7 94.8,22.0 97.7,21.8 100.6,26.8 103.5,25.0 106.4,28.4 109.3,30.1 112.2,31.0 115.1,28.8 118.0,17.9" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="17.9" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="11.2" x2="118" y2="11.2" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,11.2 4.9,7.5 7.8,6.3 10.7,3.3 13.6,3.0 16.5,5.7 19.4,5.9 22.3,5.2 25.2,8.5 28.1,7.8 31.0,8.7 33.9,5.8 36.8,7.0 39.7,9.4 42.6,6.6 45.5,10.5 48.4,9.4 51.3,13.2 54.2,13.5 57.1,12.4 60.0,15.5 62.9,14.4 65.8,16.8 68.7,15.0 71.6,17.2 74.5,18.0 77.4,17.9 80.3,14.7 83.2,15.7 86.1,18.3 89.0,19.9 91.9,20.7 94.8,22.0 97.7,21.8 100.6,26.8 103.5,25.0 106.4,28.4 109.3,30.1 112.2,31.0 115.1,28.8 118.0,17.9" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="17.9" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr data-search="科达利002850" data-code="002850">
           <td class="tname">科达利</td>
           <td class="mono">002850.SZ</td>
@@ -2325,7 +2325,7 @@ footer b{color:var(--ink2)}
           <td class="mono">203.05</td>
           <td class="cum down">-0.02%</td>
           <td class="exc up">+4.93%</td>
-          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="6.1" x2="118" y2="6.1" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,6.1 4.9,12.0 7.8,10.8 10.7,4.9 13.6,3.0 16.5,5.9 19.4,4.0 22.3,6.4 25.2,17.4 28.1,17.9 31.0,18.0 33.9,16.3 36.8,8.1 39.7,5.8 42.6,13.4 45.5,13.0 48.4,13.2 51.3,17.0 54.2,14.8 57.1,8.1 60.0,6.6 62.9,4.4 65.8,5.0 68.7,5.8 71.6,12.2 74.5,13.3 77.4,18.2 80.3,21.2 83.2,29.0 86.1,28.9 89.0,29.0 91.9,30.8 94.8,31.0 97.7,30.4 100.6,21.7 103.5,21.8 106.4,18.3 109.3,16.1 112.2,17.4 115.1,15.4 118.0,6.2" fill="none" stroke="#6f6857" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="6.2" r="1.9" fill="#6f6857"/></svg></td>
+          <td class="sp"><svg class="spark" viewBox="0 0 120 34" width="120" height="34" preserveAspectRatio="none"><line x1="2" y1="6.1" x2="118" y2="6.1" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="2.5,2.5"/><polyline points="2.0,6.1 4.9,12.0 7.8,10.8 10.7,4.9 13.6,3.0 16.5,5.9 19.4,4.0 22.3,6.4 25.2,17.4 28.1,17.9 31.0,18.0 33.9,16.3 36.8,8.1 39.7,5.8 42.6,13.4 45.5,13.0 48.4,13.2 51.3,17.0 54.2,14.8 57.1,8.1 60.0,6.6 62.9,4.4 65.8,5.0 68.7,5.8 71.6,12.2 74.5,13.3 77.4,18.2 80.3,21.2 83.2,29.0 86.1,28.9 89.0,29.0 91.9,30.8 94.8,31.0 97.7,30.4 100.6,21.7 103.5,21.8 106.4,18.3 109.3,16.1 112.2,17.4 115.1,15.4 118.0,6.2" fill="none" stroke="#4f8456" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="118.0" cy="6.2" r="1.9" fill="#4f8456"/></svg></td>
         </tr><tr class="bench-row" data-search="电池etf159755" data-code="159755">
           <td class="tname">📊 对标 · 电池ETF</td>
           <td class="mono">159755</td>
@@ -2368,7 +2368,7 @@ function render(){
     return o;});
   if(!useExc&&a.etf){series.push({name:'对标·'+a.etf.name+'('+a.etf.code+')',type:'line',showSymbol:false,smooth:true,z:10,data:a.etf.data,color:'#a35e2a',lineStyle:{width:3,type:'dashed'},emphasis:{focus:'series',lineStyle:{width:4}}});}
   chart.setOption({animation:false,
-    color:['#c2650d','#9c3f2e','#c4a04a','#8a6d3b','#a8474a','#c27a4a','#6b6456','#9a5a6b','#877a4a','#b5732a'],
+    color:['#c4753a','#5a8a5e','#a35e2a','#7a6a3b','#8a6d3b','#9a5a6b','#5f7a6a','#b08542','#3a6b5a','#a8474a'],
     tooltip:{trigger:'axis',valueFormatter:function(v){return (v>0?'+':'')+v+'%';},textStyle:{fontSize:12},axisPointer:{type:'cross'}},
     legend:{type:'scroll',top:0,textStyle:{fontSize:11},itemWidth:18,itemHeight:8},
     grid:{left:48,right:30,top:42,bottom:34},
@@ -2428,7 +2428,7 @@ document.getElementById('rkE').onclick=function(){this.classList.add('on');docum
    浏览器端按同一口径重算全部指标并刷新 DOM。失败自动降级为静态数据。 */
 (function(){
   var statEl=document.getElementById('liveStat');
-  function setStat(t,tone){if(!statEl)return;statEl.textContent=t;statEl.style.color=tone==='ok'?'#b08542':(tone==='warn'?'#bf4a30':'#a35e2a');}
+  function setStat(t,tone){if(!statEl)return;statEl.textContent=t;statEl.style.color=tone==='ok'?'#4f8456':(tone==='warn'?'#bf4a30':'#a35e2a');}
   function fpct(v){return (v>0?'+':'')+v.toFixed(2)+'%';}
   function fcls(v){return v>0?'up':(v<0?'down':'flat');}
   function r2(v){return Math.round(v*100)/100;}
@@ -2597,7 +2597,7 @@ document.getElementById('rkE').onclick=function(){this.classList.add('on');docum
         if(blkE)blkE.innerHTML='<div class="rank-wrap"><div class="rank-col"><h3>🚀 超额榜 Top 8</h3>'+barRows(rkE.slice(0,8),'exc','cum',mabE)+'</div><div class="rank-col"><h3>🪨 落后榜 Top 8</h3>'+barRows(rkE.slice(-8).reverse(),'exc','cum',mabE)+'</div></div>';
       }
       // ---- 主题卡 ----
-      var TC={'机器人':'#8a6d3b','新能源':'#c27a4a','电力设备':'#9c3f2e','军工':'#6b6456','AI算力':'#a35e2a','半导体':'#c2650d','软件':'#877a4a','医药':'#a8474a','周期':'#c4a04a','高端制造':'#8a5a44','金融':'#6e5a3a','电子':'#9a5a6b','其他':'#8a8472'};
+      var TC={'机器人':'#8a6d3b','新能源':'#5a8a5e','电力设备':'#3a6b5a','军工':'#6b6456','AI算力':'#a35e2a','半导体':'#c2650d','软件':'#4f8456','医药':'#a8474a','周期':'#b08542','高端制造':'#5f7a6a','金融':'#7a6a3b','电子':'#9a5a6b','其他':'#8a8472'};
       var tmaxv=1;thList.forEach(function(t){if(t.exc!=null&&Math.abs(t.exc)>tmaxv)tmaxv=Math.abs(t.exc);});
       var tg=document.getElementById('themeGrid');
       if(tg)tg.innerHTML=thList.map(function(t){
