@@ -113,8 +113,25 @@ def main():
     os.makedirs(QROUT, exist_ok=True)
     links = json.load(open(LINKS, encoding="utf-8")) if os.path.exists(LINKS) else {}
     known_urls = {v.get("url") if isinstance(v, dict) else v for v in links.values()}
-    article_titles = [v["title"] for v in json.load(open(STOCKS, encoding="utf-8")).values()] \
-        if os.path.exists(STOCKS) else []
+    # 直接扫文章文件夹取标题(不读可能滞后的 stocks.json),保证新文章也在候选里
+    base = "/Users/apple/Desktop/CURSOR/松松"
+    skip = ["复盘", "私享会", "基金", "私人知识库", "cloud", ".claude", "标的跟踪"]
+    article_titles = []
+    for d in os.listdir(base):
+        full = os.path.join(base, d)
+        if not os.path.isdir(full) or any(k in d for k in skip):
+            continue
+        hh = glob.glob(os.path.join(full, "*.html"))
+        if not hh:
+            continue
+        try:
+            html = open(hh[0], encoding="utf-8").read()
+        except Exception:
+            continue
+        if re.search(r'<h3>\s*(?:\d+\.\s*)?[^（(<]+?[（(]\s*[0-9]{5,6}', html):
+            article_titles.append(re.sub(r'_\d{4}-\d{2}-\d{2}$', '', d))
+    if not article_titles and os.path.exists(STOCKS):
+        article_titles = [v["title"] for v in json.load(open(STOCKS, encoding="utf-8")).values()]
     imgs = sorted(glob.glob(os.path.join(QRIN, "*.jpg")) + glob.glob(os.path.join(QRIN, "*.jpeg"))
                   + glob.glob(os.path.join(QRIN, "*.png")))
     new, manual = 0, []
