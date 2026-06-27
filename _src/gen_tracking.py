@@ -20,6 +20,9 @@ TODAY = datetime.date.today().isoformat()
 from collections import Counter as _Counter
 _last_days = _Counter(v["klines"][-1].split(",")[0]
                       for c, v in kline.items() if len(c) == 6 and v["klines"])
+if not _last_days:
+    import sys
+    sys.exit("❌ 行情数据为空(全部抓取失败/被限流),中止以免覆盖线上好数据。请稍后重试 sync。")
 CUTOFF = _last_days.most_common(1)[0][0]
 print(f"CUTOFF={CUTOFF} (A股末日分布 {dict(_last_days)})")
 
