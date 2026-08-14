@@ -25,12 +25,22 @@ for d in sorted(os.listdir(BASE)):
             continue
         seen.add(code)
         stocks.append({"name": name, "code": code, "ex": ex})
+    # 兜底：部分文章的 <h3> 是材料/分类名，个股写在卡片正文里，改从 stock-card 区块内抓
+    if not stocks:
+        for card in re.findall(r'<div class="stock-card">(.*?)</div>', html, re.S):
+            for m in re.finditer(r'([一-龥A-Za-z0-9]{2,8})\s*[（(]\s*([0-9]{5,6})\.?(SH|SZ|HK|BJ)\s*[）)]', card):
+                name, code, ex = m.group(1).strip(), m.group(2), m.group(3)
+                if code in seen:
+                    continue
+                seen.add(code)
+                stocks.append({"name": name, "code": code, "ex": ex})
     if stocks:
         title = re.sub(r'_\d{4}-\d{2}-\d{2}$', '', d)
         articles[d] = {"title": title, "date": d[-10:], "stocks": stocks}
 
 # ---------- 2. 文章 -> 行业ETF (有序规则, 先匹配先得) ----------
 ETF_RULES = [
+    (["隐形材料", "光刻胶", "靶材", "电子布"], "sh512480", "半导体ETF"),
     (["重工", "国产替代", "大国重工"],     "sz159638", "高端装备ETF"),
     (["券商", "证券"],                    "sh512880", "证券ETF"),
     (["信创", "软件", "政务"],            "sh515230", "软件ETF"),
